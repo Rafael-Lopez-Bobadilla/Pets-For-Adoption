@@ -1,0 +1,9 @@
+.input {
+  font-size: 18px;
+  background-color: #D4F3D9;
+  height: var(--controlsHeight);
+  padding: var(--controlsPadding);
+  border-radius: var(--controlsRadius);
+  border: 1px solid rgb(211, 209, 209);
+  width: 350px;
+}
