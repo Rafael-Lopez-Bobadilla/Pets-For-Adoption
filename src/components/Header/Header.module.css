@@ -1,0 +1,45 @@
+.header {
+  background-color: var(--green);
+  width: 100%;
+  color: white;
+  font-family: 'Inter';
+  position: relative;
+}
+
+.wrapper {
+  max-width: var(--max-width);
+  height: var(--header-height);
+  padding: var(--wrapper-padding);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+}
+
+.name img,
+.button img {
+  width: 30px;
+}
+
+.name img {
+  margin-right: 10px;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-family: 'Inter';
+}
+
+@media(min-width: 768px) {
+  .button {
+    display: none;
+  }
+}

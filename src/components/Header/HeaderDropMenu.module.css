@@ -1,0 +1,24 @@
+.dropMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--green);
+  padding: 10px var(--wrapper-padding);
+  width: 100%;
+}
+
+.dropMenu button {
+  background-color: transparent;
+  color: white;
+  font-size: 16px;
+  font-family: 'Inter';
+  border: none;
+  margin: 20px 0;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .dropMenu {
+    display: none;
+  }
+}

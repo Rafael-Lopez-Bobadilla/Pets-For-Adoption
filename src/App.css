@@ -1,5 +1,8 @@
 :root {
   --green: #267C5B;
+  --max-width: 1240px;
+  --wrapper-padding: 20px;
+  --header-height: 50px;
 }
 
 * {

@@ -1,0 +1,45 @@
+.line {
+  width: 2px;
+  background-color: white;
+  height: calc(var(--header-height) - 10px);
+}
+
+.options {
+  display: none;
+  align-items: center;
+}
+
+.favorites {
+  display: flex;
+  align-items: center;
+}
+
+.favorites,
+.options>button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-family: 'Inter';
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.favorites img {
+  width: 30px;
+}
+
+.options>button,
+.line {
+  margin-left: 30px;
+}
+
+@media(min-width: 768px) {
+  .options {
+    display: flex;
+  }
+}
