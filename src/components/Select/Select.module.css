@@ -1,0 +1,30 @@
+.select {
+  width: 250px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+}
+
+.select select {
+  width: 100%;
+  appearance: none;
+  padding: 0 15px;
+  border: none;
+  height: calc(var(--header-height) - 20px);
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Inter';
+}
+
+.select option:hover {
+  background-color: red;
+}
+
+.select img {
+  width: 12px;
+  pointer-events: none;
+  position: absolute;
+  right: 10px;
+}
