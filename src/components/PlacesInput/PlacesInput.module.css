@@ -1,0 +1,12 @@
+.places {
+  position: relative;
+}
+
+.places input {
+  font-size: 16px;
+  font-family: 'Inter';
+  width: 300px;
+  border-radius: 10px;
+  height: calc(var(--header-height) - 15px);
+  padding: 0 10px;
+}

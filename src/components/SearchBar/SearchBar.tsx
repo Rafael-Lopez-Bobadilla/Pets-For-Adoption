@@ -2,6 +2,7 @@ import s from './SearchBar.module.css'
 import pencil from '../../assets/svgs/pencil.svg'
 import Select from '../Select/Select'
 import usePetTypes from './usePetTypes'
+import PlacesInput from '../PlacesInput/PlacesInput'
 
 const SearchBar = () => {
   const types = usePetTypes()
@@ -13,6 +14,9 @@ const SearchBar = () => {
         <img src={pencil} />
         <div className={s.select}>
           <Select options={types} />
+        </div>
+        <div className={s.input}>
+          <PlacesInput />
         </div>
       </div>
     </div >
