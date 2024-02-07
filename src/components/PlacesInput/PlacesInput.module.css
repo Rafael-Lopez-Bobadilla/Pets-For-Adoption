@@ -7,6 +7,32 @@
   font-family: 'Inter';
   width: 300px;
   border-radius: 10px;
-  height: calc(var(--header-height) - 15px);
-  padding: 0 10px;
+  padding: var(--controls-padding);
+  border: 1px solid gray;
+}
+
+.options {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.75);
+  background-color: white;
+  overflow: hidden;
+}
+
+.options div {
+  width: 300px;
+  padding: var(--controls-padding);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
+.selected {
+  background-color: lightblue;
 }

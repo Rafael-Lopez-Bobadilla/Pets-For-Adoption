@@ -1,6 +1,5 @@
 .select {
-  width: 250px;
-  border: 1px solid black;
+  width: var(--select-width);
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -8,14 +7,15 @@
 }
 
 .select select {
+  cursor: pointer;
   width: 100%;
   appearance: none;
-  padding: 0 15px;
+  padding: var(--controls-padding);
   border: none;
-  height: calc(var(--header-height) - 20px);
   border-radius: 10px;
   font-size: 16px;
   font-family: 'Inter';
+  border: 1px solid gray;
 }
 
 .select option:hover {
@@ -26,5 +26,5 @@
   width: 12px;
   pointer-events: none;
   position: absolute;
-  right: 10px;
+  right: 15px;
 }

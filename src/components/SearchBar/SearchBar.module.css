@@ -1,6 +1,8 @@
 .bar {
   width: 100%;
   background-color: white;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.75);
+  --controls-padding: 7px 15px;
 }
 
 .wrapper {
@@ -27,7 +29,9 @@
 
 .select {
   display: none;
-  width: 300px;
+  --select-width: 250px;
+  width: var(--select-width);
+  margin-right: 50px;
 }
 
 @media (min-width: 768px) {
