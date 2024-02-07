@@ -33,7 +33,6 @@ const usePlacesInput = () => {
       timeoutID.current = setTimeout(() => {
         timeoutID.current = null
         service.current?.getPlacePredictions({ input: text }, predictions => {
-          console.log('request')
           const places = predictions!.map(prediction => {
             const { description, place_id } = prediction
             return { description, place_id }

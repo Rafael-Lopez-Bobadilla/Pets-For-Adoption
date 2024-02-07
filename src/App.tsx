@@ -1,8 +1,8 @@
 import './App.css'
 import Header from './components/Header/Header'
-import SearchBar from './components/SearchBar/SearchBar'
 import useToken from './useToken'
 import { createContext } from 'react'
+import { Outlet } from 'react-router-dom'
 export const TokenContext = createContext<string | null>(null)
 function App() {
   const token = useToken()
@@ -10,7 +10,7 @@ function App() {
     <>
       <Header />
       <TokenContext.Provider value={token}>
-        <SearchBar />
+        <Outlet />
       </TokenContext.Provider>
     </>
   )
