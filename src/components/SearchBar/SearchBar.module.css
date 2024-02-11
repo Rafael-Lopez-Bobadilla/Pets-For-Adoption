@@ -34,6 +34,11 @@
   margin-right: 50px;
 }
 
+.select,
+.input {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     justify-content: left;
@@ -44,8 +49,8 @@
     display: none;
   }
 
-  .select {
-    display: flex;
-    align-items: center;
+  .select,
+  .input {
+    display: block;
   }
 }

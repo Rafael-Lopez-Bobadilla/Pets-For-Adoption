@@ -1,5 +1,6 @@
 import s from './HeaderOptions.module.css'
 import heart from '../../assets/svgs/heart.svg'
+
 const HeaderOptions = () => {
   return (
     <div className={s.options}>
