@@ -1,0 +1,14 @@
+.content {
+  display: flex;
+  max-width: var(--max-width);
+  padding: 30px var(--wrapper-padding);
+  margin: 20px auto;
+  font-family: 'Inter';
+}
+
+.filters {
+  width: 250px;
+  margin-right: 30px;
+  text-align: center;
+  font-weight: bold;
+}

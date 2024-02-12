@@ -3,15 +3,15 @@ import Select from '../Select/Select'
 import PlacesInput from '../PlacesInput/PlacesInput'
 import close from '../../assets/svgs/close.svg'
 type OverlayParams = {
-  types: string[] | null,
+  names: string[] | null,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
-const OverlaySearch = ({ types, setIsOpen }: OverlayParams) => {
+const OverlaySearch = ({ names, setIsOpen }: OverlayParams) => {
   return (
     <div className={s.overlay}>
       <div className={s.control}>
         <span>Pet Type</span>
-        <Select options={types} />
+        <Select options={names} field='type' />
       </div>
       <div className={s.control}>
         <span>Location</span>

@@ -4,7 +4,8 @@ import { TokenContext } from '../../App'
 
 const usePetTypes = () => {
   const token = useContext(TokenContext)
-  const [types, setTypes] = useState<string[] | null>(null)
+  const [types, setTypes] = useState<PetType[] | null>(null)
+  const [names, setNames] = useState<string[] | null>(null)
   const getPetTypes = async () => {
     const res = await fetch('https://api.petfinder.com/v2/types', {
       headers: {
@@ -12,15 +13,15 @@ const usePetTypes = () => {
       }
     })
     const data = await res.json()
-    const names = data.types.map((type: PetType) => type.name)
-    setTypes(names)
+    const petNames = data.types.map((type: PetType) => type.name)
+    setNames(petNames)
+    setTypes(data.types)
+    console.log(data.types)
   }
   useEffect(() => {
-    if (token !== null) {
-      getPetTypes()
-    }
-  }, [token])
-  return types
+    getPetTypes()
+  }, [])
+  return { types, names }
 }
 
 export default usePetTypes

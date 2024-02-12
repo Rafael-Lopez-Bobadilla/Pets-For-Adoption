@@ -1,0 +1,9 @@
+.filter {
+  height: 100px;
+}
+
+.filter>span {
+  margin-bottom: 10px;
+  display: inline-block;
+  font-size: 18px;
+}

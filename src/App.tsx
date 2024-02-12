@@ -5,18 +5,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Search from './pages/Search/Search';
 import Favorites from './pages/Favorites/Favorites';
 import { createContext } from 'react';
+import { Navigate } from 'react-router-dom';
 export const TokenContext = createContext<string | null>(null)
 function App() {
   const token = useToken()
   return (
     <BrowserRouter>
       <Header />
-      <TokenContext.Provider value={token}>
+      {token && <TokenContext.Provider value={token}>
         <Routes>
-          <Route path='/' element={<Search />} />
+          <Route path='/search' element={<Search />} />
           <Route path='/favorites' element={<Favorites />} />
+          <Route path='*' element={<Navigate to={'/search?type=dog'} />} />
         </Routes>
-      </TokenContext.Provider>
+      </TokenContext.Provider>}
     </BrowserRouter>
   )
 }

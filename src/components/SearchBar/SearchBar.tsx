@@ -1,14 +1,12 @@
 import s from './SearchBar.module.css'
 import pencil from '../../assets/svgs/pencil.svg'
 import Select from '../Select/Select'
-import usePetTypes from './usePetTypes'
 import PlacesInput from '../PlacesInput/PlacesInput'
 import { useState } from 'react'
 import OverlaySearch from './OverlaySearch'
 
-const SearchBar = () => {
+const SearchBar = ({ names }: { names: string[] | null }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const types = usePetTypes()
 
   return (
     <div className={s.bar}>
@@ -17,13 +15,13 @@ const SearchBar = () => {
           more long location</span>
         <img src={pencil} onClick={() => setIsOpen(true)} />
         <div className={s.select}>
-          <Select options={types} />
+          <Select options={names} field='type' />
         </div>
         <div className={s.input}>
           <PlacesInput />
         </div>
         {isOpen &&
-          <OverlaySearch types={types} setIsOpen={setIsOpen} />
+          <OverlaySearch names={names} setIsOpen={setIsOpen} />
         }
       </div>
     </div >
