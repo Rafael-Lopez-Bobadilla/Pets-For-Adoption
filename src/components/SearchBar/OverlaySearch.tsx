@@ -3,7 +3,7 @@ import Select from '../Select/Select'
 import PlacesInput from '../PlacesInput/PlacesInput'
 import close from '../../assets/svgs/close.svg'
 type OverlayParams = {
-  names: string[] | null,
+  names: string[] | undefined,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 const OverlaySearch = ({ names, setIsOpen }: OverlayParams) => {
@@ -11,7 +11,7 @@ const OverlaySearch = ({ names, setIsOpen }: OverlayParams) => {
     <div className={s.overlay}>
       <div className={s.control}>
         <span>Pet Type</span>
-        <Select options={names} field='type' />
+        {names && <Select options={names} field='type' />}
       </div>
       <div className={s.control}>
         <span>Location</span>

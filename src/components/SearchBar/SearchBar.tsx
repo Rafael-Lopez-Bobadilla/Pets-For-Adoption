@@ -5,7 +5,7 @@ import PlacesInput from '../PlacesInput/PlacesInput'
 import { useState } from 'react'
 import OverlaySearch from './OverlaySearch'
 
-const SearchBar = ({ names }: { names: string[] | null }) => {
+const SearchBar = ({ names }: { names: string[] | undefined }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -15,7 +15,7 @@ const SearchBar = ({ names }: { names: string[] | null }) => {
           more long location</span>
         <img src={pencil} onClick={() => setIsOpen(true)} />
         <div className={s.select}>
-          <Select options={names} field='type' />
+          {names && <Select options={names} field='type' />}
         </div>
         <div className={s.input}>
           <PlacesInput />

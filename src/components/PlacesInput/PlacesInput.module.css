@@ -7,6 +7,7 @@
   font-family: 'Inter';
   width: 300px;
   border-radius: 10px;
+  height: var(--controls-height);
   padding: var(--controls-padding);
   border: 1px solid gray;
 }
@@ -24,6 +25,7 @@
 .options div {
   width: 300px;
   padding: var(--controls-padding);
+  min-height: var(--controls-height);
   display: flex;
   align-items: center;
   cursor: pointer;

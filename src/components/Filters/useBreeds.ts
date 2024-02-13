@@ -12,7 +12,7 @@ type breedType = {
 }
 const useBreeds = (breedsLink: string, params: URLSearchParams) => {
   const token = useContext(TokenContext)
-  const [breeds, setBreeds] = useState<string[]>([])
+  const [breeds, setBreeds] = useState<string[]>()
   const [isLoading, setIsLoading] = useState(true)
   const getBreeds = async () => {
     const res = await fetch(`https://api.petfinder.com${breedsLink}`, {

@@ -13,7 +13,7 @@ const Filters = ({ types }: { types: PetType[] }) => {
     <>
       <div className={s.filter}>
         <span>Breeds</span>
-        {!isLoading && <Select options={breeds} field='breed' />}
+        {(!isLoading && breeds) && <Select options={breeds} field='breed' />}
       </div>
       {type.coats.length > 0 && <div className={s.filter}>
         <span>Coats</span>
