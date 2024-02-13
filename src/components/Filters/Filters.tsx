@@ -3,12 +3,12 @@ import { PetType } from '../../pages/Search/IPetType'
 import { useSearchParams } from 'react-router-dom'
 import useBreeds from './useBreeds'
 import Select from '../Select/Select'
+import { capitalizeWords } from '../utils/capitalize'
 
 const Filters = ({ types }: { types: PetType[] }) => {
   const [params] = useSearchParams()
-  const type = types.find(type => type.name.toLocaleLowerCase() === params.get('type')) as PetType
+  const type = types.find(type => type.name === capitalizeWords(params.get('type') as string)) as PetType
   const { breeds, isLoading } = useBreeds(type._links.breeds.href, params)
-
   return (
     <>
       <div className={s.filter}>
