@@ -1,0 +1,32 @@
+.container {
+  font-family: 'Inter';
+  font-size: 18px;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  margin-top: 80px;
+  height: 100vh;
+  align-items: center;
+}
+
+.container button {
+  font-size: 16px;
+  font-family: 'Inter';
+  padding: 5px 15px;
+  background-color: var(--green);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.container img {
+  width: 20px;
+  margin-left: 10px;
+}
