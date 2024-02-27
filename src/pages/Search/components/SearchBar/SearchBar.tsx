@@ -1,13 +1,14 @@
 import s from './SearchBar.module.css'
-import pencil from '../../assets/svgs/pencil.svg'
+import pencil from '../../../../assets/svgs/pencil.svg'
 import Select from '../Select/Select'
 import PlacesInput from '../PlacesInput/PlacesInput'
 import { useState } from 'react'
-import OverlaySearch from './OverlaySearch'
+import OverlaySearch from './OverlaySearch/OverlaySearch'
+import { PetType } from '../../utils/IPetType'
 
-const SearchBar = ({ names }: { names: string[] | undefined }) => {
+const SearchBar = ({ types }: { types: PetType[] | null }) => {
   const [isOpen, setIsOpen] = useState(false)
-
+  const names = types ? types.map((type: PetType) => type.name) : null
   return (
     <div className={s.bar}>
       <div className={s.wrapper}>

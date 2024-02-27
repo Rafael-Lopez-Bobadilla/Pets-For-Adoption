@@ -19,7 +19,7 @@ function App() {
             <Routes>
               <Route path='/search' element={<Search />} />
               <Route path='/favorites' element={<Favorites />} />
-              <Route path='*' element={<Navigate to={'/search?type=Dog'} />} />
+              <Route path='*' element={<Navigate to={'/search'} />} />
             </Routes>
           </TokenContext.Provider>
         </BrowserRouter>}

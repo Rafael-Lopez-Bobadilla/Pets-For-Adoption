@@ -1,9 +1,9 @@
 import s from './OverlaySearch.module.css'
-import Select from '../Select/Select'
-import PlacesInput from '../PlacesInput/PlacesInput'
-import close from '../../assets/svgs/close.svg'
+import Select from '../../Select/Select'
+import PlacesInput from '../../PlacesInput/PlacesInput'
+import close from '../../../../../assets/svgs/close.svg'
 type OverlayParams = {
-  names: string[] | undefined,
+  names: string[] | null,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 const OverlaySearch = ({ names, setIsOpen }: OverlayParams) => {

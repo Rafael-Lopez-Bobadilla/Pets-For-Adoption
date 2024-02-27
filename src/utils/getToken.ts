@@ -1,4 +1,4 @@
-export interface TokenData {
+interface TokenData {
   token_type: string
   expires_in: number
   access_token: string

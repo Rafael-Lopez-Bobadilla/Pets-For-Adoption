@@ -1,5 +1,5 @@
 import s from './HeaderOptions.module.css'
-import heart from '../../assets/svgs/heart.svg'
+import heart from '../../../../assets/svgs/heart.svg'
 
 const HeaderOptions = () => {
   return (

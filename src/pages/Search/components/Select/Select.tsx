@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 import { Select as SelectMui, MenuItem, SelectChangeEvent } from '@mui/material'
 import s from './Select.module.css'
-import { capitalizeWords } from '../utils/capitalize'
+import { capitalizeWords } from '../../../../components/utils/capitalize'
 type SelectType = {
   options: string[],
   field: string

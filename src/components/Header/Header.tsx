@@ -3,8 +3,8 @@ import logo from '../../assets/svgs/logo.svg'
 import menu from '../../assets/svgs/menu.svg'
 import close from '../../assets/svgs/close.svg'
 import { useState } from 'react'
-import HeaderOptions from './HeaderOptions'
-import HeaderDropMenu from './HeaderDropMenu'
+import HeaderOptions from './components/HeaderOptions/HeaderOptions'
+import HeaderDropMenu from './components/HeaderDropMenu/HeaderDropMenu'
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
