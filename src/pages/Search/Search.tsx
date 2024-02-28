@@ -1,18 +1,26 @@
 import SearchBar from "./components/SearchBar/SearchBar"
-import usePetsData from "./utils/usePetsData"
+import { useEffect, useState, useContext } from "react"
 import s from './Search.module.css'
+import { PetType } from "./utils/IPetType"
+import { TokenContext } from "../../App"
+import { getPetTypes } from "./utils/getPetTypes"
 import Filters from "./components/Filters/Filters"
 import PetList from "./components/PetList/PetList"
 const Search = () => {
-  const { types, breeds, pets } = usePetsData()
+  const token = useContext(TokenContext) as string //routes are not rendered if token is null
+  const [types, setTypes] = useState<PetType[] | null>(null)
+
+  useEffect(() => {
+    getPetTypes(token, setTypes)
+  }, [])
   return (
     <>
       <SearchBar types={types} />
       <div className={s.content}>
         <div className={s.filters}>
-          {types && <Filters types={types} breeds={breeds} />}
+          {types && <Filters types={types} />}
         </div>
-        <PetList pets={pets} />
+        <PetList />
       </div>
     </>
   )

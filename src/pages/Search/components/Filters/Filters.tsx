@@ -3,15 +3,25 @@ import { PetType } from '../../utils/IPetType'
 import { useSearchParams } from 'react-router-dom'
 import Select from '../Select/Select'
 import { Breeds } from '../../utils/IBreeds'
-const Filters = ({ types, breeds }: { types: PetType[], breeds: Breeds }) => {
+import { useState, useEffect, useContext } from 'react'
+import { getBreeds } from '../../utils/getBreeds'
+import { TokenContext } from '../../../../App'
+const Filters = ({ types }: { types: PetType[] }) => {
   const [params] = useSearchParams()
+  const token = useContext(TokenContext) as string
+  const [breeds, setBreeds] = useState<Breeds>({ data: null, loading: false })
   const selected = types.find((type: PetType) =>
     type.name.toLowerCase() === params.get('type')?.toLocaleLowerCase())
+  useEffect(() => {
+    if (selected) {
+      getBreeds(token, selected._links.breeds.href, setBreeds)
+    }
+  }, [selected])
   return (
     <>{selected && <>
       {breeds.data && <div className={s.filter}>
         <span>Breeds</span>
-        <Select options={breeds.data} field='breeds' />
+        <Select options={breeds.data} field='breed' />
       </div>}
       {selected.coats.length > 0 && <div className={s.filter}>
         <span>Coats</span>

@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { Select as SelectMui, MenuItem, SelectChangeEvent } from '@mui/material'
 import s from './Select.module.css'
-import { capitalizeWords } from '../../../../components/utils/capitalize'
 type SelectType = {
   options: string[],
   field: string
@@ -22,7 +21,7 @@ const Select = ({ options, field }: SelectType) => {
 
   return (
     <SelectMui onChange={handleChange} className={s.select}
-      value={params.get(field) ? capitalizeWords(params.get(field) as string) : options[0]}>
+      value={params.get(field) ? params.get(field) as string : options[0]}>
       {options.map(option => <MenuItem value={option} key={option}>{option}</MenuItem>)}
     </SelectMui>
   )
