@@ -2,9 +2,9 @@ import s from './Filters.module.css'
 import { PetType } from '../../utils/IPetType'
 import { useSearchParams } from 'react-router-dom'
 import Select from '../Select/Select'
-import { Breeds } from '../../utils/IBreeds'
+import { Breeds } from './utils/IBreeds'
 import { useState, useEffect, useContext } from 'react'
-import { getBreeds } from '../../utils/getBreeds'
+import { getBreeds } from './utils/getBreeds'
 import { TokenContext } from '../../../../App'
 const Filters = ({ types }: { types: PetType[] }) => {
   const [params] = useSearchParams()
