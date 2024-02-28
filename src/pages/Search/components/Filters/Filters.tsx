@@ -2,16 +2,16 @@ import s from './Filters.module.css'
 import { PetType } from '../../utils/IPetType'
 import { useSearchParams } from 'react-router-dom'
 import Select from '../Select/Select'
-
-const Filters = ({ types, breeds }: { types: PetType[], breeds: string[] | null }) => {
+import { Breeds } from '../../utils/IBreeds'
+const Filters = ({ types, breeds }: { types: PetType[], breeds: Breeds }) => {
   const [params] = useSearchParams()
   const selected = types.find((type: PetType) =>
     type.name.toLowerCase() === params.get('type')?.toLocaleLowerCase())
   return (
     <>{selected && <>
-      {breeds && <div className={s.filter}>
+      {breeds.data && <div className={s.filter}>
         <span>Breeds</span>
-        <Select options={breeds} field='breeds' />
+        <Select options={breeds.data} field='breeds' />
       </div>}
       {selected.coats.length > 0 && <div className={s.filter}>
         <span>Coats</span>

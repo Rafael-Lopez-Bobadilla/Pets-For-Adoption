@@ -1,3 +1,4 @@
+import { Breeds } from "./IBreeds"
 type breedType = {
   name: string,
   _links: {
@@ -8,7 +9,8 @@ type breedType = {
 }
 
 export const getBreeds = async (token: string, link: string,
-  setBreeds: React.Dispatch<React.SetStateAction<string[] | null>>) => {
+  setBreeds: React.Dispatch<React.SetStateAction<Breeds>>) => {
+  setBreeds(breeds => { return { ...breeds, loading: true } })
   const res = await fetch(`https://api.petfinder.com${link}`, {
     headers: {
       "Authorization": `Bearer ${token}`
@@ -16,5 +18,5 @@ export const getBreeds = async (token: string, link: string,
   })
   const data = await res.json()
   const breeds = data.breeds.map((breed: breedType) => breed.name)
-  setBreeds(breeds)
+  setBreeds({ data: breeds, loading: false })
 }

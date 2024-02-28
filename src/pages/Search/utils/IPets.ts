@@ -1,3 +1,8 @@
+export interface Pets {
+  data: PetsData | null,
+  loading: boolean
+}
+
 export interface PetsData {
   animals: Pet[]
   pagination: Pagination

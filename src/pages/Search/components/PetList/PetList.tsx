@@ -1,10 +1,10 @@
-import { PetsData } from "../../utils/IPets"
+import { Pets } from "../../utils/IPets"
 
-const PetList = ({ pets }: { pets: PetsData | null }) => {
+const PetList = ({ pets }: { pets: Pets }) => {
 
   return (
     <div>
-      {pets && pets.animals.map(pet => <div key={pet.id}>{pet.name}</div>)}
+      {pets.data && pets.data.animals.map(pet => <div key={pet.id}>{pet.name}</div>)}
     </div>
   )
 }
