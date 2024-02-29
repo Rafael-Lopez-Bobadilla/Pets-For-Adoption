@@ -1,8 +1,8 @@
 import s from './PlacesInput.module.css'
-import usePlacesInput from './usePlacesInput'
+import usePlacesInput from './utils/usePlacesInput'
 const PlacesInput = () => {
   const { value, places, isOpen, selected,
-    setIsOpen, handleInput, handleKey, handleClick } = usePlacesInput()
+    setIsOpen, handleInput, handleKey, handleChange } = usePlacesInput()
   return (
     <div className={s.places}>
       <input onInput={handleInput} onKeyDown={handleKey}
@@ -14,7 +14,7 @@ const PlacesInput = () => {
         {places.map((place, index) => <div key={place.place_id}
           className={selected === index ? s.selected : ''}
           onMouseDown={e => e.preventDefault()}
-          onClick={handleClick}>
+          onClick={() => handleChange(place.description, place.place_id)}>
           {place.description}
         </div>)}
       </div>}
