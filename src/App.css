@@ -3,8 +3,8 @@
   --max-width: 1240px;
   --wrapper-padding: 20px;
   --header-height: 50px;
-  --controls-height: 35px;
-  --controls-padding: 7px 15px
+  --input-padding: 7px 15px;
+  --input-radius: 8px;
 }
 
 * {

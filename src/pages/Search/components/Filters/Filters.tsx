@@ -6,6 +6,7 @@ import { Breeds } from './utils/IBreeds'
 import { useState, useEffect, useContext } from 'react'
 import { getBreeds } from './utils/getBreeds'
 import { TokenContext } from '../../../../App'
+import Autocomplete from '../Autocomplete/Autocomplete'
 const Filters = ({ types }: { types: PetType[] }) => {
   const [params] = useSearchParams()
   const token = useContext(TokenContext) as string
@@ -21,19 +22,19 @@ const Filters = ({ types }: { types: PetType[] }) => {
     <>{selected && <>
       {breeds.data && <div className={s.filter}>
         <span>Breeds</span>
-        <Select options={breeds.data} field='breed' />
+        <Autocomplete options={['Any', ...breeds.data]} field='breed' />
       </div>}
       {selected.coats.length > 0 && <div className={s.filter}>
         <span>Coats</span>
-        <Select options={selected.coats} field='coat' />
+        <Select options={['Any', ...selected.coats]} field='coat' />
       </div>}
       {selected.colors.length > 0 && <div className={s.filter}>
         <span>Colors</span>
-        <Select options={selected.colors} field='color' />
+        <Autocomplete options={['Any', ...selected.colors]} field='color' />
       </div>}
       {selected.genders.length > 0 && <div className={s.filter}>
         <span>Genders</span>
-        <Select options={selected.genders} field='gender' />
+        <Select options={['Any', ...selected.genders]} field='gender' />
       </div>}
     </>
     }
