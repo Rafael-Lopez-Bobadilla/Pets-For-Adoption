@@ -10,14 +10,14 @@
   font-weight: bold;
 }
 
-.control {
+.overlay>div {
   margin: 0 auto;
   text-align: center;
   max-width: 300px;
   margin-bottom: 50px;
 }
 
-.control span {
+.overlay>div span {
   display: inline-block;
   margin-bottom: 15px;
 }

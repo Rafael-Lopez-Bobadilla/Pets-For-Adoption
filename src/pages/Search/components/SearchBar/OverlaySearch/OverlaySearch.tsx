@@ -9,11 +9,11 @@ type OverlayParams = {
 const OverlaySearch = ({ names, setIsOpen }: OverlayParams) => {
   return (
     <div className={s.overlay}>
-      <div className={s.control}>
+      <div>
         <span>Pet Type</span>
         {names && <Select options={names} field='type' />}
       </div>
-      <div className={s.control}>
+      <div>
         <span>Location</span>
         <PlacesInput />
       </div>

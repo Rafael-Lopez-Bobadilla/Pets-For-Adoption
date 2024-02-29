@@ -1,27 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
-import { Loader } from "@googlemaps/js-api-loader"
-interface Place {
-  description: string,
-  place_id: string
-}
+import { loadLibrary } from './utils/loadLibrary'
+import { Place } from './utils/IPlace'
+import { getPredictions } from './utils/getPredictions'
 const usePlacesInput = () => {
-  const service = useRef<google.maps.places.AutocompleteService | undefined>()
+  const service = useRef<google.maps.places.AutocompleteService>()
   const [places, setPlaces] = useState<Place[] | []>([])
   const [selected, setSelected] = useState(0)
   const [value, setValue] = useState('')
   const [isOpen, setIsOpen] = useState(false)
-  const timeoutID = useRef<number | null>()
+  const timeoutID = useRef<number | null>(null)
   useEffect(() => {
-    if (!window.google) {
-      const loader = new Loader({
-        apiKey: 'AIzaSyBeMIrIdcecTGx6XPecpuBi-2jnNj-86mM',
-        libraries: ['places'],
-        version: 'weekly'
-      })
-      loader.importLibrary('places').then(() => {
-        service.current = new google.maps.places.AutocompleteService()
-      })
-    }
+    loadLibrary(service)
   }, [])
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value
@@ -30,16 +19,7 @@ const usePlacesInput = () => {
     if (text === '') {
       setPlaces([])
     } else {
-      timeoutID.current = setTimeout(() => {
-        timeoutID.current = null
-        service.current?.getPlacePredictions({ input: text }, predictions => {
-          const places = predictions!.map(prediction => {
-            const { description, place_id } = prediction
-            return { description, place_id }
-          })
-          setPlaces(places)
-        })
-      }, 250)
+      getPredictions(timeoutID, service, text, setPlaces)
     }
     setValue(text)
   }

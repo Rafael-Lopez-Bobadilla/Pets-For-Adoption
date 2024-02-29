@@ -1,8 +1,13 @@
+.search {
+  --select-width: 250px;
+  --select-margin: 50px;
+}
+
 .content {
   display: flex;
   max-width: var(--max-width);
-  padding: 30px var(--wrapper-padding);
-  margin: 20px auto;
+  padding: 50px var(--wrapper-padding);
+  margin: 0 auto;
   font-family: 'Inter';
 }
 
@@ -11,4 +16,9 @@
   margin-right: 30px;
   text-align: center;
   font-weight: bold;
+  margin-right: var(--select-margin);
+}
+
+.list {
+  flex-grow: 1;
 }

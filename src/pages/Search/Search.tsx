@@ -14,15 +14,17 @@ const Search = () => {
     getPetTypes(token, setTypes)
   }, [])
   return (
-    <>
+    <div className={s.search}>
       <SearchBar types={types} />
       <div className={s.content}>
         <div className={s.filters}>
           {types && <Filters types={types} />}
         </div>
-        <PetList />
+        <div className={s.list}>
+          <PetList />
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 

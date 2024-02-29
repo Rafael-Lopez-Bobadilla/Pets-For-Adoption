@@ -4,6 +4,8 @@ import { TokenContext } from "../../../../App"
 import { useSearchParams } from "react-router-dom"
 import { paramsSchema } from "./utils/paramsSchema"
 import { getPets } from "./utils/getPets"
+import { CircularProgress } from "@mui/material"
+import s from './PetList.module.css'
 const PetList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const token = useContext(TokenContext) as string
@@ -24,8 +26,9 @@ const PetList = () => {
     }
   }, [searchParams])
   return (
-    <div>
-      {pets.data && pets.data.animals.map(pet => <div key={pet.id}>{pet.name}</div>)}
+    <div className={s.petlist}>
+      {(pets.data && !pets.loading) && pets.data.animals.map(pet => <div key={pet.id}>{pet.name}</div>)}
+      {pets.loading && <div className={s.loading}><CircularProgress size={30} /></div>}
     </div>
   )
 }

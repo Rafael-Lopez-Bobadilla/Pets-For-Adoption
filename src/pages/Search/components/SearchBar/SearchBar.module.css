@@ -28,9 +28,8 @@
 
 .select {
   display: none;
-  --select-width: 250px;
   width: var(--select-width);
-  margin-right: 50px;
+  margin-right: var(--select-margin);
 }
 
 .select,
