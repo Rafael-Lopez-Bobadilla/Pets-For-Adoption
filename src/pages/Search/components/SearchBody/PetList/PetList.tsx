@@ -1,12 +1,12 @@
 import { Pets } from "./utils/IPets"
 import { useState, useContext, useEffect } from "react"
-import { TokenContext } from "../../../../App"
+import { TokenContext } from "../../../../../App"
 import { useSearchParams } from "react-router-dom"
 import { getPets } from "./utils/getPets"
 import { CircularProgress } from "@mui/material"
 import s from './PetList.module.css'
-import { Location } from "../../utils/ILocation"
-import { LocationContext } from "../../Search"
+import { Location } from "../../../utils/ILocation"
+import { LocationContext } from "../../../Search"
 import { validateParams } from "./utils/validateParams"
 const PetList = () => {
   const [searchParams, setSearchParams] = useSearchParams()

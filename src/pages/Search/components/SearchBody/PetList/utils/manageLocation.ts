@@ -1,5 +1,5 @@
-import { Location } from "../../../utils/ILocation"
-import { getLocation } from "../../../utils/getLocation"
+import { Location } from "../../../../utils/ILocation"
+import { getLocation } from "../../../../utils/getLocation"
 import { SetURLSearchParams } from "react-router-dom"
 export const manageLocation = async (location: Location | null,
   params: URLSearchParams,

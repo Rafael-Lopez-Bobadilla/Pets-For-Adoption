@@ -1,5 +1,5 @@
 import { Pets } from "./IPets"
-import { Location } from "../../../utils/ILocation"
+import { Location } from "../../../../utils/ILocation"
 import { SetURLSearchParams } from "react-router-dom"
 import { manageLocation } from "./manageLocation"
 export const getPets = async (params: URLSearchParams,
