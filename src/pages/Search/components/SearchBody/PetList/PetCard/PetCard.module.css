@@ -1,0 +1,73 @@
+.card {
+  --card-width: 270px;
+  width: var(--card-width);
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  margin: 0 15px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.container {
+  width: var(--card-width);
+  height: var(--card-width);
+}
+
+.container img {
+  width: var(--card-width);
+  height: var(--card-width);
+  object-fit: cover;
+  object-position: center;
+}
+
+.info {
+  text-align: center;
+  background-color: white;
+  padding: 25px 10px;
+}
+
+.info>h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--green);
+}
+
+.info>p {
+  font-size: 16px;
+  padding: 5px 0;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info>p>span {
+  margin: 0 10px;
+}
+
+.heart {
+  width: 45px;
+  height: 45px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: white;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.heart>img {
+  width: 30px;
+}

@@ -13,6 +13,7 @@
 
 .options {
   position: absolute;
+  z-index: 3;
   left: 0;
   top: calc(100% + 10px);
   border-radius: 10px;

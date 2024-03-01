@@ -8,6 +8,7 @@ import s from './PetList.module.css'
 import { Location } from "../../../utils/ILocation"
 import { LocationContext } from "../../../Search"
 import { validateParams } from "./utils/validateParams"
+import PetCard from "./PetCard/PetCard"
 const PetList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const token = useContext(TokenContext) as string
@@ -19,8 +20,12 @@ const PetList = () => {
     getPets(validParams, token, setSearchParams, setPets, location, setLocation)
   }, [searchParams])
   return (
-    <div className={s.petlist}>
-      {(pets.data && !pets.loading) && pets.data.animals.map(pet => <div key={pet.id}>{pet.name}</div>)}
+    <div className={s.list}>
+      {(pets.data && !pets.loading) && pets.data.animals.map(pet =>
+        <div key={pet.id}>
+          <PetCard pet={pet} />
+        </div>
+      )}
       {pets.loading && <div className={s.loading}><CircularProgress size={30} /></div>}
     </div>
   )
