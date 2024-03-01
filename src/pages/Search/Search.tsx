@@ -5,7 +5,7 @@ import { PetType } from "./utils/IPetType"
 import { TokenContext } from "../../App"
 import { getPetTypes } from "./utils/getPetTypes"
 import Filters from "./components/Filters/Filters"
-import PetList from "./components/PetList/PetList"
+import SearchBody from "./components/SearchBody/SearchBody"
 import { Location, ILocationContext } from "./utils/ILocation"
 export const LocationContext = createContext<ILocationContext | null>(null)
 const Search = () => {
@@ -26,7 +26,7 @@ const Search = () => {
         </div>
         <div className={s.body}>
           <LocationContext.Provider value={{ location, setLocation }}>
-            <PetList />
+            <SearchBody />
           </LocationContext.Provider>
         </div>
       </div>
