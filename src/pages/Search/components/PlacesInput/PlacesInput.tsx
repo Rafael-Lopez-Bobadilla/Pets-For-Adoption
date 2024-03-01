@@ -2,11 +2,12 @@ import s from './PlacesInput.module.css'
 import usePlacesInput from './utils/usePlacesInput'
 const PlacesInput = () => {
   const { value, places, isOpen, selected,
-    setIsOpen, handleInput, handleKey, handleChange, inputRef } = usePlacesInput()
+    setIsOpen, handleInput, handleKey, handleChange, inputRef,
+    handleBlur } = usePlacesInput()
   return (
     <div className={s.places}>
       <input onInput={handleInput} onKeyDown={handleKey}
-        onBlur={() => setIsOpen(false)}
+        onBlur={handleBlur}
         onFocus={() => setIsOpen(true)}
         value={value}
         ref={inputRef}
