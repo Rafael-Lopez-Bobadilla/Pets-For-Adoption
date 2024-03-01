@@ -6,10 +6,8 @@ import { TokenContext } from "../../App"
 import { getPetTypes } from "./utils/getPetTypes"
 import Filters from "./components/Filters/Filters"
 import PetList from "./components/PetList/PetList"
-import { Location } from "./utils/ILocation"
-export const LocationContext = createContext<
-  { location: Location | null, setLocation: React.Dispatch<React.SetStateAction<Location | null>> }
-  | null>(null)
+import { Location, ILocationContext } from "./utils/ILocation"
+export const LocationContext = createContext<ILocationContext | null>(null)
 const Search = () => {
   const token = useContext(TokenContext) as string //routes are not rendered if token is null
   const [types, setTypes] = useState<PetType[] | null>(null)

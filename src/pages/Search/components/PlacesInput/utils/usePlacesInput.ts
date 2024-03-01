@@ -5,7 +5,7 @@ import { getPredictions } from './getPredictions'
 import { useSearchParams } from 'react-router-dom'
 import { LocationContext } from '../../../Search'
 import { getLocation } from '../../../utils/getLocation'
-import { Location } from '../../../utils/ILocation'
+import { ILocationContext } from '../../../utils/ILocation'
 const usePlacesInput = () => {
   const service = useRef<google.maps.places.AutocompleteService>()
   const [places, setPlaces] = useState<Place[] | []>([])
@@ -14,7 +14,7 @@ const usePlacesInput = () => {
   const [params, setParams] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const timeoutID = useRef<number | null>(null)
-  const { location, setLocation } = useContext(LocationContext) as { location: Location | null, setLocation: React.Dispatch<React.SetStateAction<Location | null>> }
+  const { location, setLocation } = useContext(LocationContext) as ILocationContext
   useEffect(() => {
     loadLibrary(service)
   }, [])
