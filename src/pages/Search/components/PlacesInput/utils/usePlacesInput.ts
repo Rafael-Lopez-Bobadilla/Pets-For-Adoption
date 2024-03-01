@@ -8,6 +8,7 @@ import { getLocation } from '../../../utils/getLocation'
 import { ILocationContext } from '../../../utils/ILocation'
 const usePlacesInput = () => {
   const service = useRef<google.maps.places.AutocompleteService>()
+  const inputRef = useRef<HTMLInputElement>(null)
   const [places, setPlaces] = useState<Place[] | []>([])
   const [selected, setSelected] = useState(0)
   const [value, setValue] = useState('')
@@ -52,8 +53,13 @@ const usePlacesInput = () => {
     newParams.set('location', id)
     setParams(newParams)
     setIsOpen(false)
+    setPlaces([])
+    inputRef.current?.blur()
   }
-  return { value, places, isOpen, selected, setIsOpen, handleInput, handleKey, handleChange }
+  return {
+    value, places, isOpen, selected, setIsOpen,
+    handleInput, handleKey, handleChange, inputRef
+  }
 }
 
 export default usePlacesInput

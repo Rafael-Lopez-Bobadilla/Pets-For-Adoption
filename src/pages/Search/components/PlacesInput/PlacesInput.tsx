@@ -2,13 +2,14 @@ import s from './PlacesInput.module.css'
 import usePlacesInput from './utils/usePlacesInput'
 const PlacesInput = () => {
   const { value, places, isOpen, selected,
-    setIsOpen, handleInput, handleKey, handleChange } = usePlacesInput()
+    setIsOpen, handleInput, handleKey, handleChange, inputRef } = usePlacesInput()
   return (
     <div className={s.places}>
       <input onInput={handleInput} onKeyDown={handleKey}
         onBlur={() => setIsOpen(false)}
         onFocus={() => setIsOpen(true)}
         value={value}
+        ref={inputRef}
         placeholder='Search by Location...' />
       {isOpen && <div className={s.options}>
         {places.map((place, index) => <div key={place.place_id}
