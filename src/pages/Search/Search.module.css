@@ -3,7 +3,7 @@
   --select-margin: 50px;
 }
 
-.content {
+.wrapper {
   display: flex;
   max-width: var(--max-width);
   padding: 50px var(--wrapper-padding);
@@ -19,6 +19,6 @@
   margin-right: var(--select-margin);
 }
 
-.list {
+.body {
   flex-grow: 1;
 }

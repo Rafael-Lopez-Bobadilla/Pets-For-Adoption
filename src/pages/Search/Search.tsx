@@ -20,11 +20,11 @@ const Search = () => {
       <LocationContext.Provider value={{ location, setLocation }}>
         <SearchBar types={types} />
       </LocationContext.Provider>
-      <div className={s.content}>
+      <div className={s.wrapper}>
         <div className={s.filters}>
           {types && <Filters types={types} />}
         </div>
-        <div className={s.list}>
+        <div className={s.body}>
           <LocationContext.Provider value={{ location, setLocation }}>
             <PetList />
           </LocationContext.Provider>
