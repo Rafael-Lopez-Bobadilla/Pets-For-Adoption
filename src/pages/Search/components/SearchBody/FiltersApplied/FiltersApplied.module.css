@@ -19,3 +19,14 @@
   margin-left: 10px;
   cursor: pointer;
 }
+
+.clear {
+  color: var(--green);
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 5px 10px;
+}
+
+.clear>span {
+  cursor: pointer;
+}

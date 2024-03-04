@@ -9,23 +9,32 @@ const FiltersApplied = () => {
     newParams.delete(filter)
     setParams(newParams)
   }
+  const clearAll = () => {
+    const newParams = new URLSearchParams()
+    newParams.set('type', params.get('type') as string)
+    params.get('location') && newParams.set('location', params.get('location') as string)
+    setParams(newParams)
+  }
   return (
     <>
       {(params.size > 2 || (!params.has('location') && params.size > 1)) &&
-        <p>Filters Applied:</p>
+        <>
+          <p>Filters Applied:</p>
+          <div className={s.filters}>
+            {filters.map(filter => {
+              return (<>
+                {params.has(filter) ?
+                  <div className={s.filter}>{params.get(filter)}
+                    <img src={close} onClick={() => deleteParam(filter)} />
+                  </div> :
+                  <></>}
+              </>
+              )
+            })}
+            <div className={s.clear}><span onClick={clearAll}>Clear all</span></div>
+          </div>
+        </>
       }
-      <div className={s.filters}>
-        {filters.map(filter => {
-          return (<>
-            {params.has(filter) ?
-              <div className={s.filter}>{params.get(filter)}
-                <img src={close} onClick={() => deleteParam(filter)} />
-              </div> :
-              <></>}
-          </>
-          )
-        })}
-      </div>
     </>
   )
 }

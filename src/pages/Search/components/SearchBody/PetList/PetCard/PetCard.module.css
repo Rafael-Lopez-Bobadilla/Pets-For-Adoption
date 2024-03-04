@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #dad5de, #eae9ed);
+  background: radial-gradient(circle, hsla(0, 0%, 100%, 1) 0%, hsla(0, 0%, 97%, 1) 100%);
 }
 
 .overlay {
