@@ -1,4 +1,4 @@
-import { Pets } from "./IPets"
+import { Pets, Pet, PetsData } from "./IPets"
 import { Location } from "../../../../utils/ILocation"
 import { SetURLSearchParams } from "react-router-dom"
 import { manageLocation } from "./manageLocation"
@@ -11,7 +11,7 @@ export const getPets = async (params: URLSearchParams,
   const requestParams = await manageLocation(location, params, setSearchParams, setLocation)
   if (!requestParams) return
   setPets(pets => { return { ...pets, loading: true } })
-  const res = await fetch(`https://api.petfinder.com/v2/animals?${requestParams}`, {
+  const res = await fetch(`https://api.petfinder.com/v2/animals?${requestParams}&limit=12`, {
     headers: {
       "Authorization": `Bearer ${token}`
     }
@@ -20,6 +20,14 @@ export const getPets = async (params: URLSearchParams,
     setSearchParams(new URLSearchParams({ type: 'Dog' }))
     return
   }
-  const data = await res.json()
+  const data: PetsData = await res.json()
+  const compareByImg = (a: Pet, b: Pet) => {
+    const aImg = a.primary_photo_cropped
+    const bImg = b.primary_photo_cropped
+    if (aImg && !bImg) return -1
+    if (bImg && !aImg) return 1
+    return 0
+  }
+  data.animals.sort(compareByImg)
   setPets({ data: data, loading: false })
 }
