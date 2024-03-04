@@ -1,9 +1,9 @@
 import s from './PlacesInput.module.css'
 import usePlacesInput from './utils/usePlacesInput'
-const PlacesInput = () => {
+const PlacesInput = ({ closeOverlay }: { closeOverlay?: () => void }) => {
   const { value, places, isOpen, selected,
     setIsOpen, handleInput, handleKey, handleChange, inputRef,
-    handleBlur } = usePlacesInput()
+    handleBlur } = usePlacesInput(closeOverlay)
   return (
     <div className={s.places}>
       <input onInput={handleInput} onKeyDown={handleKey}

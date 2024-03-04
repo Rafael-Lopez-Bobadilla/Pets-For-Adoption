@@ -5,16 +5,16 @@ import { useSearchParams } from "react-router-dom"
 import { getPets } from "./utils/getPets"
 import { CircularProgress } from "@mui/material"
 import s from './PetList.module.css'
-import { Location } from "../../../utils/ILocation"
 import { LocationContext } from "../../../Search"
 import { validateParams } from "./utils/validateParams"
 import PetCard from "./PetCard/PetCard"
 import { clearFilters, clearLocation } from "./utils/clearingEvents"
+import { ILocationContext } from "../../../utils/ILocation"
 const PetList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const token = useContext(TokenContext) as string
   const [pets, setPets] = useState<Pets>({ data: null, loading: false })
-  const { location, setLocation } = useContext(LocationContext) as { location: Location | null, setLocation: React.Dispatch<React.SetStateAction<Location | null>> }
+  const { location, setLocation } = useContext(LocationContext) as ILocationContext
   useEffect(() => {
     const validParams = validateParams(setSearchParams, searchParams)
     if (!validParams) return

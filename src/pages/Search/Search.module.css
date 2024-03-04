@@ -12,10 +12,18 @@
 }
 
 .filters {
+  display: none;
   padding-top: 40px;
-  text-align: center;
   font-weight: bold;
   margin-right: var(--select-margin);
+
+  @media (min-width: 1200px) {
+    display: block;
+  }
+}
+
+.filter>span {
+  text-align: center;
 }
 
 .body {

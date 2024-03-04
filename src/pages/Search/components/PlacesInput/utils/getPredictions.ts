@@ -3,7 +3,7 @@ export const getPredictions = (timeoutID: React.MutableRefObject<number | null>,
   service: React.MutableRefObject<google.maps.places.AutocompleteService | undefined>,
   text: string,
   setPlaces: React.Dispatch<React.SetStateAction<[] | Place[]>>) => {
-  timeoutID.current = setTimeout(() => {
+  timeoutID.current = setTimeout(async () => {
     timeoutID.current = null
     service.current?.getPlacePredictions({ input: text }, predictions => {
       const places = predictions!.map(prediction => {

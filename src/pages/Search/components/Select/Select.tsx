@@ -2,9 +2,10 @@ import { useSearchParams } from 'react-router-dom'
 import { Select as SelectMui, MenuItem, SelectChangeEvent } from '@mui/material'
 type SelectProps = {
   options: string[],
-  field: string
+  field: string,
+  closeOverlay?: () => void
 }
-const Select = ({ options, field }: SelectProps) => {
+const Select = ({ options, field, closeOverlay }: SelectProps) => {
   const [params, setParams] = useSearchParams()
 
   const handleChange = (e: SelectChangeEvent) => {
@@ -17,13 +18,13 @@ const Select = ({ options, field }: SelectProps) => {
     if (e.target.value === 'Any') newParams.delete(field)
     if (e.target.value !== 'Any') newParams.set(field, e.target.value)
     setParams(newParams)
+    if (closeOverlay !== undefined) closeOverlay()
   }
 
   return (
     <>
       <SelectMui onChange={handleChange} fullWidth sx={{
         backgroundColor: 'white',
-        textAlign: 'left',
         borderRadius: 'var(--input-radius)',
         '& .MuiSelect-select': {
           padding: 'var(--input-padding)'

@@ -9,5 +9,7 @@ export const loadLibrary = (service: React.MutableRefObject<google.maps.places.A
     loader.importLibrary('places').then(() => {
       service.current = new google.maps.places.AutocompleteService()
     })
+  } else {
+    service.current = new google.maps.places.AutocompleteService()
   }
 }
