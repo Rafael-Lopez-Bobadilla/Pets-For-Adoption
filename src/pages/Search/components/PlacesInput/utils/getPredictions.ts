@@ -5,7 +5,11 @@ export const getPredictions = (timeoutID: React.MutableRefObject<number | null>,
   setPlaces: React.Dispatch<React.SetStateAction<[] | Place[]>>) => {
   timeoutID.current = setTimeout(async () => {
     timeoutID.current = null
-    service.current?.getPlacePredictions({ input: text }, predictions => {
+    service.current?.getPlacePredictions({
+      input: text, componentRestrictions: {
+        country: ['us', 'mx', 'can']
+      }
+    }, predictions => {
       const places = predictions!.map(prediction => {
         const { description, place_id } = prediction
         return { description, place_id }
