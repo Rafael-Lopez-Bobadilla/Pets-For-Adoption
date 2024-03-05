@@ -7,7 +7,7 @@ import { useState, useEffect, useContext } from 'react'
 import { getBreeds } from './utils/getBreeds'
 import { TokenContext } from '../../../../App'
 import Autocomplete from '../Autocomplete/Autocomplete'
-const Filters = ({ types }: { types: PetType[] }) => {
+const Filters = ({ types, closeOverlay }: { types: PetType[], closeOverlay?: () => void }) => {
   const [params] = useSearchParams()
   const token = useContext(TokenContext) as string
   const [breeds, setBreeds] = useState<Breeds>({ data: null, loading: false })
@@ -22,19 +22,19 @@ const Filters = ({ types }: { types: PetType[] }) => {
     <>{selected && <>
       {breeds.data && <div className={s.filter}>
         <span>Breeds</span>
-        <Autocomplete options={['Any', ...breeds.data]} field='breed' />
+        <Autocomplete options={['Any', ...breeds.data]} field='breed' closeOverlay={closeOverlay} />
       </div>}
       {selected.coats.length > 0 && <div className={s.filter}>
         <span>Coats</span>
-        <Select options={['Any', ...selected.coats]} field='coat' />
+        <Select options={['Any', ...selected.coats]} field='coat' closeOverlay={closeOverlay} />
       </div>}
       {selected.colors.length > 0 && <div className={s.filter}>
         <span>Colors</span>
-        <Autocomplete options={['Any', ...selected.colors]} field='color' />
+        <Autocomplete options={['Any', ...selected.colors]} field='color' closeOverlay={closeOverlay} />
       </div>}
       {selected.genders.length > 0 && <div className={s.filter}>
         <span>Genders</span>
-        <Select options={['Any', ...selected.genders]} field='gender' />
+        <Select options={['Any', ...selected.genders]} field='gender' closeOverlay={closeOverlay} />
       </div>}
     </>
     }

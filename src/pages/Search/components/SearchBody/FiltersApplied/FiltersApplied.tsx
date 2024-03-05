@@ -20,7 +20,7 @@ const FiltersApplied = () => {
     <>
       {(params.size > 2 || (!params.has('location') && params.size > 1)) &&
         <>
-          <p>Filters Applied:</p>
+          <p className={s.label}>Filters Applied:</p>
           <div className={s.filters}>
             {filters.map(filter => {
               return (

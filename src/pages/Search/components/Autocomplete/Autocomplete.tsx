@@ -3,15 +3,17 @@ import { TextField } from "@mui/material"
 import { useSearchParams } from "react-router-dom"
 type AutocompleteProps = {
   options: string[],
-  field: string
+  field: string,
+  closeOverlay?: () => void
 }
-const Autocomplete = ({ options, field }: AutocompleteProps) => {
+const Autocomplete = ({ options, field, closeOverlay }: AutocompleteProps) => {
   const [params, setParams] = useSearchParams()
   const onChange = (_e: any, newValue: string | null) => {
     let newParams = new URLSearchParams(params)
     if (newValue === 'Any') newParams.delete(field)
     if (newValue !== 'Any' && newValue) newParams.set(field, newValue)
     setParams(newParams)
+    if (closeOverlay !== undefined) closeOverlay()
   }
   return (
     <AutocompleteMui options={options}

@@ -1,6 +1,7 @@
 .search {
   --select-width: 250px;
   --select-margin: 50px;
+  position: relative;
 }
 
 .wrapper {
