@@ -26,7 +26,7 @@ const Search = () => {
         </div>
         <div className={s.body}>
           <LocationContext.Provider value={{ location, setLocation }}>
-            <SearchBody />
+            <SearchBody types={types} />
           </LocationContext.Provider>
         </div>
       </div>

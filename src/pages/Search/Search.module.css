@@ -4,11 +4,16 @@
 }
 
 .wrapper {
-  display: flex;
+  display: block;
   max-width: var(--max-width);
-  padding: 10px var(--wrapper-padding);
+  padding: 10px 5px;
   margin: 0 auto;
   font-family: 'Inter';
+
+  @media (min-width: 1000px) {
+    display: flex;
+    padding: 10px var(--wrapper-padding);
+  }
 }
 
 .filters {
@@ -17,13 +22,9 @@
   font-weight: bold;
   margin-right: var(--select-margin);
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1000px) {
     display: block;
   }
-}
-
-.filter>span {
-  text-align: center;
 }
 
 .body {

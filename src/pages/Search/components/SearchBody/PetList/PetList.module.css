@@ -4,10 +4,21 @@
 }
 
 .list {
-  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.card {
+  width: 45%;
+  margin: 0 7px 30px 7px;
+  max-width: 220px;
+
+  @media (min-width: 768px) {
+    width: 30%;
+    max-width: 270px;
+    margin: 0 7px 30px 7px;
+  }
 }
 
 .alert {

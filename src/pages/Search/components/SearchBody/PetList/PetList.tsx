@@ -29,7 +29,7 @@ const PetList = () => {
     <>
       <div className={s.list}>
         {(pets.data && !pets.loading) && pets.data.animals.map(pet =>
-          <div key={pet.id}>
+          <div key={pet.id} className={s.card}>
             <PetCard pet={pet} />
           </div>
         )}
