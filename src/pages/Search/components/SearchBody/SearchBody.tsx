@@ -19,7 +19,7 @@ const SearchBody = ({ types }: { types: PetType[] | null }) => {
         <div className={s.filters}>
           {types && <Filters types={types} closeOverlay={closeOverlay} />}
         </div>
-        <img src={closeBlack} />
+        <img src={closeBlack} onClick={() => setIsOpen(false)} />
       </div>}
       <FiltersApplied />
       <PetList />

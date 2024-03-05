@@ -73,6 +73,10 @@
   text-wrap: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 }
 
 .info>p>span {
