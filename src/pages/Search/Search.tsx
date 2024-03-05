@@ -19,17 +19,15 @@ const Search = () => {
     <div className={s.search}>
       <LocationContext.Provider value={{ location, setLocation }}>
         <SearchBar types={types} />
-      </LocationContext.Provider>
-      <div className={s.wrapper}>
-        <div className={s.filters}>
-          {types && <Filters types={types} />}
-        </div>
-        <div className={s.body}>
-          <LocationContext.Provider value={{ location, setLocation }}>
+        <div className={s.wrapper}>
+          <div className={s.filters}>
+            {types && <Filters types={types} />}
+          </div>
+          <div className={s.body}>
             <SearchBody types={types} />
-          </LocationContext.Provider>
+          </div>
         </div>
-      </div>
+      </LocationContext.Provider>
     </div>
   )
 }

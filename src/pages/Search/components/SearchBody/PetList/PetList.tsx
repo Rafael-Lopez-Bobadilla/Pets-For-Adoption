@@ -25,6 +25,7 @@ const PetList = () => {
       return true
     } else { return false }
   }
+  console.log('render list')
   return (
     <>
       <div className={s.list}>

@@ -11,6 +11,8 @@ const PlacesInput = ({ closeOverlay }: { closeOverlay?: () => void }) => {
         onFocus={() => setIsOpen(true)}
         value={value}
         ref={inputRef}
+        name='location'
+        autoComplete='off'
         placeholder='Search by Location...' />
       {isOpen && <div className={s.options}>
         {places.map((place, index) => <div key={place.place_id}

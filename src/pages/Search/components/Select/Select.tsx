@@ -23,7 +23,7 @@ const Select = ({ options, field, closeOverlay }: SelectProps) => {
 
   return (
     <>
-      <SelectMui onChange={handleChange} fullWidth sx={{
+      <SelectMui onChange={handleChange} name={field} fullWidth sx={{
         backgroundColor: 'white',
         borderRadius: 'var(--input-radius)',
         '& .MuiSelect-select': {
