@@ -12,14 +12,14 @@ import { clearFilters, clearLocation } from "./utils/clearingEvents"
 import { ILocationContext } from "../../../utils/ILocation"
 const PetList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const token = useContext(TokenContext) as string
+  const token = useContext(TokenContext)
   const [pets, setPets] = useState<Pets>({ data: null, loading: false })
   const { location, setLocation } = useContext(LocationContext) as ILocationContext
   useEffect(() => {
     const validParams = validateParams(setSearchParams, searchParams)
     if (!validParams) return
     getPets(validParams, token, setSearchParams, setPets, location, setLocation)
-  }, [searchParams])
+  }, [searchParams, token])
   const filtersExists = () => {
     if (searchParams.size > 2 || (searchParams.size > 1 && !searchParams.has('location'))) {
       return true

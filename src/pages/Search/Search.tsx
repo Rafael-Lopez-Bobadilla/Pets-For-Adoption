@@ -9,12 +9,12 @@ import SearchBody from "./components/SearchBody/SearchBody"
 import { Location, ILocationContext } from "./utils/ILocation"
 export const LocationContext = createContext<ILocationContext | null>(null)
 const Search = () => {
-  const token = useContext(TokenContext) as string //routes are not rendered if token is null
+  const token = useContext(TokenContext)
   const [types, setTypes] = useState<PetType[] | null>(null)
   const [location, setLocation] = useState<Location | null>(null)
   useEffect(() => {
     getPetTypes(token, setTypes)
-  }, [])
+  }, [token])
   return (
     <div className={s.search}>
       <LocationContext.Provider value={{ location, setLocation }}>

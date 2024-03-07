@@ -8,9 +8,10 @@ type breedType = {
   }
 }
 
-export const getBreeds = async (token: string, link: string,
+export const getBreeds = async (token: string | null, link: string,
   setBreeds: React.Dispatch<React.SetStateAction<Breeds>>) => {
   setBreeds(breeds => { return { ...breeds, loading: true } })
+  if (!token) return
   const res = await fetch(`https://api.petfinder.com${link}`, {
     headers: {
       "Authorization": `Bearer ${token}`

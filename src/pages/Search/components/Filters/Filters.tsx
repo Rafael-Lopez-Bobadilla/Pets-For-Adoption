@@ -9,7 +9,7 @@ import { TokenContext } from '../../../../App'
 import Autocomplete from '../Autocomplete/Autocomplete'
 const Filters = ({ types, closeOverlay }: { types: PetType[], closeOverlay?: () => void }) => {
   const [params] = useSearchParams()
-  const token = useContext(TokenContext) as string
+  const token = useContext(TokenContext)
   const [breeds, setBreeds] = useState<Breeds>({ data: null, loading: false })
   const selected = types.find((type: PetType) =>
     type.name.toLowerCase() === params.get('type')?.toLocaleLowerCase())
@@ -17,7 +17,7 @@ const Filters = ({ types, closeOverlay }: { types: PetType[], closeOverlay?: () 
     if (selected) {
       getBreeds(token, selected._links.breeds.href, setBreeds)
     }
-  }, [selected])
+  }, [selected, token])
   return (
     <>{selected && <>
       {breeds.data && <div className={s.filter}>

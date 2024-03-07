@@ -1,29 +1,30 @@
 import './App.css'
 import Header from './components/Header/Header'
-import useToken from './utils/useToken'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Search from './pages/Search/Search';
 import Favorites from './pages/Favorites/Favorites';
-import { createContext } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import TokenError from './components/TokenError/TokenError';
+import { getToken } from './utils/getToken';
 export const TokenContext = createContext<string | null>(null)
 function App() {
-  const { token, error, reloadToken } = useToken()
+  const [token, setToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    getToken(setToken)
+  }, [])
   return (
     <>
-      {token &&
-        <BrowserRouter>
-          <Header />
-          <TokenContext.Provider value={token}>
-            <Routes>
-              <Route path='/search' element={<Search />} />
-              <Route path='/favorites' element={<Favorites />} />
-              <Route path='*' element={<Navigate to={'/search'} />} />
-            </Routes>
-          </TokenContext.Provider>
-        </BrowserRouter>}
-      {error && <TokenError reloadToken={reloadToken} />}
+      <BrowserRouter>
+        <Header />
+        <TokenContext.Provider value={token}>
+          <Routes>
+            <Route path='/search' element={<Search />} />
+            <Route path='/favorites' element={<Favorites />} />
+            <Route path='*' element={<Navigate to={'/search'} />} />
+          </Routes>
+        </TokenContext.Provider>
+      </BrowserRouter>
     </>
   )
 }
