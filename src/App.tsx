@@ -1,4 +1,5 @@
 import './App.css'
+import Header from './components/Header/Header'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Search from './pages/Search/Search';
 import Favorites from './pages/Favorites/Favorites';
@@ -15,6 +16,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Header />
         <TokenContext.Provider value={token}>
           <Routes>
             <Route path='/search' element={<Search />} />
