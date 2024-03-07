@@ -5,7 +5,7 @@ import Select from '../Select/Select'
 import { Breeds } from './utils/IBreeds'
 import { useState, useEffect, useContext } from 'react'
 import { getBreeds } from './utils/getBreeds'
-import { TokenContext } from '../../../../App'
+import { TokenContext } from '../../../../components/TokenProvider/TokenProvider'
 import Autocomplete from '../Autocomplete/Autocomplete'
 const Filters = ({ types, closeOverlay }: { types: PetType[], closeOverlay?: () => void }) => {
   const [params] = useSearchParams()

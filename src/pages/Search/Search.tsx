@@ -2,7 +2,7 @@ import SearchBar from "./components/SearchBar/SearchBar"
 import { useEffect, useState, useContext, createContext } from "react"
 import s from './Search.module.css'
 import { PetType } from "./utils/IPetType"
-import { TokenContext } from "../../App"
+import { TokenContext } from "../../components/TokenProvider/TokenProvider"
 import { getPetTypes } from "./utils/getPetTypes"
 import Filters from "./components/Filters/Filters"
 import SearchBody from "./components/SearchBody/SearchBody"

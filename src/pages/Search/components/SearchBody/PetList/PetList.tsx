@@ -1,6 +1,6 @@
 import { Pets } from "./utils/IPets"
 import { useState, useContext, useEffect } from "react"
-import { TokenContext } from "../../../../../App"
+import { TokenContext } from "../../../../../components/TokenProvider/TokenProvider"
 import { useSearchParams } from "react-router-dom"
 import { getPets } from "./utils/getPets"
 import { CircularProgress } from "@mui/material"
