@@ -5,16 +5,15 @@ import { useSearchParams } from "react-router-dom"
 import { getPets } from "./utils/getPets"
 import { CircularProgress } from "@mui/material"
 import s from './PetList.module.css'
-import { LocationContext } from "../../../Search"
+import { LocationContext } from "../../LocationProvider/LocationProvider"
 import { validateParams } from "./utils/validateParams"
 import PetCard from "./PetCard/PetCard"
 import { clearFilters, clearLocation } from "./utils/clearingEvents"
-import { ILocationContext } from "../../../utils/ILocation"
 const PetList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const token = useContext(TokenContext)
   const [pets, setPets] = useState<Pets>({ data: null, loading: false })
-  const { location, setLocation } = useContext(LocationContext) as ILocationContext
+  const { location, setLocation } = useContext(LocationContext)
   useEffect(() => {
     const validParams = validateParams(setSearchParams, searchParams)
     if (!validParams) return
@@ -25,7 +24,6 @@ const PetList = () => {
       return true
     } else { return false }
   }
-  console.log('render list')
   return (
     <>
       <div className={s.list}>

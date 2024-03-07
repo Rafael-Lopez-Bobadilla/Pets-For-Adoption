@@ -2,11 +2,10 @@ import s from './SearchBody.module.css'
 import PetList from "./PetList/PetList"
 import filters from '../../../../assets/svgs/filters.svg'
 import FiltersApplied from './FiltersApplied/FiltersApplied'
-import { PetType } from '../../utils/IPetType'
 import { useState } from 'react'
 import Filters from '../Filters/Filters'
 import closeBlack from '../../../../assets/svgs/closeBlack.svg'
-const SearchBody = ({ types }: { types: PetType[] | null }) => {
+const SearchBody = () => {
   const [isOpen, setIsOpen] = useState(false)
   const closeOverlay = () => setIsOpen(false)
   return (
@@ -17,7 +16,7 @@ const SearchBody = ({ types }: { types: PetType[] | null }) => {
       </button>
       {isOpen && <div className={s.overlay}>
         <div className={s.filters}>
-          {types && <Filters types={types} closeOverlay={closeOverlay} />}
+          <Filters closeOverlay={closeOverlay} />
         </div>
         <img src={closeBlack} onClick={() => setIsOpen(false)} />
       </div>}

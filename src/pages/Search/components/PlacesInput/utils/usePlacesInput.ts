@@ -3,9 +3,8 @@ import { loadLibrary } from './loadLibrary'
 import { Place } from './IPlace'
 import { getPredictions } from './getPredictions'
 import { useSearchParams } from 'react-router-dom'
-import { LocationContext } from '../../../Search'
+import { LocationContext } from '../../LocationProvider/LocationProvider'
 import { getLocation } from '../../../utils/getLocation'
-import { ILocationContext } from '../../../utils/ILocation'
 const usePlacesInput = (closeOverlay?: () => void) => {
   const service = useRef<google.maps.places.AutocompleteService>()
   const inputRef = useRef<HTMLInputElement>(null)
@@ -15,7 +14,7 @@ const usePlacesInput = (closeOverlay?: () => void) => {
   const [params, setParams] = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   const timeoutID = useRef<number | null>(null)
-  const { location, setLocation } = useContext(LocationContext) as ILocationContext
+  const { location, setLocation } = useContext(LocationContext)
   useEffect(() => {
     loadLibrary(service)
   }, [])

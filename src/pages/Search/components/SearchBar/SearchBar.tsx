@@ -2,17 +2,17 @@ import s from './SearchBar.module.css'
 import pencil from '../../../../assets/svgs/pencil.svg'
 import Select from '../Select/Select'
 import PlacesInput from '../PlacesInput/PlacesInput'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import OverlaySearch from './OverlaySearch/OverlaySearch'
 import { PetType } from '../../utils/IPetType'
-import { useContext } from 'react'
-import { LocationContext } from '../../Search'
-import { ILocationContext } from '../../utils/ILocation'
+import { LocationContext } from '../LocationProvider/LocationProvider'
 import { useSearchParams } from 'react-router-dom'
-const SearchBar = ({ types }: { types: PetType[] | null }) => {
+import { TypesContext } from '../PetsInfoProvider/PetsInfoProvider'
+const SearchBar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [params] = useSearchParams()
-  const { location } = useContext(LocationContext) as ILocationContext
+  const { location } = useContext(LocationContext)
+  const types = useContext(TypesContext)
   const names = types ? types.map((type: PetType) => type.name) : null
   return (
     <div className={s.bar}>
