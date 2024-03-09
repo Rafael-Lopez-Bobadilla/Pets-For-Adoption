@@ -1,12 +1,11 @@
 import s from './OverlaySearch.module.css'
-import Select from '../../Select/Select'
-import PlacesInput from '../../PlacesInput/PlacesInput'
-import closeBlack from '../../../../../assets/svgs/closeBlack.svg'
+import PlacesInput from '../../../PlacesInput/PlacesInput'
+import closeBlack from '../../../../../../assets/svgs/closeBlack.svg'
+import TypesSelect from '../TypesSelect/TypesSelect'
 type OverlayParams = {
-  names: string[] | null,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
-const OverlaySearch = ({ names, setIsOpen }: OverlayParams) => {
+const OverlaySearch = ({ setIsOpen }: OverlayParams) => {
   const closeOverlay = () => {
     setIsOpen(false)
   }
@@ -14,10 +13,12 @@ const OverlaySearch = ({ names, setIsOpen }: OverlayParams) => {
     <div className={s.overlay}>
       <div>
         <span>Pet Type</span>
-        {names && <Select options={names} field='type' closeOverlay={closeOverlay} />}
+        <TypesSelect />
       </div>
       <div>
-        <span>Location</span>
+        <span>Location
+          <p>{'(Only places in North America)'}</p>
+        </span>
         <PlacesInput closeOverlay={closeOverlay} />
       </div>
       <img src={closeBlack} onClick={() => setIsOpen(false)} />

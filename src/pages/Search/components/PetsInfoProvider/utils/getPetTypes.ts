@@ -1,7 +1,6 @@
-import { PetType } from "./IPetType"
+import { PetType } from "../../../utils/IPetType"
 export const getPetTypes = async (token: string,
   setTypes: React.Dispatch<React.SetStateAction<PetType[] | null>>) => {
-  if (!token) return
   const res = await fetch('https://api.petfinder.com/v2/types', {
     headers: {
       "Authorization": `Bearer ${token}`

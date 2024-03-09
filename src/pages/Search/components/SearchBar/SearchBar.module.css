@@ -15,27 +15,10 @@
   font-family: 'Inter';
 }
 
-.wrapper>span {
-  padding-right: 5px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .wrapper>img {
   width: 30px;
 }
 
-.select {
-  display: none;
-  width: var(--select-width);
-  margin-right: var(--select-margin);
-}
-
-.select,
-.input {
-  display: none;
-}
 
 @media (min-width: 768px) {
   .wrapper {
@@ -45,10 +28,5 @@
   .wrapper>span,
   .wrapper>img {
     display: none;
-  }
-
-  .select,
-  .input {
-    display: block;
   }
 }

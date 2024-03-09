@@ -5,8 +5,6 @@ import SearchBody from "./components/SearchBody/SearchBody"
 import PetsInfoProvider from "./components/PetsInfoProvider/PetsInfoProvider"
 import LocationProvider from "./components/LocationProvider/LocationProvider"
 const Search = () => {
-
-
   return (
     <div className={s.search}>
       <PetsInfoProvider>

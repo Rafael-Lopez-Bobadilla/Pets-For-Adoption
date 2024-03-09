@@ -1,14 +1,11 @@
 import { createContext, useState, useEffect, useContext } from "react"
-import { PetType } from "./utils/IPetType"
+import { PetType } from "../../utils/IPetType"
 import { TokenContext } from "../../../../components/TokenProvider/TokenProvider"
 import { getPetTypes } from "./utils/getPetTypes"
-import { Breeds } from "./utils/IBreeds"
+import { Breeds } from "./utils/filtersTypes"
 import { useSearchParams } from "react-router-dom"
 import { getBreeds } from "./utils/getBreeds"
-interface FiltersInfo {
-  selected: PetType | undefined,
-  breeds: Breeds
-}
+import { FiltersInfo } from "./utils/filtersTypes"
 const initialBreeds = { data: null, loading: false }
 export const TypesContext = createContext<PetType[] | null>(null)
 export const FiltersContext = createContext<FiltersInfo>({ selected: undefined, breeds: initialBreeds })

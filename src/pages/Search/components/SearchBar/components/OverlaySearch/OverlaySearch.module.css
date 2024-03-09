@@ -24,6 +24,10 @@
   margin-bottom: 15px;
 }
 
+.overlay>div>span>p {
+  font-weight: normal;
+}
+
 .overlay>img {
   width: 25px;
   position: fixed;
