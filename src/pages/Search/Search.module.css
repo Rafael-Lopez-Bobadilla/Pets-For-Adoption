@@ -11,7 +11,9 @@
   font-family: 'Inter';
 
   @media (min-width: 1000px) {
-    display: flex;
+    display: grid;
+    --filters-width: calc(var(--select-width) + var(--select-margin));
+    grid-template-columns: var(--filters-width) calc(100% - var(--filters-width));
     padding: 10px var(--wrapper-padding);
   }
 }
