@@ -1,0 +1,12 @@
+.alert {
+  font-size: 20px;
+  font-weight: 400;
+  max-width: 750px;
+  line-height: 1.5;
+}
+
+.alert a {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}

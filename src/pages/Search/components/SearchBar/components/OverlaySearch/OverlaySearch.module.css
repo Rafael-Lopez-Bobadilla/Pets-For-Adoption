@@ -26,6 +26,7 @@
 
 .overlay>div>span>p {
   font-weight: normal;
+  font-size: 14px;
 }
 
 .overlay>img {

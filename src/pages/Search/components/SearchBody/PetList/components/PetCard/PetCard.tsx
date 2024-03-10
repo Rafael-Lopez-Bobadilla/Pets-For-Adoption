@@ -1,7 +1,7 @@
-import { Pet } from "../utils/IPets"
+import { Pet } from '../../utils/IPets'
 import s from './PetCard.module.css'
-import favorite from '../../../../../../assets/svgs/favorite.svg'
-import noImage from '../../../../../../assets/svgs/noImage.svg'
+import favorite from '../../../../../../../assets/svgs/favorite.svg'
+import noImage from '../../../../../../../assets/svgs/noImage.svg'
 import { useSearchParams } from "react-router-dom"
 const PetCard = ({ pet }: { pet: Pet }) => {
   const [params] = useSearchParams()

@@ -13,7 +13,7 @@ const OverlaySearch = ({ setIsOpen }: OverlayParams) => {
     <div className={s.overlay}>
       <div>
         <span>Pet Type</span>
-        <TypesSelect />
+        <TypesSelect closeOverlay={closeOverlay} />
       </div>
       <div>
         <span>Location

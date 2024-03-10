@@ -18,7 +18,7 @@ const SearchBody = () => {
         <div className={s.filters}>
           <Filters closeOverlay={closeOverlay} />
         </div>
-        <img src={closeBlack} onClick={() => setIsOpen(false)} />
+        <img src={closeBlack} onClick={closeOverlay} />
       </div>}
       <FiltersApplied />
       <PetList />

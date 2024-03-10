@@ -7,23 +7,20 @@ import { CircularProgress } from "@mui/material"
 import s from './PetList.module.css'
 import { LocationContext } from "../../LocationProvider/LocationProvider"
 import { validateParams } from "./utils/validateParams"
-import PetCard from "./PetCard/PetCard"
-import { clearFilters, clearLocation } from "./utils/clearingEvents"
-const PetList = () => {
+import PetCard from './components/PetCard/PetCard'
+import { memo } from "react"
+import NoResults from "./components/NoResults/NoResults"
+const PetList = memo(() => {
   const [searchParams, setSearchParams] = useSearchParams()
   const token = useContext(TokenContext)
   const [pets, setPets] = useState<Pets>({ data: null, loading: false })
   const { location, setLocation } = useContext(LocationContext)
   useEffect(() => {
+    if (!token) return
     const validParams = validateParams(setSearchParams, searchParams)
     if (!validParams) return
     getPets(validParams, token, setSearchParams, setPets, location, setLocation)
   }, [searchParams, token])
-  const filtersExists = () => {
-    if (searchParams.size > 2 || (searchParams.size > 1 && !searchParams.has('location'))) {
-      return true
-    } else { return false }
-  }
   return (
     <>
       <div className={s.list}>
@@ -32,21 +29,11 @@ const PetList = () => {
             <PetCard pet={pet} />
           </div>
         )}
-        {pets.loading && <div className={s.loading}><CircularProgress size={30} /></div>}
       </div>
-      {(pets.data?.animals.length === 0 && !pets.loading) &&
-        <h2 className={s.alert}>No results matching your criteria. Consider {location && <>
-          <span> looking for pets <a onClick={() => clearLocation(setLocation, setSearchParams)}>
-            Anywhere in North America</a></span>
-          {filtersExists() && ' or '}
-        </>
-        }
-          {filtersExists() &&
-            <a onClick={() => clearFilters(searchParams, setSearchParams)}>Clearing the filters</a>}
-        </h2>
-      }
+      {pets.loading && <div className={s.loading}><CircularProgress size={30} /></div>}
+      {(pets.data?.animals.length === 0 && !pets.loading) && <NoResults />}
     </>
   )
-}
+})
 
 export default PetList

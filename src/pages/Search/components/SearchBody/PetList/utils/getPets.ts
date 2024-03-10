@@ -3,12 +3,11 @@ import { Location } from "../../../../utils/ILocation"
 import { SetURLSearchParams } from "react-router-dom"
 import { manageLocation } from "./manageLocation"
 export const getPets = async (params: URLSearchParams,
-  token: string | null,
+  token: string,
   setSearchParams: SetURLSearchParams,
   setPets: React.Dispatch<React.SetStateAction<Pets>>,
   location: Location | null,
   setLocation: React.Dispatch<React.SetStateAction<Location | null>>) => {
-  if (!token) return
   const requestParams = await manageLocation(location, params, setSearchParams, setLocation)
   if (!requestParams) return
   setPets(pets => { return { ...pets, loading: true } })
