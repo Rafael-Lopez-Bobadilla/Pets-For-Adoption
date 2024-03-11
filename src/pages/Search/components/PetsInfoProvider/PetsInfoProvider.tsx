@@ -2,33 +2,29 @@ import { createContext, useState, useEffect, useContext } from "react"
 import { PetType } from "../../utils/IPetType"
 import { TokenContext } from "../../../../components/TokenProvider/TokenProvider"
 import { getPetTypes } from "./utils/getPetTypes"
-import { Breeds } from "./utils/filtersTypes"
 import { useSearchParams } from "react-router-dom"
 import { getBreeds } from "./utils/getBreeds"
-import { FiltersInfo } from "./utils/filtersTypes"
-const initialBreeds = { data: null, loading: false }
 export const TypesContext = createContext<PetType[] | null>(null)
-export const FiltersContext = createContext<FiltersInfo>({ selected: undefined, breeds: initialBreeds })
+export const BreedsContext = createContext<string[] | null>(null)
 const PetsInfoProvider = ({ children }: { children: React.ReactNode }) => {
   const token = useContext(TokenContext)
   const [params] = useSearchParams()
   const [types, setTypes] = useState<PetType[] | null>(null)
-  const [breeds, setBreeds] = useState<Breeds>(initialBreeds)
-  const selected = types?.find((type: PetType) =>
-    type.name.toLowerCase() === params.get('type')?.toLocaleLowerCase())
+  const [breeds, setBreeds] = useState<string[] | null>(null)
+  const getPetsInfo = async (token: string) => {
+    const types = await getPetTypes(token, setTypes)
+    const selected = types?.find((type: PetType) =>
+      type.name.toLowerCase() === params.get('type')?.toLowerCase())
+    getBreeds(token, selected._links.breeds.href, setBreeds)
+  }
   useEffect(() => {
-    if (token) getPetTypes(token, setTypes)
+    if (token) getPetsInfo(token)
   }, [token])
-  useEffect(() => {
-    if (selected && token) {
-      getBreeds(token, selected._links.breeds.href, setBreeds)
-    }
-  }, [selected, token])
   return (
     <TypesContext.Provider value={types}>
-      <FiltersContext.Provider value={{ selected, breeds }}>
+      <BreedsContext.Provider value={breeds}>
         {children}
-      </FiltersContext.Provider>
+      </BreedsContext.Provider>
     </TypesContext.Provider>
   )
 }

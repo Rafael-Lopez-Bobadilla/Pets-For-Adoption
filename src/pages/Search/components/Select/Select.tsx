@@ -20,7 +20,7 @@ const Select = ({ options, field, closeOverlay }: SelectProps) => {
     setParams(newParams)
     if (closeOverlay !== undefined) closeOverlay()
   }
-
+  const value = options.find(option => option.toLowerCase() == params.get(field)?.toLowerCase())
   return (
     <>
       <SelectMui onChange={handleChange} name={field} fullWidth sx={{
@@ -30,7 +30,7 @@ const Select = ({ options, field, closeOverlay }: SelectProps) => {
           padding: 'var(--input-padding)'
         }
       }}
-        value={params.get(field) ? params.get(field) as string : options[0]}>
+        value={value ? value : options[0]}>
         {options.map(option => <MenuItem value={option} key={option}>{option}</MenuItem>)}
       </SelectMui>
     </>

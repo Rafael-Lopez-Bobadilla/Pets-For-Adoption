@@ -7,7 +7,7 @@ const Message = memo(() => {
   const [params] = useSearchParams()
   const { location } = useContext(LocationContext)
   const type = () => {
-    const paramsType = params.get('type')?.toLocaleLowerCase()
+    const paramsType = params.get('type')?.toLowerCase()
     if (!paramsType) return undefined
     if (paramsType === 'barnyard' ||
       paramsType === 'small & furry') return `${params.get('type')} animals`
