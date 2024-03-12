@@ -1,40 +1,34 @@
-import { Autocomplete as AutocompleteMui } from "@mui/material"
-import { TextField } from "@mui/material"
+import AutocompleteMui from "./AutocompleteMui"
 import { useSearchParams } from "react-router-dom"
+import { useState, useEffect, useCallback } from "react"
+import { useNavigate } from "react-router-dom"
 type AutocompleteProps = {
   options: string[],
   field: string,
   closeOverlay?: () => void
 }
 const Autocomplete = ({ options, field, closeOverlay }: AutocompleteProps) => {
-  const [params, setParams] = useSearchParams()
-  const onChange = (_e: any, newValue: string | null) => {
-    let newParams = new URLSearchParams(params)
+  const [params] = useSearchParams()
+  const [value, setValue] = useState(options[0])
+  const navigate = useNavigate()
+  const onChange = useCallback((_e: any, newValue: string | null) => {
+    let newParams = new URLSearchParams(location.search)
     if (newValue === 'Any') newParams.delete(field)
     if (newValue !== 'Any' && newValue) newParams.set(field, newValue)
-    setParams(newParams)
     if (closeOverlay !== undefined) closeOverlay()
-  }
-  console.log(location.search)
-  const value = options.find(option =>
-    option.toLowerCase() == params.get(field)?.toLowerCase())
+    navigate(`/search?${newParams}`)
+  }, [])
+  useEffect(() => {
+    const paramsValue = params.get(field)?.toLowerCase()
+    if (!params.has(field) && value !== options[0]) setValue(options[0])
+    if (params.has(field) && paramsValue !== value.toLowerCase()) {
+      const newValue = options.find(option =>
+        option.toLowerCase() == params.get(field)?.toLowerCase())
+      if (newValue) setValue(newValue)
+    }
+  }, [params])
   return (
-    <AutocompleteMui options={options}
-      value={value ? value : options[0]}
-      onChange={onChange}
-      renderInput={params => <TextField {...params} />}
-      disableClearable
-      sx={{
-        backgroundColor: 'white',
-        borderRadius: 'var(--input-radius)',
-        '& .MuiAutocomplete-inputRoot': {
-          padding: 'var(--input-padding)',
-          borderRadius: 'var(--input-radius)',
-          '& .MuiAutocomplete-input': {
-            padding: '0'
-          }
-        }
-      }} />
+    <AutocompleteMui value={value} options={options} onChange={onChange} />
   )
 }
 
