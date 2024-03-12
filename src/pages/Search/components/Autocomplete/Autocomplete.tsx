@@ -15,9 +15,9 @@ const Autocomplete = ({ options, field, closeOverlay }: AutocompleteProps) => {
     setParams(newParams)
     if (closeOverlay !== undefined) closeOverlay()
   }
+  console.log(location.search)
   const value = options.find(option =>
     option.toLowerCase() == params.get(field)?.toLowerCase())
-  console.log('render')
   return (
     <AutocompleteMui options={options}
       value={value ? value : options[0]}
