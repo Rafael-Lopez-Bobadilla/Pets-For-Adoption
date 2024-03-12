@@ -6,6 +6,7 @@ type Props = {
   onChange: (_e: any, newValue: string | null) => void
 }
 const AutocompleteMui = memo(({ value, options, onChange }: Props) => {
+  console.log('render')
   return (
     <Autocomplete options={options}
       value={value ? value : options[0]}

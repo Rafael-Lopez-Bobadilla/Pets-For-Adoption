@@ -1,22 +1,20 @@
 import AutocompleteMui from "./AutocompleteMui"
 import { useSearchParams } from "react-router-dom"
 import { useState, useEffect, useCallback } from "react"
-import { useNavigate } from "react-router-dom"
 type AutocompleteProps = {
   options: string[],
   field: string,
   closeOverlay?: () => void
 }
 const Autocomplete = ({ options, field, closeOverlay }: AutocompleteProps) => {
-  const [params] = useSearchParams()
+  const [params, setParams] = useSearchParams()
   const [value, setValue] = useState(options[0])
-  const navigate = useNavigate()
   const onChange = useCallback((_e: any, newValue: string | null) => {
     let newParams = new URLSearchParams(location.search)
     if (newValue === 'Any') newParams.delete(field)
     if (newValue !== 'Any' && newValue) newParams.set(field, newValue)
     if (closeOverlay !== undefined) closeOverlay()
-    navigate(`/search?${newParams}`)
+    setParams(newParams)
   }, [])
   useEffect(() => {
     const paramsValue = params.get(field)?.toLowerCase()
