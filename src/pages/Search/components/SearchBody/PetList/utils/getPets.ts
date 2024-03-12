@@ -11,6 +11,11 @@ export const getPets = async (params: URLSearchParams,
   const requestParams = await manageLocation(location, params, setSearchParams, setLocation)
   if (!requestParams) return
   setPets(pets => { return { ...pets, loading: true } })
+  if (requestParams.has('color')) {
+    const color = requestParams.get('color') as string
+    requestParams.delete('color')
+    requestParams.set('color[]', color)
+  }
   const res = await fetch(`https://api.petfinder.com/v2/animals?${requestParams}&limit=12`, {
     headers: {
       "Authorization": `Bearer ${token}`
