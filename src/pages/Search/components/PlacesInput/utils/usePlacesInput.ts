@@ -53,6 +53,7 @@ const usePlacesInput = (closeOverlay?: () => void) => {
       setValue('')
       setLocation(null)
       newParams.delete('location')
+      newParams.set('page', '1')
       setParams(newParams)
       return
     }
@@ -61,6 +62,7 @@ const usePlacesInput = (closeOverlay?: () => void) => {
     const { lat, lng } = coords.results[0].geometry.location
     setLocation({ id: id, coords: `${lat},${lng}`, address: value })
     newParams.set('location', id)
+    newParams.set('page', '1')
     setParams(newParams)
   }
   const handleBlur = () => {

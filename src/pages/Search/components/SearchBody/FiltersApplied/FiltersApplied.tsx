@@ -6,12 +6,14 @@ const FiltersApplied = () => {
   const [params, setParams] = useSearchParams()
   const deleteParam = (filter: string) => {
     const newParams = new URLSearchParams(params)
+    newParams.set('page', '1')
     newParams.delete(filter)
     setParams(newParams)
   }
   const clearAll = () => {
     const newParams = new URLSearchParams()
     newParams.set('type', params.get('type') as string)
+    newParams.set('page', '1')
     params.get('location') && newParams.set('location', params.get('location') as string)
     setParams(newParams)
   }

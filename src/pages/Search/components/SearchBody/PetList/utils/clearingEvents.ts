@@ -5,6 +5,7 @@ export const clearFilters = (
   setSearchParams: SetURLSearchParams
 ) => {
   const newParams = new URLSearchParams()
+  newParams.set('page', '1')
   newParams.set('type', searchParams.get('type') as string)
   searchParams.has('location') && newParams.set('location', searchParams.get('location') as string)
   setSearchParams(newParams)
@@ -17,6 +18,7 @@ export const clearLocation = (
   setLocation(null)
   setSearchParams(prevParams => {
     prevParams.delete('location')
+    prevParams.set('page', '1')
     return prevParams
   })
 }
