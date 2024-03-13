@@ -13,6 +13,7 @@ const Autocomplete = ({ options, field, closeOverlay }: AutocompleteProps) => {
     let newParams = new URLSearchParams(location.search)
     if (newValue === 'Any') newParams.delete(field)
     if (newValue !== 'Any' && newValue) newParams.set(field, newValue)
+    newParams.set('page', '1')
     if (closeOverlay !== undefined) closeOverlay()
     setParams(newParams)
   }, [])

@@ -17,6 +17,7 @@ const Select = ({ options, field, closeOverlay }: SelectProps) => {
     }
     if (e.target.value === 'Any') newParams.delete(field)
     if (e.target.value !== 'Any') newParams.set(field, e.target.value)
+    newParams.set('page', '1')
     setParams(newParams)
     if (closeOverlay !== undefined) closeOverlay()
   }
