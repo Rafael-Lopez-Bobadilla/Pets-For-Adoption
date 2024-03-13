@@ -7,7 +7,7 @@ const NoResults = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { location, setLocation } = useContext(LocationContext)
   const filtersExists = () => {
-    if (searchParams.size > 2 || (searchParams.size > 1 && !searchParams.has('location'))) {
+    if (searchParams.size > 3 || (searchParams.size > 2 && !searchParams.has('location'))) {
       return true
     } else { return false }
   }

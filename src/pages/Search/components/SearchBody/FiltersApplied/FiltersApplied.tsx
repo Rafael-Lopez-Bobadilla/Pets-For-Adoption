@@ -18,7 +18,7 @@ const FiltersApplied = () => {
   const filters = options.filter(option => params.has(option))
   return (
     <>
-      {(params.size > 2 || (!params.has('location') && params.size > 1)) &&
+      {(params.size > 3 || (!params.has('location') && params.size > 2)) &&
         <>
           <p className={s.label}>Filters Applied:</p>
           <div className={s.filters}>

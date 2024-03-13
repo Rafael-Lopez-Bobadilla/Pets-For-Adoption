@@ -6,7 +6,7 @@ export const validateParams = (
 ) => {
   const validParams = paramsSchema.safeParse(Object.fromEntries(searchParams))
   if (!validParams.success) {
-    setSearchParams(new URLSearchParams({ type: 'Dog' }))
+    setSearchParams(new URLSearchParams({ type: 'Dog', page: '1' }))
     return false
   }
   const params = new URLSearchParams(validParams.data)

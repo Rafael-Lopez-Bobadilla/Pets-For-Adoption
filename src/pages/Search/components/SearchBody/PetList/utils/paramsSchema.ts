@@ -7,6 +7,8 @@ export const paramsSchema = z.object({
   coat: z.string(),
   gender: z.string(),
   breed: z.string(),
+  page: z.string()
 }).partial().required({
-  type: true
+  type: true,
+  page: true
 }).strip()

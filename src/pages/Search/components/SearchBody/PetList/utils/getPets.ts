@@ -7,22 +7,23 @@ export const getPets = async (params: URLSearchParams,
   setSearchParams: SetURLSearchParams,
   setPets: React.Dispatch<React.SetStateAction<Pets>>,
   location: Location | null,
-  setLocation: React.Dispatch<React.SetStateAction<Location | null>>) => {
+  setLocation: React.Dispatch<React.SetStateAction<Location | null>>,
+  setPageCount: React.Dispatch<React.SetStateAction<number>>) => {
   const requestParams = await manageLocation(location, params, setSearchParams, setLocation)
   if (!requestParams) return
-  setPets(pets => { return { ...pets, loading: true } })
   if (requestParams.has('color')) {
     const color = requestParams.get('color') as string
     requestParams.delete('color')
     requestParams.set('color[]', color)
   }
+  setPets(pets => { return { ...pets, loading: true } })
   const res = await fetch(`https://api.petfinder.com/v2/animals?${requestParams}&limit=12`, {
     headers: {
       "Authorization": `Bearer ${token}`
     }
   })
   if (res.status === 400) {
-    setSearchParams(new URLSearchParams({ type: 'Dog' }))
+    setSearchParams(new URLSearchParams({ type: 'Dog', page: '1' }))
     return
   }
   const data: PetsData = await res.json()
@@ -34,5 +35,6 @@ export const getPets = async (params: URLSearchParams,
     return 0
   }
   data.animals.sort(compareByImg)
+  setPageCount(data.pagination.total_pages)
   setPets({ data: data, loading: false })
 }

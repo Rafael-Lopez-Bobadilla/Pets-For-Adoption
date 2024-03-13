@@ -10,7 +10,7 @@ import { validateParams } from "./utils/validateParams"
 import PetCard from './components/PetCard/PetCard'
 import { memo } from "react"
 import NoResults from "./components/NoResults/NoResults"
-const PetList = memo(() => {
+const PetList = memo(({ setPageCount }: { setPageCount: React.Dispatch<React.SetStateAction<number>> }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const token = useContext(TokenContext)
   const [pets, setPets] = useState<Pets>({ data: null, loading: false })
@@ -19,7 +19,8 @@ const PetList = memo(() => {
     if (!token) return
     const validParams = validateParams(setSearchParams, searchParams)
     if (!validParams) return
-    getPets(validParams, token, setSearchParams, setPets, location, setLocation)
+    getPets(validParams, token, setSearchParams,
+      setPets, location, setLocation, setPageCount)
   }, [searchParams, token])
   return (
     <>

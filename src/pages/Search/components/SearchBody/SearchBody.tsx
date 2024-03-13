@@ -5,9 +5,11 @@ import FiltersApplied from './FiltersApplied/FiltersApplied'
 import { useState } from 'react'
 import Filters from '../Filters/Filters'
 import closeBlack from '../../../../assets/svgs/closeBlack.svg'
+import Pagination from './Pagination/Pagination'
 const SearchBody = () => {
   const [isOpen, setIsOpen] = useState(false)
   const closeOverlay = () => setIsOpen(false)
+  const [pageCount, setPageCount] = useState(1)
   return (
     <>
       <h2 className={s.heading}>Find pets for adoption in North America</h2>
@@ -21,7 +23,8 @@ const SearchBody = () => {
         <img src={closeBlack} onClick={closeOverlay} />
       </div>}
       <FiltersApplied />
-      <PetList />
+      <PetList setPageCount={setPageCount} />
+      <Pagination pageCount={pageCount} />
     </>
   )
 }
