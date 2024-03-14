@@ -5,18 +5,23 @@ import Search from './pages/Search/Search';
 import Favorites from './pages/Favorites/Favorites';
 import { TokenProvider } from './components/TokenProvider/TokenProvider';
 import { Navigate } from 'react-router-dom';
+import AuthDialog from './components/AuthDialog/AuthDialog';
+import DialogProvider from './components/DialogProvider/DialogProvider';
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
-        <TokenProvider>
-          <Routes>
-            <Route path='/search' element={<Search />} />
-            <Route path='/favorites' element={<Favorites />} />
-            <Route path='*' element={<Navigate to={'/search'} />} />
-          </Routes>
-        </TokenProvider>
+        <DialogProvider>
+          <Header />
+          <AuthDialog />
+          <TokenProvider>
+            <Routes>
+              <Route path='/search' element={<Search />} />
+              <Route path='/favorites' element={<Favorites />} />
+              <Route path='*' element={<Navigate to={'/search'} />} />
+            </Routes>
+          </TokenProvider>
+        </DialogProvider>
       </BrowserRouter>
     </>
   )
