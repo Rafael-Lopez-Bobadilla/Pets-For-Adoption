@@ -4,7 +4,6 @@ import s from './Pagination.module.css'
 const Pagination = ({ pageCount }: { pageCount: number }) => {
   const [params, setParams] = useSearchParams()
   let page = Number(params.get('page'))
-  if (page === 0) page = 1
   const handleChange = (_e: any, value: number) => {
     setParams(params => {
       params.set('page', value.toString())
