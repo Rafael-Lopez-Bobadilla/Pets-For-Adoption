@@ -29,11 +29,11 @@
 }
 
 .overlay>img {
-  width: 20px;
+  width: 25px;
   position: fixed;
   z-index: 3;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
 }
 
 .button {

@@ -1,5 +1,11 @@
 .container {
-  padding: 50px 80px;
+  width: 100%;
+  padding: 50px 20px;
+
+  @media (min-width: 768px) {
+    padding: 50px 80px;
+  }
+
   font-family: 'Inter';
 }
 
@@ -57,7 +63,7 @@
 .close {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 15px;
   width: 25px;
   cursor: pointer;
 }

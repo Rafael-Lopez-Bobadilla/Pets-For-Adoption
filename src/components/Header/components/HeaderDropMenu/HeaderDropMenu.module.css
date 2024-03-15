@@ -2,6 +2,7 @@
   position: absolute;
   top: 100%;
   left: 0;
+  z-index: 4;
   background-color: var(--green);
   padding: 10px var(--wrapper-padding);
   width: 100%;

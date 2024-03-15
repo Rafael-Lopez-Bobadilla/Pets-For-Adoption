@@ -5,18 +5,20 @@ import { useContext } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signUpSchema } from './signUpSchema'
 import { z } from 'zod'
-type SignUpSchema = z.infer<typeof signUpSchema>
+import { signUpRequest } from './signUpRequest'
+export type SignUpSchema = z.infer<typeof signUpSchema>
 const SignUp = () => {
-  const { setType } = useContext(DialogSetterContext)
+  const { setType, setOpen } = useContext(DialogSetterContext)
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors }
+    formState: { isSubmitting, errors },
+    setError
   } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema)
   })
-  const onSubmit = (data: SignUpSchema) => {
-    console.log(data)
+  const onSubmit = async (data: SignUpSchema) => {
+    signUpRequest(data, setOpen, setError)
   }
   return (
     <div className={s.container}>
