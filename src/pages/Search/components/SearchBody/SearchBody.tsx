@@ -9,7 +9,7 @@ import Pagination from './Pagination/Pagination'
 const SearchBody = () => {
   const [isOpen, setIsOpen] = useState(false)
   const closeOverlay = () => setIsOpen(false)
-  const [pageCount, setPageCount] = useState(1)
+  const [pageCount, setPageCount] = useState(0)
   return (
     <>
       <h2 className={s.heading}>Find pets for adoption in North America</h2>
