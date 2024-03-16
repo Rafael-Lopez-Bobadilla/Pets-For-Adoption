@@ -1,4 +1,4 @@
-import { useState, createContext } from "react"
+import { useState, createContext, useEffect } from "react"
 type SetterContext = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
   setType: React.Dispatch<React.SetStateAction<string>>
@@ -8,6 +8,16 @@ export const DialogSetterContext = createContext<SetterContext>({ setOpen: () =>
 const DialogProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('none')
+  const onSignIn = () => {
+    setOpen(false)
+  }
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id: "215994121648-uc647b3pmh2jui4pp6te812880pd5rvk.apps.googleusercontent.com",
+      callback: onSignIn,
+      use_fedcm_for_prompt: true
+    })
+  }, [])
   return (
     <DialogContext.Provider value={{ open, type }}>
       <DialogSetterContext.Provider value={{ setOpen, setType }}>

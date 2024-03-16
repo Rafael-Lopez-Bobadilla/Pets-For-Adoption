@@ -1,8 +1,8 @@
 import { Dialog } from "@mui/material"
 import { useContext } from "react"
 import { DialogContext, DialogSetterContext } from "../DialogProvider/DialogProvider"
-import SignUp from "./SignUp/SignUp"
-import LogIn from "./LogIn/LogIn"
+import SignUp from './components/SignUp/SignUp'
+import LogIn from './components/LogIn/LogIn'
 import closeBlack from '../../assets/svgs/closeBlack.svg'
 import s from './AuthDialog.module.css'
 const AuthDialog = () => {

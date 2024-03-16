@@ -14,10 +14,6 @@
   margin-bottom: 25px;
 }
 
-.container>p {
-  text-align: center;
-}
-
 .form>label {
   display: block;
   margin-bottom: 5px;
@@ -66,4 +62,8 @@
   right: 15px;
   width: 25px;
   cursor: pointer;
+}
+
+.alt {
+  text-align: center;
 }

@@ -1,5 +1,5 @@
-import s from '../AuthDialog.module.css'
-import { DialogSetterContext } from '../../DialogProvider/DialogProvider'
+import s from '../../AuthDialog.module.css'
+import { DialogSetterContext } from '../../../DialogProvider/DialogProvider'
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { logInSchema } from './logInSchema'
@@ -32,7 +32,7 @@ const LogIn = () => {
         {errors.password && <p>{`${errors.password.message}`}</p>}
         <button disabled={isSubmitting}>Sign Up</button>
       </form>
-      <p>{`No account? `}
+      <p className={s.alt}>{`No account? `}
         <span className={s.link} onClick={() => setType('signup')}>Create one</span>
       </p>
     </div>

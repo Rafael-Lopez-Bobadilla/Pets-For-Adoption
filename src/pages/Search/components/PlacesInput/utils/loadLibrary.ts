@@ -1,6 +1,6 @@
 import { Loader } from "@googlemaps/js-api-loader"
 export const loadLibrary = (service: React.MutableRefObject<google.maps.places.AutocompleteService | undefined>) => {
-  if (!window.google) {
+  if (!window.google?.maps) {
     const loader = new Loader({
       apiKey: 'AIzaSyBeMIrIdcecTGx6XPecpuBi-2jnNj-86mM',
       libraries: ['places'],
