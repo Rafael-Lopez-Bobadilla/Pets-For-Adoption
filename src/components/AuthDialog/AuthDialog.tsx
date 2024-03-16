@@ -9,7 +9,7 @@ const AuthDialog = () => {
   const { open, type } = useContext(DialogContext)
   const { setOpen } = useContext(DialogSetterContext)
   return (
-    <Dialog open={open} onClose={() => setOpen(false)}>
+    <Dialog open={open} onClose={() => setOpen(false)} keepMounted={true}>
       {type === 'signup' && <SignUp />}
       {type === 'login' && <LogIn />}
       <img src={closeBlack} className={s.close} onClick={() => setOpen(false)} />
