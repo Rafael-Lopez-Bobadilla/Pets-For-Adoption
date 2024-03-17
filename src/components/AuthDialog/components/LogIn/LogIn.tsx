@@ -21,8 +21,7 @@ const LogIn = () => {
     logInRequest(data, setOpen, setError)
   }
   return (
-    <div className={s.container}>
-      <h3>Log In</h3>
+    <>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <label>Email</label>
         <input {...register('email')} />
@@ -35,7 +34,7 @@ const LogIn = () => {
       <p className={s.alt}>{`No account? `}
         <span className={s.link} onClick={() => setType('signup')}>Create one</span>
       </p>
-    </div>
+    </>
   )
 }
 
