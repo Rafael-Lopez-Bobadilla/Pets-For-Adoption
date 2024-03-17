@@ -1,3 +1,10 @@
-export const googleAuth = async (res: google.accounts.id.CredentialResponse) => {
-  console.log(res)
+export const googleAuth = async (credential: google.accounts.id.CredentialResponse) => {
+  const res = await fetch('http://localhost:5002/api/v1/googleAuth', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${credential.credential}`
+    }
+  })
+  const data = await res.json()
+  console.log(data)
 }

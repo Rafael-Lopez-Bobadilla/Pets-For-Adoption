@@ -10,7 +10,7 @@ const AuthDialog = () => {
   const { open, type } = useContext(DialogContext)
   const { setOpen } = useContext(DialogSetterContext)
   return (
-    <Dialog open={open} onClose={() => setOpen(false)} scroll="body">
+    <Dialog open={open} onClose={() => setOpen(false)} scroll="body" keepMounted={true}>
       <div className={s.container}>
         {type === 'signup' && <h3>Sign Up</h3>}
         {type === 'login' && <h3>Log In</h3>}
