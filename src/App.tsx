@@ -7,21 +7,24 @@ import { TokenProvider } from './components/TokenProvider/TokenProvider';
 import { Navigate } from 'react-router-dom';
 import AuthDialog from './components/AuthDialog/AuthDialog';
 import DialogProvider from './components/DialogProvider/DialogProvider';
+import UserProvider from './components/UserProvider/UserProvider';
 function App() {
   return (
     <>
       <BrowserRouter>
-        <DialogProvider>
-          <Header />
-          <AuthDialog />
-          <TokenProvider>
-            <Routes>
-              <Route path='/search' element={<Search />} />
-              <Route path='/favorites' element={<Favorites />} />
-              <Route path='*' element={<Navigate to={'/search'} />} />
-            </Routes>
-          </TokenProvider>
-        </DialogProvider>
+        <UserProvider>
+          <DialogProvider>
+            <Header />
+            <AuthDialog />
+            <TokenProvider>
+              <Routes>
+                <Route path='/search' element={<Search />} />
+                <Route path='/favorites' element={<Favorites />} />
+                <Route path='*' element={<Navigate to={'/search'} />} />
+              </Routes>
+            </TokenProvider>
+          </DialogProvider>
+        </UserProvider>
       </BrowserRouter>
     </>
   )

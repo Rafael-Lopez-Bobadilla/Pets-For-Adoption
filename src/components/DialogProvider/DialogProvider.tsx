@@ -16,7 +16,7 @@ const DialogProvider = ({ children }: { children: React.ReactNode }) => {
     google.accounts.id.initialize({
       client_id: "215994121648-uc647b3pmh2jui4pp6te812880pd5rvk.apps.googleusercontent.com",
       callback: onSignIn,
-      use_fedcm_for_prompt: true
+      use_fedcm_for_prompt: true,
     })
   }, [])
   return (

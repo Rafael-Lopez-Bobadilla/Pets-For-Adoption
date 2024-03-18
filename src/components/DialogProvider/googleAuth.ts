@@ -3,7 +3,8 @@ export const googleAuth = async (credential: google.accounts.id.CredentialRespon
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${credential.credential}`
-    }
+    },
+    credentials: 'include'
   })
   const data = await res.json()
   console.log(data)

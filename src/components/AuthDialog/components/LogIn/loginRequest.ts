@@ -14,7 +14,7 @@ export const logInRequest = async (data: LogInSchema,
   const resData = await res.json()
   if (res.status === 200) setOpen(false)
   if (res.status === 401) {
-    setError('email', { message: resData.data.error })
-    setError('password', { message: resData.data.error })
+    setError('email', { message: resData.error })
+    setError('password', { message: resData.error })
   }
 }
