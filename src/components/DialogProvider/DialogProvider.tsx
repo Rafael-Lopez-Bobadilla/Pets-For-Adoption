@@ -1,5 +1,6 @@
-import { useState, createContext, useEffect } from "react"
+import { useState, createContext, useEffect, useContext } from "react"
 import { googleAuth } from "./googleAuth"
+import { UserContext } from "../UserProvider/UserProvider"
 type SetterContext = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
   setType: React.Dispatch<React.SetStateAction<string>>
@@ -9,8 +10,13 @@ export const DialogSetterContext = createContext<SetterContext>({ setOpen: () =>
 const DialogProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState('none')
-  const onSignIn = (response: google.accounts.id.CredentialResponse) => {
-    googleAuth(response)
+  const { setUser } = useContext(UserContext)
+  const onSignIn = async (response: google.accounts.id.CredentialResponse) => {
+    const data = await googleAuth(response)
+    if (data.status === 'success') {
+      setUser(data.user)
+      setOpen(false)
+    }
   }
   useEffect(() => {
     google.accounts.id.initialize({

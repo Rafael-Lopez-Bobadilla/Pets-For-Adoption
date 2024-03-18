@@ -9,12 +9,14 @@
   align-items: center;
 }
 
-.favorites {
+.favorites,
+.user>button {
   display: flex;
   align-items: center;
 }
 
 .favorites,
+.user>button,
 .options>button {
   background-color: transparent;
   border: none;
@@ -23,19 +25,66 @@
   font-family: 'Inter';
   font-size: 16px;
   cursor: pointer;
+}
 
+.favorites,
+.options>button {
   &:hover {
     transform: scale(1.05);
   }
 }
 
-.favorites img {
+.favorites>img {
   width: 30px;
 }
 
+.userIcon {
+  width: 25px;
+  margin-right: 3px;
+}
+
+.tri {
+  width: 20px;
+  margin-left: 10px;
+}
+
 .options>button,
-.line {
+.line,
+.user {
   margin-left: 30px;
+}
+
+.user {
+  position: relative;
+}
+
+.user>button {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.name {
+  max-width: 150px;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+
+.user>div {
+  position: absolute;
+  top: calc(100% + 10px);
+  border-radius: 5px;
+  left: 0;
+  background-color: var(--green);
+  padding: 5px 0;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(20, 73, 20);
+  }
 }
 
 @media(min-width: 768px) {

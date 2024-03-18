@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect } from "react"
 import { User, IUserContext } from './IUser'
-const UserContext = createContext<IUserContext>({ user: null, setUser: () => { } })
+export const UserContext = createContext<IUserContext>({ user: null, setUser: () => { } })
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const authenticate = async () => {
