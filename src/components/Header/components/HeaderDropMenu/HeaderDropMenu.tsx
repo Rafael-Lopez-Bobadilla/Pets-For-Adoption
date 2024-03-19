@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import userIconGray from '../../../../assets/svgs/userIconGray.svg'
 import { UserContext } from '../../../UserProvider/UserProvider'
 import { logout } from '../logout'
+import FavButton from '../FavButton/FavButton'
 const DropMenu = ({ setIsOpen }: { setIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const { setOpen, setType } = useContext(DialogSetterContext)
   const { user, setUser } = useContext(UserContext)
@@ -21,10 +22,10 @@ const DropMenu = ({ setIsOpen }: { setIsOpen: React.Dispatch<React.SetStateActio
         <img src={userIconGray} className={s.userIcon} />
         <span className={s.name}>{user?.name}</span>
       </button>}
-      <button className={s.button}>Favorites</button>
-      {!user && <><button onClick={() => openAuthDialog('signup')} className={s.button}>Sign Up</button>
-        <button onClick={() => openAuthDialog('login')} className={s.button}>Log In</button></>}
-      {user && <button onClick={onLogout} className={s.button}>Log out</button>}
+      <FavButton icon={false} />
+      {!user && <><button onClick={() => openAuthDialog('signup')}>Sign Up</button>
+        <button onClick={() => openAuthDialog('login')}>Log In</button></>}
+      {user && <button onClick={onLogout}>Log out</button>}
     </div>
   )
 }

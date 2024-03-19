@@ -1,10 +1,10 @@
 import s from './HeaderOptions.module.css'
-import heart from '../../../../assets/svgs/heart.svg'
 import { DialogSetterContext } from '../../../DialogProvider/DialogProvider'
 import { useContext, useState } from 'react'
 import { UserContext } from '../../../UserProvider/UserProvider'
 import userIcon from '../../../../assets/svgs/userIcon.svg'
 import triangleDown from '../../../../assets/svgs/triangleDown.svg'
+import FavButton from '../FavButton/FavButton'
 import { logout } from '../logout'
 const HeaderOptions = () => {
   const { setOpen, setType } = useContext(DialogSetterContext)
@@ -20,10 +20,7 @@ const HeaderOptions = () => {
   }
   return (
     <div className={s.options}>
-      <button className={s.favorites}>
-        <img src={heart} className={s.icon} />
-        <span>Favorites</span>
-      </button>
+      <FavButton icon={true} />
       <div className={s.line}></div>
       {!user && <>
         <button onClick={() => openAuthDialog('signup')}>Sign Up</button>

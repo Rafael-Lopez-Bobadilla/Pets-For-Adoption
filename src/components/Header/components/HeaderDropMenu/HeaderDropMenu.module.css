@@ -8,15 +8,15 @@
   width: 100%;
 }
 
-.button,
-.user {
+.dropMenu>* {
+  margin: 20px 0;
   background-color: transparent;
   color: white;
   font-size: 16px;
   font-family: 'Inter';
   border: none;
-  margin: 20px 0;
   display: block;
+  font-weight: bold;
 }
 
 .user {

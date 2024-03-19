@@ -9,13 +9,11 @@
   align-items: center;
 }
 
-.favorites,
 .user>button {
   display: flex;
   align-items: center;
 }
 
-.favorites,
 .user>button,
 .options>button {
   background-color: transparent;
@@ -27,15 +25,10 @@
   cursor: pointer;
 }
 
-.favorites,
 .options>button {
   &:hover {
     transform: scale(1.05);
   }
-}
-
-.favorites>img {
-  width: 30px;
 }
 
 .userIcon {
