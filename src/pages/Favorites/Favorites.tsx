@@ -5,6 +5,7 @@ import { TokenContext } from '../../components/TokenProvider/TokenProvider'
 import { getPet } from './getPet'
 import { Pet } from '../Search/components/SearchBody/PetList/utils/IPets'
 import PetCard from '../Search/components/SearchBody/PetList/components/PetCard/PetCard'
+import { CircularProgress } from '@mui/material'
 const Favorites = () => {
   const { user } = useContext(UserContext)
   const token = useContext(TokenContext)
@@ -19,6 +20,7 @@ const Favorites = () => {
   return (
     <div className={s.wrapper}>
       <h1>{`My Favorites (${user?.favorites.length})`}</h1>
+      {favorites.length === 0 && <div className={s.loading}><CircularProgress size={30} /></div>}
       <div className={s.list}>
         {favorites.map(pet => {
           return <div className={s.card} key={pet.id}><PetCard pet={pet} /></div>
