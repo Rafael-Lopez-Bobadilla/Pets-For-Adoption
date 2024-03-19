@@ -11,7 +11,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     })
     const data = await res.json()
     if (data?.user) setUser(data.user)
-    if ((!data?.user || data?.user.favorites.length === 0) && location.pathname !== '/search')
+    if ((!data?.user || data?.user.favorites.length === 0) && location.pathname === '/favorites')
       navigate('/search')
   }
   useEffect(() => {

@@ -5,9 +5,11 @@ import userIconGray from '../../../../assets/svgs/userIconGray.svg'
 import { UserContext } from '../../../UserProvider/UserProvider'
 import { logout } from '../logout'
 import FavButton from '../FavButton/FavButton'
+import { useNavigate } from 'react-router-dom'
 const DropMenu = ({ setIsOpen }: { setIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const { setOpen, setType } = useContext(DialogSetterContext)
   const { user, setUser } = useContext(UserContext)
+  const navigate = useNavigate()
   const openAuthDialog = (type: string) => {
     setOpen(true)
     setType(type)
@@ -15,6 +17,7 @@ const DropMenu = ({ setIsOpen }: { setIsOpen: React.Dispatch<React.SetStateActio
   const onLogout = async () => {
     await logout(setUser)
     setIsOpen(false)
+    if (location.pathname === '/favorites') navigate('/search')
   }
   return (
     <div className={s.dropMenu}>

@@ -5,8 +5,10 @@ import { UserContext } from '../../../UserProvider/UserProvider'
 import userIcon from '../../../../assets/svgs/userIcon.svg'
 import triangleDown from '../../../../assets/svgs/triangleDown.svg'
 import FavButton from '../FavButton/FavButton'
+import { useNavigate } from 'react-router-dom'
 import { logout } from '../logout'
 const HeaderOptions = () => {
+  const navigate = useNavigate()
   const { setOpen, setType } = useContext(DialogSetterContext)
   const { user, setUser } = useContext(UserContext)
   const [openLogout, setOpenLogout] = useState(false)
@@ -17,6 +19,7 @@ const HeaderOptions = () => {
   const onLogout = async () => {
     await logout(setUser)
     setOpenLogout(false)
+    if (location.pathname === '/favorites') navigate('/search')
   }
   return (
     <div className={s.options}>
