@@ -7,7 +7,7 @@ type Props = {
 }
 const AutocompleteMui = memo(({ value, options, onChange }: Props) => {
   return (
-    <Autocomplete options={options}
+    <Autocomplete options={options} blurOnSelect={true}
       value={value ? value : options[0]}
       onChange={onChange}
       renderInput={params => <TextField {...params} />}

@@ -1,10 +1,19 @@
 import { Pet } from '../../utils/IPets'
 import s from './PetCard.module.css'
 import favorite from '../../../../../../../assets/svgs/favorite.svg'
+import favoriteFilled from '../../../../../../../assets/svgs/favoriteFilled.svg'
 import noImage from '../../../../../../../assets/svgs/noImage.svg'
 import { useSearchParams } from "react-router-dom"
+import { useContext } from 'react'
+import { UserContext } from '../../../../../../../components/UserProvider/UserProvider'
+import { updateFavorites } from './updateFavorites'
 const PetCard = ({ pet }: { pet: Pet }) => {
   const [params] = useSearchParams()
+  const { user, setUser } = useContext(UserContext)
+  const onHeartClick = async (id: number) => {
+    const updatedUser = await updateFavorites(id)
+    setUser(updatedUser)
+  }
   return (
     <div className={s.card}>
       <div className={s.container}>
@@ -22,7 +31,10 @@ const PetCard = ({ pet }: { pet: Pet }) => {
         <p>{pet.breeds.primary}</p>
         {params.has('location') && <p>{Math.round(pet.distance)} miles away</p>}
       </div>
-      <div className={s.heart}><img src={favorite} /></div>
+      <div className={s.heart} onClick={() => onHeartClick(pet.id)}>
+        <img src={user?.favorites.includes(pet.id.toString()) ?
+          favoriteFilled : favorite} />
+      </div>
     </div>
   )
 }

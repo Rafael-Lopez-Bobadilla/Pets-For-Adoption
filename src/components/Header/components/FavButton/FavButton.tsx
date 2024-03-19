@@ -29,7 +29,7 @@ const FavButton = ({ icon }: { icon: boolean }) => {
       </button>
       <Dialog open={dialog === 'no-user' ? true : false} onClose={() => setDialog('none')}>
         <div className={s.noUser}>
-          <h3>Join us to favorite pets!</h3>
+          <h3>Join us to select favorite pets!</h3>
           <p><span onClick={() => openAuthDialog('login')}>Log in</span>{' or '}
             <span onClick={() => openAuthDialog('signup')}>Create an account</span></p>
         </div>

@@ -57,7 +57,7 @@
 .info>h3 {
   font-size: 18px;
   margin-bottom: 8px;
-  text-wrap: nowrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--green);
@@ -70,7 +70,7 @@
 .info>p {
   font-size: 14px;
   padding: 5px 0;
-  text-wrap: nowrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 
