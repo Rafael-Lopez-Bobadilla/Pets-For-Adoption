@@ -19,7 +19,7 @@ const Header = () => {
           <button className={s.button}><img src={close} onClick={() => setIsOpen(!isOpen)} /></button>
         }
         <HeaderOptions />
-        {isOpen && <HeaderDropMenu />}
+        {isOpen && <HeaderDropMenu setIsOpen={setIsOpen} />}
       </div>
     </header>
   )

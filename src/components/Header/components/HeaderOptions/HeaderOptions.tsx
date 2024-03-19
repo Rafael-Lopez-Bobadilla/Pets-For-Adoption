@@ -5,6 +5,7 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../../../UserProvider/UserProvider'
 import userIcon from '../../../../assets/svgs/userIcon.svg'
 import triangleDown from '../../../../assets/svgs/triangleDown.svg'
+import { logout } from '../logout'
 const HeaderOptions = () => {
   const { setOpen, setType } = useContext(DialogSetterContext)
   const { user, setUser } = useContext(UserContext)
@@ -13,11 +14,8 @@ const HeaderOptions = () => {
     setOpen(true)
     setType(type)
   }
-  const logout = async () => {
-    const res = await fetch('http://localhost:5002/api/v1/logout', { credentials: 'include' })
-    if (res.status === 200) setUser(null)
-    const data = await res.json()
-    console.log(data)
+  const onLogout = async () => {
+    await logout(setUser)
     setOpenLogout(false)
   }
   return (
@@ -38,7 +36,7 @@ const HeaderOptions = () => {
           <span className={s.name}>{user?.name}</span>
           <img src={triangleDown} className={s.tri} />
         </button>
-        {openLogout && <div onClick={logout} onMouseDown={e => e.preventDefault()}>Log out</div>}
+        {openLogout && <div onClick={onLogout} onMouseDown={e => e.preventDefault()}>Log out</div>}
       </div>}
     </div>
   )

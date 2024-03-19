@@ -8,7 +8,8 @@
   width: 100%;
 }
 
-.dropMenu button {
+.button,
+.user {
   background-color: transparent;
   color: white;
   font-size: 16px;
@@ -16,6 +17,21 @@
   border: none;
   margin: 20px 0;
   display: block;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.userIcon {
+  width: 25px;
+}
+
+.name {
+  color: #d3d3d3;
+  font-weight: bold;
+  margin-left: 5px;
 }
 
 @media (min-width: 768px) {
