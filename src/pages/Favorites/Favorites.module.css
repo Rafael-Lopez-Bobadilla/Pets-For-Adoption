@@ -1,0 +1,36 @@
+.wrapper {
+  max-width: var(--max-width);
+  padding: 10px 5px;
+  margin: 0 auto;
+  font-family: 'Inter';
+
+  @media (min-width: 1000px) {
+    padding: 10px var(--wrapper-padding);
+  }
+}
+
+.wrapper>h1 {
+  text-align: center;
+  margin: 50px 0;
+  font-size: 25px;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+.card {
+  width: 45%;
+  margin: 0 7px 30px 7px;
+  max-width: 220px;
+
+  @media (min-width: 768px) {
+    width: 30%;
+    max-width: 270px;
+    margin: 0 7px 30px 7px;
+  }
+}
