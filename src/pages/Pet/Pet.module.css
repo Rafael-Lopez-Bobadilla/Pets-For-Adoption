@@ -8,3 +8,12 @@
     padding: 10px var(--wrapper-padding);
   }
 }
+
+.carousel {
+  margin: 0 auto;
+}
+
+.img {
+  max-width: 300px;
+  max-width: 300px;
+}

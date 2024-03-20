@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import { TokenContext } from '../../components/TokenProvider/TokenProvider'
 import { Pet as IPet } from '../Search/components/SearchBody/PetList/utils/IPets'
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 const Pet = () => {
   const token = useContext(TokenContext)
   const { id } = useParams()
@@ -23,7 +25,13 @@ const Pet = () => {
   return (
     <div className={s.wrapper}>
       {pet && <>
-        <p>Pet: {pet.id}</p>
+        <div className={s.carousel}>
+          {pet.photos.map((photo, index) => {
+            return (
+              <img src={photo.full} className={s.img} key={index} />
+            )
+          })}
+        </div>
       </>}
     </div>
   )
