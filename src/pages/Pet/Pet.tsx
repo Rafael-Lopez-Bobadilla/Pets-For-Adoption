@@ -1,9 +1,31 @@
 import s from './Pet.module.css'
 import { useParams } from 'react-router-dom'
+import { useEffect, useState, useContext } from 'react'
+import { TokenContext } from '../../components/TokenProvider/TokenProvider'
+import { Pet as IPet } from '../Search/components/SearchBody/PetList/utils/IPets'
 const Pet = () => {
+  const token = useContext(TokenContext)
   const { id } = useParams()
+  const [pet, setPet] = useState<IPet | null>(null)
+  const getPet = async () => {
+    const res = await fetch(`https://api.petfinder.com/v2/animals/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    const data = await res.json()
+    setPet(data.animal)
+    console.log(data.animal)
+  }
+  useEffect(() => {
+    if (token) getPet()
+  }, [token])
   return (
-    <div className={s.wrapper}>Pet page: {id}</div>
+    <div className={s.wrapper}>
+      {pet && <>
+        <p>Pet: {pet.id}</p>
+      </>}
+    </div>
   )
 }
 

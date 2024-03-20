@@ -1,0 +1,10 @@
+.wrapper {
+  max-width: var(--max-width);
+  padding: 10px 5px;
+  margin: 0 auto;
+  font-family: 'Inter';
+
+  @media (min-width: 1000px) {
+    padding: 10px var(--wrapper-padding);
+  }
+}
