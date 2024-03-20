@@ -20,13 +20,12 @@ export const manageLocation = async (location: Location | null,
     const address = location.results[0].formatted_address
     setLocation({ id, coords, address })
   }
-  if (!params.has('location') && location) {
-    setLocation(null)
+  if (params.has('location')) params.set('location', coords)
+  if (!params.has('location')) {
+    params.set('location', '34.0736204,-118.4003563') //location that provides pets with images
+    if (location) setLocation(null)
   }
-  if (params.has('location')) {
-    params.set('location', coords)
-    params.set('distance', '500')
-    params.set('sort', 'distance')
-  }
+  params.set('distance', '500')
+  params.set('sort', 'distance')
   return params
 }

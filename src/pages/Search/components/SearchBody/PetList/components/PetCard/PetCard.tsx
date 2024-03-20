@@ -7,12 +7,15 @@ import { useSearchParams } from "react-router-dom"
 import { useContext, useState } from 'react'
 import { UserContext } from '../../../../../../../components/UserProvider/UserProvider'
 import { updateFavorites } from './updateFavorites'
+import { useNavigate } from 'react-router-dom'
 import NoUserDialog from '../../../../../../../components/NoUserDialog/NoUserDialog'
 const PetCard = ({ pet }: { pet: Pet }) => {
   const [params] = useSearchParams()
   const { user, setUser } = useContext(UserContext)
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
-  const onHeartClick = async (id: number) => {
+  const onHeartClick = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: number) => {
+    e.stopPropagation()
     if (!user) {
       setOpen(true)
       return
@@ -21,7 +24,7 @@ const PetCard = ({ pet }: { pet: Pet }) => {
     setUser(updatedUser)
   }
   return (
-    <div className={s.card}>
+    <div className={s.card} onClick={() => navigate(`/pet/${pet.id}`)}>
       <div className={s.container}>
         <div className={s.overlay}></div>
         {pet.primary_photo_cropped ? <img className={s.petImg} src={pet.primary_photo_cropped.full} /> :
@@ -37,7 +40,7 @@ const PetCard = ({ pet }: { pet: Pet }) => {
         <p>{pet.breeds.primary}</p>
         {params.has('location') && <p>{Math.round(pet.distance)} miles away</p>}
       </div>
-      <div className={s.heart} onClick={() => onHeartClick(pet.id)}>
+      <div className={s.heart} onClick={(e) => onHeartClick(e, pet.id)}>
         <img src={user?.favorites.includes(pet.id.toString()) ?
           favoriteFilled : favorite} />
       </div>
