@@ -18,7 +18,6 @@
   width: 30px;
 }
 
-.noUser,
 .noFav {
   padding: 40px 40px;
   font-family: 'Inter';
@@ -26,14 +25,12 @@
   max-width: 300px;
 }
 
-.noFav>h3,
-.noUser>h3 {
+.noFav>h3 {
   margin-bottom: 20px;
   font-size: 25px;
 }
 
-.noFav>p,
-.noUser>p {
+.noFav>p {
   font-size: 18px;
   line-height: 1.5;
 }
@@ -57,11 +54,4 @@
   &:hover {
     background-color: rgb(25, 61, 25);
   }
-}
-
-.noUser>p>span {
-  text-decoration: underline;
-  color: var(--green);
-  font-weight: bold;
-  cursor: pointer;
 }

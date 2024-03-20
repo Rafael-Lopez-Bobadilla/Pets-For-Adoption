@@ -4,13 +4,19 @@ import favorite from '../../../../../../../assets/svgs/favorite.svg'
 import favoriteFilled from '../../../../../../../assets/svgs/favoriteFilled.svg'
 import noImage from '../../../../../../../assets/svgs/noImage.svg'
 import { useSearchParams } from "react-router-dom"
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../../../../../../../components/UserProvider/UserProvider'
 import { updateFavorites } from './updateFavorites'
+import NoUserDialog from '../../../../../../../components/NoUserDialog/NoUserDialog'
 const PetCard = ({ pet }: { pet: Pet }) => {
   const [params] = useSearchParams()
   const { user, setUser } = useContext(UserContext)
+  const [open, setOpen] = useState(false)
   const onHeartClick = async (id: number) => {
+    if (!user) {
+      setOpen(true)
+      return
+    }
     const updatedUser = await updateFavorites(id)
     setUser(updatedUser)
   }
@@ -35,6 +41,7 @@ const PetCard = ({ pet }: { pet: Pet }) => {
         <img src={user?.favorites.includes(pet.id.toString()) ?
           favoriteFilled : favorite} />
       </div>
+      <NoUserDialog openDialog={open} setOpenDialog={setOpen} />
     </div>
   )
 }
