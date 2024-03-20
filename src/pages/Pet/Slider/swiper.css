@@ -1,0 +1,14 @@
+.swiper-button-prev,
+.swiper-button-next {
+  color: white;
+}
+
+.swiper-wrapper {
+  align-items: center;
+}
+
+.swiper-pagination-bullet {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+}
