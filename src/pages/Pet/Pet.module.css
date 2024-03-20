@@ -9,11 +9,10 @@
   }
 }
 
-.carousel {
-  margin: 0 auto;
+.container {
+  background-color: rgb(61, 60, 60);
 }
 
 .img {
-  max-width: 300px;
   max-width: 300px;
 }

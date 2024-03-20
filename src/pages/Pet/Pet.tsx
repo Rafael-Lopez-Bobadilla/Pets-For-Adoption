@@ -5,6 +5,8 @@ import { TokenContext } from '../../components/TokenProvider/TokenProvider'
 import { Pet as IPet } from '../Search/components/SearchBody/PetList/utils/IPets'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import Slider from "react-slick"
+import './test.css'
 const Pet = () => {
   const token = useContext(TokenContext)
   const { id } = useParams()
@@ -25,12 +27,14 @@ const Pet = () => {
   return (
     <div className={s.wrapper}>
       {pet && <>
-        <div className={s.carousel}>
-          {pet.photos.map((photo, index) => {
-            return (
-              <img src={photo.full} className={s.img} key={index} />
-            )
-          })}
+        <div className={s.container}>
+          <Slider centerPadding='0px'>
+            {pet.photos.map((photo, index) => {
+              return (
+                <img src={photo.full} className={s.img} key={index} />
+              )
+            })}
+          </Slider>
         </div>
       </>}
     </div>
