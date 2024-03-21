@@ -5,6 +5,7 @@
 
 .swiper-wrapper {
   align-items: center;
+  min-height: 350px;
 }
 
 .swiper-pagination-bullet {
