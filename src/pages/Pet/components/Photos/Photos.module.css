@@ -1,18 +1,8 @@
 .container {
   background-color: rgb(61, 60, 60);
-  color: white;
   padding: 0;
   margin: 0;
   position: relative;
-}
-
-.img {
-  max-width: 300px;
-  max-height: 350px;
-}
-
-.slide {
-  display: flex;
 }
 
 .expand {

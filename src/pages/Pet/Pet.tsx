@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import { TokenContext } from '../../components/TokenProvider/TokenProvider'
 import { Pet as IPet } from '../Search/components/SearchBody/PetList/utils/IPets'
-import Slider from './Slider/Slider'
+import Photos from './components/Photos/Photos'
 const Pet = () => {
   const token = useContext(TokenContext)
   const { id } = useParams()
@@ -24,7 +24,7 @@ const Pet = () => {
   return (
     <div className={s.wrapper}>
       {pet && <>
-        <Slider pet={pet} />
+        <Photos pet={pet} />
       </>}
     </div>
   )
