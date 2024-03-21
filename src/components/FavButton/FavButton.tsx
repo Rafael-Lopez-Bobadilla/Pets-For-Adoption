@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import s from './FavButton.module.css'
 import { Pet } from '../../pages/Search/components/SearchBody/PetList/utils/IPets'
 import { updateFavorites } from './updateFavorites'
+import { Tooltip } from '@mui/material'
 type Props = {
   pet: Pet,
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
@@ -21,13 +22,17 @@ const FavButton = ({ pet, setOpen, background }: Props) => {
     const updatedUser = await updateFavorites(id)
     setUser(updatedUser)
   }
+  const isFavorite = user?.favorites.includes(pet.id.toString())
   return (
-    <div className={s.heart} onClick={(e) => onHeartClick(e, pet.id)}
-      style={{ backgroundColor: background }}
-    >
-      <img src={user?.favorites.includes(pet.id.toString()) ?
-        favoriteFilled : favorite} />
-    </div>
+    <Tooltip title={isFavorite ? 'Remove From Favorites' : 'Add To Favorites'}
+      placement='left' sx={{ fontSize: '24px' }}>
+      <div className={s.heart} onClick={(e) => onHeartClick(e, pet.id)}
+        style={{ backgroundColor: background }}
+      >
+        <img src={isFavorite ?
+          favoriteFilled : favorite} />
+      </div>
+    </Tooltip>
   )
 }
 

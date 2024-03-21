@@ -47,3 +47,10 @@
   margin-left: 20px;
   padding: 5px 0;
 }
+
+.loading {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  margin: 100px auto;
+}

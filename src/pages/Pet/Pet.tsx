@@ -6,6 +6,7 @@ import { Pet as IPet } from '../Search/components/SearchBody/PetList/utils/IPets
 import Photos from './components/Photos/Photos'
 import FavButton from '../../components/FavButton/FavButton'
 import NoUserDialog from '../../components/NoUserDialog/NoUserDialog'
+import { CircularProgress } from '@mui/material'
 const Pet = () => {
   const token = useContext(TokenContext)
   const { id } = useParams()
@@ -31,6 +32,7 @@ const Pet = () => {
   }
   return (
     <div className={s.wrapper}>
+      {!pet && <div className={s.loading}><CircularProgress size={30} /></div>}
       {pet && <>
         <Photos pet={pet} />
         <div className={s.info}>
