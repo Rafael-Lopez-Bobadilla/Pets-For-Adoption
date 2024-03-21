@@ -20,7 +20,6 @@ const Pet = () => {
     })
     const data = await res.json()
     setPet(data.animal)
-    console.log(data.animal)
   }
   useEffect(() => {
     if (token) getPet()
