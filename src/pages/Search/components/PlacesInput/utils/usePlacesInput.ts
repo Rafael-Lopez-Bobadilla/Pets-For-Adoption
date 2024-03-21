@@ -28,6 +28,7 @@ const usePlacesInput = (closeOverlay?: () => void) => {
     if (!isOpen) setIsOpen(true)
     if (text === '') {
       setPlaces([{ description: 'Anywhere in North America', place_id: 'Any' }])
+      setSelected(0)
     } else {
       getPredictions(timeoutID, service, text, setPlaces)
     }
