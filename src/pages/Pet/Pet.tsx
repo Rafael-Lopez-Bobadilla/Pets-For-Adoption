@@ -4,10 +4,13 @@ import { useEffect, useState, useContext } from 'react'
 import { TokenContext } from '../../components/TokenProvider/TokenProvider'
 import { Pet as IPet } from '../Search/components/SearchBody/PetList/utils/IPets'
 import Photos from './components/Photos/Photos'
+import FavButton from '../../components/FavButton/FavButton'
+import NoUserDialog from '../../components/NoUserDialog/NoUserDialog'
 const Pet = () => {
   const token = useContext(TokenContext)
   const { id } = useParams()
   const [pet, setPet] = useState<IPet | null>(null)
+  const [open, setOpen] = useState(false)
   const getPet = async () => {
     const res = await fetch(`https://api.petfinder.com/v2/animals/${id}`, {
       headers: {
@@ -31,7 +34,11 @@ const Pet = () => {
       {pet && <>
         <Photos pet={pet} />
         <div className={s.info}>
-          <h2>{pet.name}</h2>
+          <div className={s.name}>
+            <h2>{pet.name}</h2>
+            <FavButton pet={pet} setOpen={setOpen} background='#e6dede' />
+            <NoUserDialog openDialog={open} setOpenDialog={setOpen} />
+          </div>
           <h3>Contact</h3>
           <p><span>Email:</span> {pet.contact.email}</p>
           {pet.contact.phone && <p><span>Phone:</span> {pet.contact.phone}</p>}

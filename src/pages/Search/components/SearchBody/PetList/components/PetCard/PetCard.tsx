@@ -1,28 +1,15 @@
 import { Pet } from '../../utils/IPets'
 import s from './PetCard.module.css'
-import favorite from '../../../../../../../assets/svgs/favorite.svg'
-import favoriteFilled from '../../../../../../../assets/svgs/favoriteFilled.svg'
 import noImage from '../../../../../../../assets/svgs/noImage.svg'
 import { useSearchParams } from "react-router-dom"
-import { useContext, useState } from 'react'
-import { UserContext } from '../../../../../../../components/UserProvider/UserProvider'
-import { updateFavorites } from './updateFavorites'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NoUserDialog from '../../../../../../../components/NoUserDialog/NoUserDialog'
+import FavButton from '../../../../../../../components/FavButton/FavButton'
 const PetCard = ({ pet }: { pet: Pet }) => {
   const [params] = useSearchParams()
-  const { user, setUser } = useContext(UserContext)
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
-  const onHeartClick = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: number) => {
-    e.stopPropagation()
-    if (!user) {
-      setOpen(true)
-      return
-    }
-    const updatedUser = await updateFavorites(id)
-    setUser(updatedUser)
-  }
   return (
     <>
       <div className={s.card} onClick={() => navigate(`/pet/${pet.id}`)}>
@@ -41,9 +28,8 @@ const PetCard = ({ pet }: { pet: Pet }) => {
           <p>{pet.breeds.primary}</p>
           {params.has('location') && <p>{Math.round(pet.distance)} miles away</p>}
         </div>
-        <div className={s.heart} onClick={(e) => onHeartClick(e, pet.id)}>
-          <img src={user?.favorites.includes(pet.id.toString()) ?
-            favoriteFilled : favorite} />
+        <div className={s.heartCont}>
+          <FavButton pet={pet} setOpen={setOpen} background='white' />
         </div>
       </div>
       <NoUserDialog openDialog={open} setOpenDialog={setOpen} />
