@@ -13,7 +13,6 @@ export const signUpRequest = async (data: SignUpSchema,
     }
   })
   const resData = await res.json()
-  console.log(resData)
   if (res.status === 201) setOpen(false)
   if (res.status === 400) setError('email', { message: resData.error })
 }
