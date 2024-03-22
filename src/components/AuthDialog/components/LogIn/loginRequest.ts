@@ -1,10 +1,11 @@
 import { LogInSchema } from "./LogIn"
 import { UseFormSetError } from "react-hook-form"
+import { apiUrl } from "../../../../apiUrl"
 export const logInRequest = async (data: LogInSchema,
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
   setError: UseFormSetError<LogInSchema>) => {
   const { email, password } = data
-  const res = await fetch('http://localhost:5002/api/v1/login', {
+  const res = await fetch(`${apiUrl}/api/v1/login`, {
     method: 'POST',
     body: JSON.stringify({ email, password }),
     headers: {
