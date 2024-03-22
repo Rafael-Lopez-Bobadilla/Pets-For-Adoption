@@ -1,5 +1,6 @@
+import { apiUrl } from "../../../../../../../apiUrl"
 export const updateFavorites = async (id: number,) => {
-  const res = await fetch('http://localhost:5002/api/v1/updateFavorites', {
+  const res = await fetch(`${apiUrl}/api/v1/updateFavorites`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'

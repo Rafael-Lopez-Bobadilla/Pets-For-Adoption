@@ -1,0 +1,1 @@
+export const apiUrl = 'https://pfa-users-api-production.up.railway.app'

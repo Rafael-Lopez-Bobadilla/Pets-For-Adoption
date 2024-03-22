@@ -1,10 +1,11 @@
 import { SignUpSchema } from "./SignUp"
 import { UseFormSetError } from "react-hook-form"
+import { apiUrl } from "../../../../apiUrl"
 export const signUpRequest = async (data: SignUpSchema,
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
   setError: UseFormSetError<SignUpSchema>) => {
   const { name, email, password } = data
-  const res = await fetch('http://localhost:5002/api/v1/signup', {
+  const res = await fetch(`${apiUrl}/api/v1/signup`, {
     method: 'POST',
     body: JSON.stringify({ name, email, password }),
     headers: {
