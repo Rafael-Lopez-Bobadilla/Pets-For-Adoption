@@ -12,7 +12,8 @@ export const logInRequest = async (data: LogInSchema,
     body: JSON.stringify({ email, password }),
     headers: {
       "Content-Type": "application/json",
-    }
+    },
+    credentials: 'include'
   })
   const resData = await res.json()
   if (res.status === 200) {

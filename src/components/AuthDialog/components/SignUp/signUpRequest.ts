@@ -12,7 +12,8 @@ export const signUpRequest = async (data: SignUpSchema,
     body: JSON.stringify({ name, email, password }),
     headers: {
       "Content-Type": "application/json",
-    }
+    },
+    credentials: 'include'
   })
   const resData = await res.json()
   if (res.status === 201) {
