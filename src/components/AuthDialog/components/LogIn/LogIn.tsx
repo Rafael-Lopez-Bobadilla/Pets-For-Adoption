@@ -6,9 +6,11 @@ import { logInSchema } from './logInSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { logInRequest } from './loginRequest'
+import { UserContext } from '../../../UserProvider/UserProvider'
 export type LogInSchema = z.infer<typeof logInSchema>
 const LogIn = () => {
   const { setType, setOpen } = useContext(DialogSetterContext)
+  const { setUser } = useContext(UserContext)
   const {
     register,
     handleSubmit,
@@ -18,7 +20,7 @@ const LogIn = () => {
     resolver: zodResolver(logInSchema)
   })
   const onSubmit = (data: LogInSchema) => {
-    logInRequest(data, setOpen, setError)
+    logInRequest(data, setOpen, setError, setUser)
   }
   return (
     <>
@@ -29,7 +31,7 @@ const LogIn = () => {
         <label>Password</label>
         <input type='password' {...register('password')} />
         {errors.password && <p>{`${errors.password.message}`}</p>}
-        <button disabled={isSubmitting}>Sign Up</button>
+        <button disabled={isSubmitting}>Log In</button>
       </form>
       <p className={s.alt}>{`No account? `}
         <span className={s.link} onClick={() => setType('signup')}>Create one</span>

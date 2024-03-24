@@ -6,9 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { signUpSchema } from './signUpSchema'
 import { z } from 'zod'
 import { signUpRequest } from './signUpRequest'
+import { UserContext } from '../../../UserProvider/UserProvider'
 export type SignUpSchema = z.infer<typeof signUpSchema>
 const SignUp = () => {
   const { setType, setOpen } = useContext(DialogSetterContext)
+  const { setUser } = useContext(UserContext)
   const {
     register,
     handleSubmit,
@@ -18,7 +20,7 @@ const SignUp = () => {
     resolver: zodResolver(signUpSchema)
   })
   const onSubmit = async (data: SignUpSchema) => {
-    signUpRequest(data, setOpen, setError)
+    signUpRequest(data, setOpen, setError, setUser)
   }
   return (
     <>
