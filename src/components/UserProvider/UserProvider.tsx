@@ -1,13 +1,12 @@
 import { useState, createContext, useEffect } from "react"
 import { User, IUserContext } from './IUser'
 import { useNavigate } from 'react-router-dom'
-import { apiUrl } from "../../apiUrl"
 export const UserContext = createContext<IUserContext>({ user: null, setUser: () => { } })
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
   const navigate = useNavigate()
   const authenticate = async () => {
-    const res = await fetch(`${apiUrl}/api/v1/authenticate`, {
+    const res = await fetch(`${import.meta.env.VITE_API}/api/v1/authenticate`, {
       credentials: 'include'
     })
     const data = await res.json()

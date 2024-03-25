@@ -1,13 +1,12 @@
 import { SignUpSchema } from "./SignUp"
 import { UseFormSetError } from "react-hook-form"
-import { apiUrl } from "../../../../apiUrl"
 import { User } from "../../../UserProvider/IUser"
 export const signUpRequest = async (data: SignUpSchema,
   setOpen: React.Dispatch<React.SetStateAction<boolean>>,
   setError: UseFormSetError<SignUpSchema>,
   setUser: React.Dispatch<React.SetStateAction<User | null>>) => {
   const { name, email, password } = data
-  const res = await fetch(`${apiUrl}/api/v1/signup`, {
+  const res = await fetch(`${import.meta.env.VITE_API}/api/v1/signup`, {
     method: 'POST',
     body: JSON.stringify({ name, email, password }),
     headers: {
