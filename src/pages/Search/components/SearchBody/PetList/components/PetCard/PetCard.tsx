@@ -15,12 +15,12 @@ const PetCard = ({ pet }: { pet: Pet }) => {
       <div className={s.card} onClick={() => navigate(`/pet/${pet.id}`)}>
         <div className={s.container}>
           <div className={s.overlay}></div>
-          {pet.primary_photo_cropped ? <img className={s.petImg} src={pet.primary_photo_cropped.full} /> :
-            <>
-              <img src={noImage} className={s.noImg} />
-              <p>No photo available for this pet</p>
-            </>
-          }
+          {pet.primary_photo_cropped && <img className={s.petImg} src={pet.primary_photo_cropped.full} />}
+          {!pet.primary_photo_cropped && pet.photos[0].full && <img className={s.petImg} src={pet.photos[0].full} />}
+          {(!pet.primary_photo_cropped && !pet.photos[0].full) && <>
+            <img src={noImage} className={s.noImg} />
+            <p>No photo available for this pet</p>
+          </>}
         </div>
         <div className={s.info}>
           <h3>{`${pet.name.charAt(0).toUpperCase()}${pet.name.slice(1).toLowerCase()}`}</h3>
