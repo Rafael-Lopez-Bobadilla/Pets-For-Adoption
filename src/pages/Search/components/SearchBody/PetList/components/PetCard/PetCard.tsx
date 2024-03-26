@@ -16,8 +16,8 @@ const PetCard = ({ pet }: { pet: Pet }) => {
         <div className={s.container}>
           <div className={s.overlay}></div>
           {pet.primary_photo_cropped && <img className={s.petImg} src={pet.primary_photo_cropped.full} />}
-          {!pet.primary_photo_cropped && pet.photos[0].full && <img className={s.petImg} src={pet.photos[0].full} />}
-          {(!pet.primary_photo_cropped && !pet.photos[0].full) && <>
+          {!pet.primary_photo_cropped && pet.photos[0]?.full && <img className={s.petImg} src={pet.photos[0].full} />}
+          {(!pet.primary_photo_cropped && !pet.photos[0]?.full) && <>
             <img src={noImage} className={s.noImg} />
             <p>No photo available for this pet</p>
           </>}

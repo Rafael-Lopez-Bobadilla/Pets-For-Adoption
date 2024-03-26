@@ -35,6 +35,7 @@ export const getPets = async (params: URLSearchParams,
     return 0
   }
   data.animals.sort(compareByImg)
+  console.log(data.animals)
   setPageCount(data.pagination.total_pages)
   setPets({ data: data, loading: false })
 }
