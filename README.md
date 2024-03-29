@@ -1,4 +1,4 @@
-# Hosted on netlify:
+# Hosted on Railway:
 
 https://pets-for-adoption.up.railway.app
 
