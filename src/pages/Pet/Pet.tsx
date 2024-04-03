@@ -22,7 +22,8 @@ const Pet = () => {
       })
       const data = await res.json()
       return data.animal as IPet
-    }
+    },
+    enabled: token ? true : false
   })
   const getString = () => {
     let str = data?.tags.reduce((tag, current) => `${current}, ${tag}`)

@@ -6,8 +6,7 @@ export type BreedType = {
     }
   }
 }
-export const getBreeds = async (token: string, link: string,
-  setBreeds: React.Dispatch<React.SetStateAction<string[] | null>>) => {
+export const getBreeds = async (token: string | null, link: string | undefined) => {
   const res = await fetch(`https://api.petfinder.com${link}`, {
     headers: {
       "Authorization": `Bearer ${token}`
@@ -15,5 +14,5 @@ export const getBreeds = async (token: string, link: string,
   })
   const data = await res.json()
   const breeds = data.breeds.map((breed: BreedType) => breed.name)
-  setBreeds(breeds)
+  return breeds
 }
