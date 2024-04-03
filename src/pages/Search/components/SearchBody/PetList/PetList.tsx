@@ -1,38 +1,34 @@
-import { Pets } from "./utils/IPets"
-import { useState, useContext, useEffect } from "react"
+import { useContext } from "react"
 import { TokenContext } from "../../../../../components/TokenProvider/TokenProvider"
 import { useSearchParams } from "react-router-dom"
 import { getPets } from "./utils/getPets"
 import { CircularProgress } from "@mui/material"
 import s from './PetList.module.css'
 import { LocationContext } from "../../LocationProvider/LocationProvider"
-import { validateParams } from "./utils/validateParams"
 import PetCard from './components/PetCard/PetCard'
 import { memo } from "react"
 import NoResults from "./components/NoResults/NoResults"
+import { useQuery } from "@tanstack/react-query"
 const PetList = memo(({ setPageCount }: { setPageCount: React.Dispatch<React.SetStateAction<number>> }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const token = useContext(TokenContext)
-  const [pets, setPets] = useState<Pets>({ data: null, loading: false })
   const { location, setLocation } = useContext(LocationContext)
-  useEffect(() => {
-    if (!token) return
-    const validParams = validateParams(setSearchParams, searchParams)
-    if (!validParams) return
-    getPets(validParams, token, setSearchParams,
-      setPets, location, setLocation, setPageCount)
-  }, [searchParams, token])
+  const { data, isPending } = useQuery({
+    queryKey: [`${searchParams.toString()}`],
+    queryFn: () => getPets(token, setSearchParams, searchParams,
+      location, setLocation, setPageCount),
+  })
   return (
     <>
       <div className={s.list}>
-        {(pets.data && !pets.loading) && pets.data.animals.map(pet =>
+        {(data && !isPending) && data.map(pet =>
           <div key={pet.id} className={s.card}>
             <PetCard pet={pet} />
           </div>
         )}
       </div>
-      {pets.loading && <div className={s.loading}><CircularProgress size={30} /></div>}
-      {(pets.data?.animals.length === 0 && !pets.loading) && <NoResults />}
+      {isPending && <div className={s.loading}><CircularProgress size={30} /></div>}
+      {(data?.length === 0 && !isPending) && <NoResults />}
     </>
   )
 })

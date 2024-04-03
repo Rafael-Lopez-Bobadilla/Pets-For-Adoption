@@ -1,22 +1,24 @@
-import { Pets, Pet, PetsData } from "./IPets"
+import { Pet, PetsData } from "./IPets"
 import { Location } from "../../../../utils/ILocation"
 import { SetURLSearchParams } from "react-router-dom"
 import { manageLocation } from "./manageLocation"
-export const getPets = async (params: URLSearchParams,
-  token: string,
+import { validateParams } from "./validateParams"
+export const getPets = async (token: string | null,
   setSearchParams: SetURLSearchParams,
-  setPets: React.Dispatch<React.SetStateAction<Pets>>,
+  searchParams: URLSearchParams,
   location: Location | null,
   setLocation: React.Dispatch<React.SetStateAction<Location | null>>,
   setPageCount: React.Dispatch<React.SetStateAction<number>>) => {
-  const requestParams = await manageLocation(location, params, setSearchParams, setLocation)
-  if (!requestParams) return
+  if (!token) throw new Error('wait')
+  const validParams = validateParams(setSearchParams, searchParams)
+  if (!validParams) throw new Error('wait')
+  const requestParams = await manageLocation(location, validParams, setSearchParams, setLocation)
+  if (!requestParams) throw new Error('wait')
   if (requestParams.has('color')) {
     const color = requestParams.get('color') as string
     requestParams.delete('color')
     requestParams.set('color[]', color)
   }
-  setPets(pets => { return { ...pets, loading: true } })
   const res = await fetch(`https://api.petfinder.com/v2/animals?${requestParams}&limit=12`, {
     headers: {
       "Authorization": `Bearer ${token}`
@@ -24,7 +26,7 @@ export const getPets = async (params: URLSearchParams,
   })
   if (res.status === 400) {
     setSearchParams(new URLSearchParams({ type: 'Dog', page: '1' }))
-    return
+    throw new Error('reset')
   }
   const data: PetsData = await res.json()
   const compareByImg = (a: Pet, b: Pet) => {
@@ -35,7 +37,6 @@ export const getPets = async (params: URLSearchParams,
     return 0
   }
   data.animals.sort(compareByImg)
-  console.log(data.animals)
   setPageCount(data.pagination.total_pages)
-  setPets({ data: data, loading: false })
+  return data.animals
 }
