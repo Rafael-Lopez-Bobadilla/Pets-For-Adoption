@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { TokenContext } from "../../../../../components/TokenProvider/TokenProvider"
 import { useSearchParams } from "react-router-dom"
 import { getPets } from "./utils/getPets"
@@ -9,6 +9,7 @@ import PetCard from './components/PetCard/PetCard'
 import { memo } from "react"
 import NoResults from "./components/NoResults/NoResults"
 import { useQuery } from "@tanstack/react-query"
+import { syncLocation, isLocationSync } from "./utils/syncLocation"
 const PetList = memo(({ setPageCount }: { setPageCount: React.Dispatch<React.SetStateAction<number>> }) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const token = useContext(TokenContext)
@@ -16,8 +17,12 @@ const PetList = memo(({ setPageCount }: { setPageCount: React.Dispatch<React.Set
   const { data, isPending } = useQuery({
     queryKey: [`${searchParams.toString()}`],
     queryFn: () => getPets(token, setSearchParams, searchParams,
-      location, setLocation, setPageCount),
+      location, setPageCount),
+    enabled: isLocationSync(searchParams, location)
   })
+  useEffect(() => {
+    syncLocation(searchParams, setSearchParams, location, setLocation)
+  }, [searchParams])
   return (
     <>
       <div className={s.list}>

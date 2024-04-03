@@ -7,13 +7,12 @@ export const getPets = async (token: string | null,
   setSearchParams: SetURLSearchParams,
   searchParams: URLSearchParams,
   location: Location | null,
-  setLocation: React.Dispatch<React.SetStateAction<Location | null>>,
   setPageCount: React.Dispatch<React.SetStateAction<number>>) => {
   console.log('fetching')
   if (!token) throw new Error('wait')
   const validParams = validateParams(setSearchParams, searchParams)
   if (!validParams) throw new Error('wait')
-  const requestParams = await manageLocation(location, validParams, setSearchParams, setLocation)
+  const requestParams = await manageLocation(location, validParams)
   if (!requestParams) throw new Error('wait')
   if (requestParams.has('color')) {
     const color = requestParams.get('color') as string
