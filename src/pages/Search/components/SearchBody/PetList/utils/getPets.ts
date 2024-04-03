@@ -9,6 +9,7 @@ export const getPets = async (token: string | null,
   location: Location | null,
   setLocation: React.Dispatch<React.SetStateAction<Location | null>>,
   setPageCount: React.Dispatch<React.SetStateAction<number>>) => {
+  console.log('fetching')
   if (!token) throw new Error('wait')
   const validParams = validateParams(setSearchParams, searchParams)
   if (!validParams) throw new Error('wait')

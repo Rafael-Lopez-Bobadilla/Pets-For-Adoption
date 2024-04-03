@@ -16,7 +16,6 @@
 }
 
 .noUser>p>span {
-  text-decoration: underline;
   color: var(--green);
   font-weight: bold;
   cursor: pointer;
