@@ -37,5 +37,5 @@ export const getPets = async (token: string | null,
   }
   data.animals.sort(compareByImg)
   setPageCount(data.pagination.total_pages)
-  return data.animals
+  return data
 }

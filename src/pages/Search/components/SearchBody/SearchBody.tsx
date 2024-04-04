@@ -23,7 +23,7 @@ const SearchBody = () => {
         <img src={closeBlack} onClick={closeOverlay} />
       </div>}
       <FiltersApplied />
-      <PetList setPageCount={setPageCount} />
+      <PetList setPageCount={setPageCount} pageCount={pageCount} />
       <Pagination pageCount={pageCount} />
     </>
   )
