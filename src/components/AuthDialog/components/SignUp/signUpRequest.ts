@@ -1,23 +1,25 @@
-import { SignUpSchema } from "./SignUp"
-import { UseFormSetError } from "react-hook-form"
-import { User } from "../../../UserProvider/IUser"
-export const signUpRequest = async (data: SignUpSchema,
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+import { SignUpSchema } from "./SignUp";
+import { UseFormSetError } from "react-hook-form";
+import { User } from "../../../UserProvider/IUser";
+export const signUpRequest = async (
+  data: SignUpSchema,
+  handleDialogClose: () => void,
   setError: UseFormSetError<SignUpSchema>,
-  setUser: React.Dispatch<React.SetStateAction<User | null>>) => {
-  const { name, email, password } = data
+  setUser: React.Dispatch<React.SetStateAction<User | null>>
+) => {
+  const { name, email, password } = data;
   const res = await fetch(`${import.meta.env.VITE_API}/api/v1/signup`, {
-    method: 'POST',
+    method: "POST",
     body: JSON.stringify({ name, email, password }),
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: 'include'
-  })
-  const resData = await res.json()
+    credentials: "include",
+  });
+  const resData = await res.json();
   if (res.status === 201) {
-    setOpen(false)
-    setUser(resData.user)
+    handleDialogClose();
+    setUser(resData.user);
   }
-  if (res.status === 400) setError('email', { message: resData.error })
-}
+  if (res.status === 400) setError("email", { message: resData.error });
+};
