@@ -1,5 +1,5 @@
 import s from "../../AuthDialog.module.css";
-import { DialogSetterContext } from "../../../DialogProvider/DialogProvider";
+import { useDialogContext } from "../../../DialogProvider/DialogProvider";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { logInSchema } from "./logInSchema";
@@ -9,8 +9,7 @@ import { logInRequest } from "./loginRequest";
 import { UserContext } from "../../../UserProvider/UserProvider";
 export type LogInSchema = z.infer<typeof logInSchema>;
 const LogIn = () => {
-  const { handleDialogOpen, handleDialogClose } =
-    useContext(DialogSetterContext);
+  const { handleDialogOpen, handleDialogClose } = useDialogContext();
   const { setUser } = useContext(UserContext);
   const {
     register,

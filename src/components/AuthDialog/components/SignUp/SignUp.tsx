@@ -1,6 +1,6 @@
 import s from "../../AuthDialog.module.css";
 import { useForm } from "react-hook-form";
-import { DialogSetterContext } from "../../../DialogProvider/DialogProvider";
+import { useDialogContext } from "../../../DialogProvider/DialogProvider";
 import { useContext } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema } from "./signUpSchema";
@@ -9,8 +9,7 @@ import { signUpRequest } from "./signUpRequest";
 import { UserContext } from "../../../UserProvider/UserProvider";
 export type SignUpSchema = z.infer<typeof signUpSchema>;
 const SignUp = () => {
-  const { handleDialogOpen, handleDialogClose } =
-    useContext(DialogSetterContext);
+  const { handleDialogOpen, handleDialogClose } = useDialogContext();
   const { setUser } = useContext(UserContext);
   const {
     register,

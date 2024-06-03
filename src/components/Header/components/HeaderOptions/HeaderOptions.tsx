@@ -1,5 +1,5 @@
 import s from "./HeaderOptions.module.css";
-import { DialogSetterContext } from "../../../DialogProvider/DialogProvider";
+import { useDialogContext } from "../../../DialogProvider/DialogProvider";
 import { useContext, useState } from "react";
 import { UserContext } from "../../../UserProvider/UserProvider";
 import userIcon from "../../../../assets/svgs/userIcon.svg";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../logout";
 const HeaderOptions = () => {
   const navigate = useNavigate();
-  const { handleDialogOpen } = useContext(DialogSetterContext);
+  const { handleDialogOpen } = useDialogContext();
   const { user, setUser } = useContext(UserContext);
   const [openLogout, setOpenLogout] = useState(false);
   const openAuthDialog = (type: string) => {

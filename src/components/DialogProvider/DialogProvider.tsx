@@ -1,15 +1,13 @@
 import { useState, createContext, useEffect, useContext } from "react";
 import { googleAuth } from "./googleAuth";
 import { UserContext } from "../UserProvider/UserProvider";
-type SetterContext = {
+type TDialogContext = {
+  open: boolean;
+  type: string;
   handleDialogOpen: (type: string) => void;
   handleDialogClose: () => void;
 };
-export const DialogContext = createContext({ open: false, type: "none" });
-export const DialogSetterContext = createContext<SetterContext>({
-  handleDialogOpen: () => {},
-  handleDialogClose: () => {},
-});
+const DialogContext = createContext<TDialogContext | null>(null);
 const DialogProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState("none");
@@ -38,14 +36,19 @@ const DialogProvider = ({ children }: { children: React.ReactNode }) => {
     });
   }, []);
   return (
-    <DialogContext.Provider value={{ open, type }}>
-      <DialogSetterContext.Provider
-        value={{ handleDialogOpen, handleDialogClose }}
-      >
-        {children}
-      </DialogSetterContext.Provider>
+    <DialogContext.Provider
+      value={{ open, type, handleDialogOpen, handleDialogClose }}
+    >
+      {children}
     </DialogContext.Provider>
   );
+};
+
+export const useDialogContext = () => {
+  const dialogContext = useContext(DialogContext);
+  if (!dialogContext)
+    throw new Error("Dialog context has to be used within its provider");
+  return dialogContext;
 };
 
 export default DialogProvider;

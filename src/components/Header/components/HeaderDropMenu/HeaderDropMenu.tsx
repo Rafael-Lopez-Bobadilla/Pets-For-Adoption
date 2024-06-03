@@ -1,5 +1,5 @@
 import s from "./HeaderDropMenu.module.css";
-import { DialogSetterContext } from "../../../DialogProvider/DialogProvider";
+import { useDialogContext } from "../../../DialogProvider/DialogProvider";
 import { useContext } from "react";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
 import { UserContext } from "../../../UserProvider/UserProvider";
@@ -11,7 +11,7 @@ const DropMenu = ({
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { handleDialogOpen } = useContext(DialogSetterContext);
+  const { handleDialogOpen } = useDialogContext();
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const openAuthDialog = (type: string) => {

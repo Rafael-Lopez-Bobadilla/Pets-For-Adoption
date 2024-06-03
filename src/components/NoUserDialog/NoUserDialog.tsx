@@ -1,13 +1,12 @@
 import s from "./NoUserDialog.module.css";
-import { useContext } from "react";
 import { Dialog } from "@mui/material";
-import { DialogSetterContext } from "../DialogProvider/DialogProvider";
+import { useDialogContext } from "../DialogProvider/DialogProvider";
 type Props = {
   openDialog: boolean;
   setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 const NoUserDialog = ({ openDialog, setOpenDialog }: Props) => {
-  const { handleDialogOpen } = useContext(DialogSetterContext);
+  const { handleDialogOpen } = useDialogContext();
   const openAuthDialog = (type: string) => {
     setOpenDialog(false);
     handleDialogOpen(type);
