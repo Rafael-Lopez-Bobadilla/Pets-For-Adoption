@@ -1,27 +1,44 @@
-import { useState, createContext, useEffect } from "react"
-import { User, IUserContext } from './IUser'
-import { useNavigate } from 'react-router-dom'
-export const UserContext = createContext<IUserContext>({ user: null, setUser: () => { } })
+import {
+  useState,
+  createContext,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
+import { useNavigate } from "react-router-dom";
+import { authenticate } from "./authenticate";
+export type User = {
+  email: string;
+  name: string;
+  favorites: string[];
+} | null;
+type TUserContext = {
+  user: User;
+  updateUser: (user: User) => void;
+};
+export const UserContext = createContext<TUserContext | null>(null);
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null)
-  const navigate = useNavigate()
-  const authenticate = async () => {
-    const res = await fetch(`${import.meta.env.VITE_API}/api/v1/authenticate`, {
-      credentials: 'include'
-    })
-    const data = await res.json()
-    if (data?.user) setUser(data.user)
-    if ((!data?.user || data?.user.favorites.length === 0) && location.pathname === '/favorites')
-      navigate('/search')
-  }
+  const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
+  const updateUser = useCallback((user: User) => {
+    setUser(user);
+  }, []);
+
   useEffect(() => {
-    authenticate()
-  }, [])
+    authenticate(updateUser, navigate);
+  }, []);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, updateUser }}>
       {children}
     </UserContext.Provider>
-  )
-}
+  );
+};
 
-export default UserProvider
+export const useUserContext = () => {
+  const userContext = useContext(UserContext);
+  if (!userContext)
+    throw new Error("user context has to be used within its provider");
+  return userContext;
+};
+
+export default UserProvider;

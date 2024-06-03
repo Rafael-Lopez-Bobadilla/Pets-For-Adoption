@@ -1,7 +1,7 @@
 import s from "./HeaderOptions.module.css";
-import { useDialogContext } from "../../../DialogProvider/DialogProvider";
-import { useContext, useState } from "react";
-import { UserContext } from "../../../UserProvider/UserProvider";
+import { useDialogUpdaterContext } from "../../../DialogProvider/DialogProvider";
+import { useState } from "react";
+import { useUserContext } from "../../../UserProvider/UserProvider";
 import userIcon from "../../../../assets/svgs/userIcon.svg";
 import triangleDown from "../../../../assets/svgs/triangleDown.svg";
 import FavButton from "../FavButton/FavButton";
@@ -9,14 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../logout";
 const HeaderOptions = () => {
   const navigate = useNavigate();
-  const { handleDialogOpen } = useDialogContext();
-  const { user, setUser } = useContext(UserContext);
+  const { openDialog } = useDialogUpdaterContext();
+  const { user, updateUser } = useUserContext();
   const [openLogout, setOpenLogout] = useState(false);
-  const openAuthDialog = (type: string) => {
-    handleDialogOpen(type);
-  };
   const onLogout = async () => {
-    await logout(setUser);
+    await logout(updateUser);
     setOpenLogout(false);
     if (location.pathname === "/favorites") navigate("/search");
   };
@@ -26,8 +23,8 @@ const HeaderOptions = () => {
       <div className={s.line}></div>
       {!user && (
         <>
-          <button onClick={() => openAuthDialog("signup")}>Sign Up</button>
-          <button onClick={() => openAuthDialog("login")}>Log In</button>
+          <button onClick={() => openDialog("signup")}>Sign Up</button>
+          <button onClick={() => openDialog("login")}>Log In</button>
         </>
       )}
       {user && (

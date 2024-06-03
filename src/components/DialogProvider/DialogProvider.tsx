@@ -1,30 +1,40 @@
-import { useState, createContext, useEffect, useContext } from "react";
+import {
+  useState,
+  createContext,
+  useEffect,
+  useContext,
+  useCallback,
+  useMemo,
+} from "react";
 import { googleAuth } from "./googleAuth";
-import { UserContext } from "../UserProvider/UserProvider";
+import { useUserContext } from "../UserProvider/UserProvider";
 type TDialogContext = {
   open: boolean;
   type: string;
-  handleDialogOpen: (type: string) => void;
-  handleDialogClose: () => void;
 };
-const DialogContext = createContext<TDialogContext | null>(null);
+type TUpdaterContext = {
+  openDialog: (type: string) => void;
+  closeDialog: () => void;
+};
+export const DialogContext = createContext<TDialogContext | null>(null);
+export const DialogUpdaterContext = createContext<TUpdaterContext | null>(null);
 const DialogProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState("none");
-  const { setUser } = useContext(UserContext);
-  const handleDialogClose = () => {
+  const { updateUser } = useUserContext();
+  const closeDialog = useCallback(() => {
     setType("none");
     setOpen(false);
-  };
-  const handleDialogOpen = (type: string) => {
+  }, []);
+  const openDialog = useCallback((type: string) => {
     setOpen(true);
     setType(type);
-  };
+  }, []);
   const onSignIn = async (response: google.accounts.id.CredentialResponse) => {
     const data = await googleAuth(response);
     if (data.status === "success") {
-      setUser(data.user);
-      setOpen(false);
+      updateUser(data.user);
+      closeDialog();
     }
   };
   useEffect(() => {
@@ -35,11 +45,18 @@ const DialogProvider = ({ children }: { children: React.ReactNode }) => {
       use_fedcm_for_prompt: true,
     });
   }, []);
+  const updaterValue = useMemo(
+    () => ({
+      openDialog,
+      closeDialog,
+    }),
+    []
+  );
   return (
-    <DialogContext.Provider
-      value={{ open, type, handleDialogOpen, handleDialogClose }}
-    >
-      {children}
+    <DialogContext.Provider value={{ open, type }}>
+      <DialogUpdaterContext.Provider value={updaterValue}>
+        {children}
+      </DialogUpdaterContext.Provider>
     </DialogContext.Provider>
   );
 };
@@ -48,6 +65,13 @@ export const useDialogContext = () => {
   const dialogContext = useContext(DialogContext);
   if (!dialogContext)
     throw new Error("Dialog context has to be used within its provider");
+  return dialogContext;
+};
+
+export const useDialogUpdaterContext = () => {
+  const dialogContext = useContext(DialogUpdaterContext);
+  if (!dialogContext)
+    throw new Error("Dialog update context has to be used within its provider");
   return dialogContext;
 };
 

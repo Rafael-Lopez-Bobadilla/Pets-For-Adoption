@@ -1,8 +1,7 @@
 import s from "./HeaderDropMenu.module.css";
-import { useDialogContext } from "../../../DialogProvider/DialogProvider";
-import { useContext } from "react";
+import { useDialogUpdaterContext } from "../../../DialogProvider/DialogProvider";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
-import { UserContext } from "../../../UserProvider/UserProvider";
+import { useUserContext } from "../../../UserProvider/UserProvider";
 import { logout } from "../logout";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
@@ -11,14 +10,11 @@ const DropMenu = ({
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { handleDialogOpen } = useDialogContext();
-  const { user, setUser } = useContext(UserContext);
+  const { openDialog } = useDialogUpdaterContext();
+  const { user, updateUser } = useUserContext();
   const navigate = useNavigate();
-  const openAuthDialog = (type: string) => {
-    handleDialogOpen(type);
-  };
   const onLogout = async () => {
-    await logout(setUser);
+    await logout(updateUser);
     setIsOpen(false);
     if (location.pathname === "/favorites") navigate("/search");
   };
@@ -33,8 +29,8 @@ const DropMenu = ({
       <FavButton icon={false} />
       {!user && (
         <>
-          <button onClick={() => openAuthDialog("signup")}>Sign Up</button>
-          <button onClick={() => openAuthDialog("login")}>Log In</button>
+          <button onClick={() => openDialog("signup")}>Sign Up</button>
+          <button onClick={() => openDialog("login")}>Log In</button>
         </>
       )}
       {user && <button onClick={onLogout}>Log out</button>}

@@ -1,16 +1,15 @@
 import s from "../../AuthDialog.module.css";
-import { useDialogContext } from "../../../DialogProvider/DialogProvider";
-import { useContext } from "react";
+import { useDialogUpdaterContext } from "../../../DialogProvider/DialogProvider";
 import { useForm } from "react-hook-form";
 import { logInSchema } from "./logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { logInRequest } from "./loginRequest";
-import { UserContext } from "../../../UserProvider/UserProvider";
+import { useUserContext } from "../../../UserProvider/UserProvider";
 export type LogInSchema = z.infer<typeof logInSchema>;
 const LogIn = () => {
-  const { handleDialogOpen, handleDialogClose } = useDialogContext();
-  const { setUser } = useContext(UserContext);
+  const { openDialog, closeDialog } = useDialogUpdaterContext();
+  const { updateUser } = useUserContext();
   const {
     register,
     handleSubmit,
@@ -20,7 +19,7 @@ const LogIn = () => {
     resolver: zodResolver(logInSchema),
   });
   const onSubmit = (data: LogInSchema) => {
-    logInRequest(data, handleDialogClose, setError, setUser);
+    logInRequest(data, closeDialog, setError, updateUser);
   };
   return (
     <>
@@ -35,7 +34,7 @@ const LogIn = () => {
       </form>
       <p className={s.alt}>
         {`No account? `}
-        <span className={s.link} onClick={() => handleDialogOpen("signup")}>
+        <span className={s.link} onClick={() => openDialog("signup")}>
           Create one
         </span>
       </p>

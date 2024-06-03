@@ -1,11 +1,11 @@
 import { SignUpSchema } from "./SignUp";
 import { UseFormSetError } from "react-hook-form";
-import { User } from "../../../UserProvider/IUser";
+import { User } from "../../../UserProvider/UserProvider";
 export const signUpRequest = async (
   data: SignUpSchema,
-  handleDialogClose: () => void,
+  closeDialog: () => void,
   setError: UseFormSetError<SignUpSchema>,
-  setUser: React.Dispatch<React.SetStateAction<User | null>>
+  updateUser: (user: User) => void
 ) => {
   const { name, email, password } = data;
   const res = await fetch(`${import.meta.env.VITE_API}/api/v1/signup`, {
@@ -18,8 +18,8 @@ export const signUpRequest = async (
   });
   const resData = await res.json();
   if (res.status === 201) {
-    handleDialogClose();
-    setUser(resData.user);
+    closeDialog();
+    updateUser(resData.user);
   }
   if (res.status === 400) setError("email", { message: resData.error });
 };
