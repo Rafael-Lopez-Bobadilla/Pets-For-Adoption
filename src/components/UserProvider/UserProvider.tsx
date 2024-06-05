@@ -1,11 +1,5 @@
-import {
-  useState,
-  createContext,
-  useEffect,
-  useContext,
-  useCallback,
-} from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, createContext, useEffect, useContext } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { authenticate } from "./authenticate";
 export type User = {
   email: string;
@@ -20,12 +14,13 @@ export const UserContext = createContext<TUserContext | null>(null);
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const updateUser = useCallback((user: User) => {
+  const { pathname } = useLocation();
+  const updateUser = (user: User) => {
     setUser(user);
-  }, []);
+  };
 
   useEffect(() => {
-    authenticate(updateUser, navigate);
+    authenticate(updateUser, navigate, pathname);
   }, []);
   return (
     <UserContext.Provider value={{ user, updateUser }}>

@@ -1,6 +1,7 @@
 import { SignUpSchema } from "./SignUp";
 import { UseFormSetError } from "react-hook-form";
 import { User } from "../../../UserProvider/UserProvider";
+import { UserApiRes } from "../../../UserProvider/authenticate";
 export const signUpRequest = async (
   data: SignUpSchema,
   closeDialog: () => void,
@@ -16,10 +17,10 @@ export const signUpRequest = async (
     },
     credentials: "include",
   });
-  const resData = await res.json();
-  if (res.status === 201) {
+  const resData: UserApiRes = await res.json();
+  if (resData.user) {
     closeDialog();
     updateUser(resData.user);
   }
-  if (res.status === 400) setError("email", { message: resData.error });
+  if (!resData.user) setError("email", { message: resData.error });
 };

@@ -18,8 +18,8 @@ const LogIn = () => {
   } = useForm<LogInSchema>({
     resolver: zodResolver(logInSchema),
   });
-  const onSubmit = (data: LogInSchema) => {
-    logInRequest(data, closeDialog, setError, updateUser);
+  const onSubmit = (formData: LogInSchema) => {
+    logInRequest(formData, closeDialog, setError, updateUser);
   };
   return (
     <>

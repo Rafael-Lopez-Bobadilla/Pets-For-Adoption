@@ -1,13 +1,14 @@
 import { LogInSchema } from "./LogIn";
 import { UseFormSetError } from "react-hook-form";
 import { User } from "../../../UserProvider/UserProvider";
+import { UserApiRes } from "../../../UserProvider/authenticate";
 export const logInRequest = async (
-  data: LogInSchema,
+  formData: LogInSchema,
   closeDialog: () => void,
   setError: UseFormSetError<LogInSchema>,
   updateUser: (user: User) => void
 ) => {
-  const { email, password } = data;
+  const { email, password } = formData;
   const res = await fetch(`${import.meta.env.VITE_API}/api/v1/login`, {
     method: "POST",
     body: JSON.stringify({ email, password }),
@@ -16,13 +17,13 @@ export const logInRequest = async (
     },
     credentials: "include",
   });
-  const resData = await res.json();
-  if (res.status === 200) {
+  const data: UserApiRes = await res.json();
+  if (data.user) {
     closeDialog();
-    updateUser(resData.user);
+    updateUser(data.user);
   }
-  if (res.status === 401) {
-    setError("email", { message: resData.error });
-    setError("password", { message: resData.error });
+  if (!data.user) {
+    setError("email", { message: data.error });
+    setError("password", { message: data.error });
   }
 };

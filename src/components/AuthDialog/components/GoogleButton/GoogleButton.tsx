@@ -1,14 +1,14 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, memo } from "react";
 import { useUserContext } from "../../../UserProvider/UserProvider";
 import { googleAuth } from "./googleAuth";
 import { useDialogUpdaterContext } from "../../../DialogProvider/DialogProvider";
-const GoogleButton = () => {
+const GoogleButton = memo(() => {
   const googleRef = useRef<HTMLDivElement>(null);
   const { updateUser } = useUserContext();
   const { closeDialog } = useDialogUpdaterContext();
   const onSignIn = async (response: google.accounts.id.CredentialResponse) => {
     const data = await googleAuth(response);
-    if (data.status === "success") {
+    if (data.user) {
       updateUser(data.user);
       closeDialog();
     }
@@ -30,6 +30,6 @@ const GoogleButton = () => {
     });
   }, []);
   return <div ref={googleRef}></div>;
-};
+});
 
 export default GoogleButton;

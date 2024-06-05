@@ -1,18 +1,18 @@
 import s from "./NoUserDialog.module.css";
 import { Dialog } from "@mui/material";
-import { useDialogContext } from "../DialogProvider/DialogProvider";
+import { useDialogUpdaterContext } from "../DialogProvider/DialogProvider";
 type Props = {
-  openDialog: boolean;
-  setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  openNUDialog: boolean;
+  setOpenNUDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
-const NoUserDialog = ({ openDialog, setOpenDialog }: Props) => {
-  const { handleDialogOpen } = useDialogContext();
+const NoUserDialog = ({ openNUDialog, setOpenNUDialog }: Props) => {
+  const { openDialog } = useDialogUpdaterContext();
   const openAuthDialog = (type: string) => {
-    setOpenDialog(false);
-    handleDialogOpen(type);
+    setOpenNUDialog(false);
+    openDialog(type);
   };
   return (
-    <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+    <Dialog open={openNUDialog} onClose={() => setOpenNUDialog(false)}>
       <div className={s.noUser}>
         <h3>Join us to select favorite pets!</h3>
         <p>

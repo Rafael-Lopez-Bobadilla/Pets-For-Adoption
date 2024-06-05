@@ -1,11 +1,14 @@
-export const googleAuth = async (credential: google.accounts.id.CredentialResponse) => {
+import { UserApiRes } from "../../../UserProvider/authenticate";
+export const googleAuth = async (
+  credential: google.accounts.id.CredentialResponse
+) => {
   const res = await fetch(`${import.meta.env.VITE_API}/api/v1/googleAuth`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Authorization': `Bearer ${credential.credential}`
+      Authorization: `Bearer ${credential.credential}`,
     },
-    credentials: 'include'
-  })
-  const data = await res.json()
-  return data
-}
+    credentials: "include",
+  });
+  const data: UserApiRes = await res.json();
+  return data;
+};
