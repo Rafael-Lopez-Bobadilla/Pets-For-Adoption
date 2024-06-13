@@ -25,6 +25,9 @@ const Pet = () => {
     },
     enabled: token ? true : false,
   });
+  const closeDialog = () => {
+    setOpen(false);
+  };
   const getString = () => {
     let str = data?.tags.reduce((tag, current) => `${current}, ${tag}`);
     if (data?.attributes.house_trained) str = `${str}, House trained`;
@@ -44,7 +47,7 @@ const Pet = () => {
             <div className={s.name}>
               <h2>{data.name}</h2>
               <FavButton pet={data} setOpen={setOpen} background="#e6dede" />
-              <NoUserDialog openNUDialog={open} setOpenNUDialog={setOpen} />
+              <NoUserDialog open={open} closeDialog={closeDialog} />
             </div>
             <h3>Contact</h3>
             <p>

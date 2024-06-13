@@ -10,9 +10,12 @@ const FavButton = ({ icon }: { icon: boolean }) => {
   const navigate = useNavigate();
   const { user } = useUserContext();
   const [dialog, setDialog] = useState(false);
-  const [openNoUser, setOpenNoUser] = useState(false);
+  const [open, setOpen] = useState(false);
+  const closeDialog = () => {
+    setOpen(false);
+  };
   const handleClick = () => {
-    if (!user) setOpenNoUser(true);
+    if (!user) setOpen(true);
     if (user && user.favorites.length === 0) setDialog(true);
     if (user && user.favorites.length > 0) navigate("/favorites");
   };
@@ -22,7 +25,7 @@ const FavButton = ({ icon }: { icon: boolean }) => {
         {icon && <img src={heart} />}
         Favorites
       </button>
-      <NoUserDialog openNUDialog={openNoUser} setOpenNUDialog={setOpenNoUser} />
+      <NoUserDialog open={open} closeDialog={closeDialog} />
       <Dialog open={dialog} onClose={() => setDialog(false)}>
         <div className={s.noFav}>
           <h3>No favorites yet</h3>
