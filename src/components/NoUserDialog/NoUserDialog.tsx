@@ -11,8 +11,12 @@ const NoUserDialog = ({ open, closeDialog }: Props) => {
     closeDialog();
     openDialog(type);
   };
+  const closeAndStop = (e: any) => {
+    e.stopPropagation();
+    closeDialog();
+  };
   return (
-    <Dialog open={open} onClose={closeDialog}>
+    <Dialog open={open} onClose={(e) => closeAndStop(e)}>
       <div className={s.noUser}>
         <h3>Join us to select favorite pets!</h3>
         <p>

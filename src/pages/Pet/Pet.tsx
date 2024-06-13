@@ -1,17 +1,15 @@
 import s from "./Pet.module.css";
 import { useParams } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { TokenContext } from "../../components/TokenProvider/TokenProvider";
 import { Pet as IPet } from "../Search/components/SearchBody/PetList/utils/IPets";
 import Photos from "./components/Photos/Photos";
 import FavButton from "../../components/FavButton/FavButton";
-import NoUserDialog from "../../components/NoUserDialog/NoUserDialog";
 import { CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 const Pet = () => {
   const token = useContext(TokenContext);
   const { id } = useParams();
-  const [open, setOpen] = useState(false);
   const { data, isPending } = useQuery({
     queryKey: [id],
     queryFn: async () => {
@@ -25,9 +23,6 @@ const Pet = () => {
     },
     enabled: token ? true : false,
   });
-  const closeDialog = () => {
-    setOpen(false);
-  };
   const getString = () => {
     let str = data?.tags.reduce((tag, current) => `${current}, ${tag}`);
     if (data?.attributes.house_trained) str = `${str}, House trained`;
@@ -46,8 +41,7 @@ const Pet = () => {
           <div className={s.info}>
             <div className={s.name}>
               <h2>{data.name}</h2>
-              <FavButton pet={data} setOpen={setOpen} background="#e6dede" />
-              <NoUserDialog open={open} closeDialog={closeDialog} />
+              <FavButton id={data.id} background="#e6dede" />
             </div>
             <h3>Contact</h3>
             <p>
