@@ -1,6 +1,6 @@
 import s from "./Favorites.module.css";
 import { useEffect, useContext, useState } from "react";
-import { useUserContext } from "../../components/UserProvider/UserProvider";
+import { useUserContext } from "../../context/UserProvider/UserProvider";
 import { TokenContext } from "../../components/TokenProvider/TokenProvider";
 import { getPet } from "./getPet";
 import { Pet } from "../Search/components/SearchBody/PetList/utils/IPets";

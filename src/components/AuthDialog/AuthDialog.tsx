@@ -2,7 +2,7 @@ import { Dialog } from "@mui/material";
 import {
   useDialogContext,
   useDialogUpdaterContext,
-} from "../DialogProvider/DialogProvider";
+} from "../../context/DialogProvider/DialogProvider";
 import SignUp from "./components/SignUp/SignUp";
 import LogIn from "./components/LogIn/LogIn";
 import closeBlack from "../../assets/svgs/closeBlack.svg";

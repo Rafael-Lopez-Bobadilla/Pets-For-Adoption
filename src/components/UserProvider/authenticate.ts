@@ -1,8 +1,8 @@
 import { User } from "./UserProvider";
 import { NavigateFunction } from "react-router-dom";
 export type UserApiRes = {
-  status: "success" | "fail";
-  error?: string;
+  status?: "success" | "fail";
+  message?: string;
   user?: User;
 };
 export const authenticate = async (
@@ -14,6 +14,7 @@ export const authenticate = async (
     credentials: "include",
   });
   const data: UserApiRes = await res.json();
+  console.log(data);
   if (data.user) updateUser(data.user);
   if (
     (!data.user || data.user.favorites.length === 0) &&

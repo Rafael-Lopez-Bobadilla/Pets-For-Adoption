@@ -1,6 +1,6 @@
 import s from "./NoUserDialog.module.css";
 import { Dialog } from "@mui/material";
-import { useDialogUpdaterContext } from "../DialogProvider/DialogProvider";
+import { useDialogUpdaterContext } from "../../context/DialogProvider/DialogProvider";
 type Props = {
   open: boolean;
   closeDialog: () => void;
@@ -16,7 +16,11 @@ const NoUserDialog = ({ open, closeDialog }: Props) => {
     closeDialog();
   };
   return (
-    <Dialog open={open} onClose={(e) => closeAndStop(e)}>
+    <Dialog
+      open={open}
+      onClose={(e) => closeAndStop(e)}
+      onClick={(e) => e.stopPropagation()}
+    >
       <div className={s.noUser}>
         <h3>Join us to select favorite pets!</h3>
         <p>

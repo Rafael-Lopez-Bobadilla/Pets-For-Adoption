@@ -8,8 +8,8 @@ const Pet = lazy(() => import("./pages/Pet/Pet"));
 import { TokenProvider } from "./components/TokenProvider/TokenProvider";
 import { Navigate } from "react-router-dom";
 import AuthDialog from "./components/AuthDialog/AuthDialog";
-import DialogProvider from "./components/DialogProvider/DialogProvider";
-import UserProvider from "./components/UserProvider/UserProvider";
+import DialogProvider from "./context/DialogProvider/DialogProvider";
+import UserProvider from "./context/UserProvider/UserProvider";
 function App() {
   return (
     <>

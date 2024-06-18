@@ -1,21 +1,26 @@
 import s from "./HeaderOptions.module.css";
-import { useDialogUpdaterContext } from "../../../DialogProvider/DialogProvider";
+import { useDialogUpdaterContext } from "../../../../context/DialogProvider/DialogProvider";
 import { useState } from "react";
-import { useUserContext } from "../../../UserProvider/UserProvider";
+import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import userIcon from "../../../../assets/svgs/userIcon.svg";
 import triangleDown from "../../../../assets/svgs/triangleDown.svg";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../logout";
+import { logout } from "../../../../services/pfaService";
 const HeaderOptions = () => {
   const navigate = useNavigate();
   const { openDialog } = useDialogUpdaterContext();
   const { user, updateUser } = useUserContext();
   const [openLogout, setOpenLogout] = useState(false);
   const onLogout = async () => {
-    await logout(updateUser);
-    setOpenLogout(false);
-    if (location.pathname === "/favorites") navigate("/search");
+    try {
+      await logout();
+      updateUser(null);
+      setOpenLogout(false);
+      if (location.pathname === "/favorites") navigate("/search");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className={s.options}>

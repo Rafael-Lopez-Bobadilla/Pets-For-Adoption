@@ -1,6 +1,6 @@
 import heart from "../../../../assets/svgs/heart.svg";
 import s from "./FavButton.module.css";
-import { useUserContext } from "../../../UserProvider/UserProvider";
+import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import { useState } from "react";
 import { Dialog } from "@mui/material";
 import favorite from "../../../../assets/svgs/favorite.svg";

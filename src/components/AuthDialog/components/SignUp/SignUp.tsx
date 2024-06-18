@@ -1,11 +1,11 @@
 import s from "../../AuthDialog.module.css";
 import { useForm } from "react-hook-form";
-import { useDialogUpdaterContext } from "../../../DialogProvider/DialogProvider";
+import { useDialogUpdaterContext } from "../../../../context/DialogProvider/DialogProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema } from "./signUpSchema";
 import { z } from "zod";
-import { signUpRequest } from "./signUpRequest";
-import { useUserContext } from "../../../UserProvider/UserProvider";
+import { signUp } from "../../../../services/pfaService";
+import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 export type SignUpSchema = z.infer<typeof signUpSchema>;
 const SignUp = () => {
   const { openDialog, closeDialog } = useDialogUpdaterContext();
@@ -19,7 +19,14 @@ const SignUp = () => {
     resolver: zodResolver(signUpSchema),
   });
   const onSubmit = async (data: SignUpSchema) => {
-    signUpRequest(data, closeDialog, setError, updateUser);
+    try {
+      const user = await signUp(data);
+      updateUser(user);
+      closeDialog();
+    } catch (err) {
+      const message = err as string;
+      setError("email", { message });
+    }
   };
   return (
     <>

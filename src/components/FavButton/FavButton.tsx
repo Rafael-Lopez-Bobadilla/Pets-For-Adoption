@@ -1,14 +1,14 @@
 import favorite from "../../assets/svgs/favorite.svg";
 import favoriteFilled from "../../assets/svgs/favoriteFilled.svg";
-import { useUserContext } from "../UserProvider/UserProvider";
+import { useUserContext } from "../../context/UserProvider/UserProvider";
 import s from "./FavButton.module.css";
-import { updateFavorites } from "./updateFavorites";
+import { updateFavorites } from "../../services/pfaService";
 import { Tooltip } from "@mui/material";
 import NoUserDialog from "../NoUserDialog/NoUserDialog";
 import { useState } from "react";
 type Props = {
   id: number;
-  background: string;
+  background: "white" | "#e6dede";
 };
 const FavButton = ({ id, background }: Props) => {
   const { user, updateUser } = useUserContext();
@@ -25,8 +25,12 @@ const FavButton = ({ id, background }: Props) => {
       setOpenDialog(true);
       return;
     }
-    const updatedUser = await updateFavorites(id);
-    updateUser(updatedUser);
+    try {
+      const updatedUser = await updateFavorites(id);
+      updateUser(updatedUser);
+    } catch (err) {
+      console.log(err);
+    }
   };
   const isFavorite = user?.favorites.includes(id.toString());
   return (

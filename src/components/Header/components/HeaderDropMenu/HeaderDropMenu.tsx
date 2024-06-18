@@ -1,8 +1,8 @@
 import s from "./HeaderDropMenu.module.css";
-import { useDialogUpdaterContext } from "../../../DialogProvider/DialogProvider";
+import { useDialogUpdaterContext } from "../../../../context/DialogProvider/DialogProvider";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
-import { useUserContext } from "../../../UserProvider/UserProvider";
-import { logout } from "../logout";
+import { useUserContext } from "../../../../context/UserProvider/UserProvider";
+import { logout } from "../../../../services/pfaService";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
 const DropMenu = ({
@@ -14,9 +14,14 @@ const DropMenu = ({
   const { user, updateUser } = useUserContext();
   const navigate = useNavigate();
   const onLogout = async () => {
-    await logout(updateUser);
-    setIsOpen(false);
-    if (location.pathname === "/favorites") navigate("/search");
+    try {
+      await logout();
+      updateUser(null);
+      setIsOpen(false);
+      if (location.pathname === "/favorites") navigate("/search");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className={s.dropMenu}>
