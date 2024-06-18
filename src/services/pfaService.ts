@@ -20,6 +20,7 @@ export const getUser = async () => {
     throw new Error(error.message);
   }
   const data: APIRes = await res.json();
+  console.log(data.user);
   return data.user;
 };
 
@@ -36,6 +37,7 @@ export const getUserWithGoogle = async (googleToken: string) => {
     throw error.message;
   }
   const data: APIRes = await res.json();
+  console.log(data.user);
   return data.user;
 };
 
@@ -54,6 +56,7 @@ export const logIn = async (formData: LogInSchema) => {
     throw error.message;
   }
   const data: APIRes = await res.json();
+  console.log(data.user);
   return data.user;
 };
 
@@ -72,12 +75,13 @@ export const signUp = async (formData: SignUpSchema) => {
     throw err.message;
   }
   const data: APIRes = await res.json();
+  console.log(data.user);
   return data.user;
 };
 
-export const updateFavorites = async (id: number) => {
+export const updateFavorites = async (id: number, action: string) => {
   const res = await fetch(
-    `${import.meta.env.VITE_API}/api/v1/updateFavorites`,
+    `${import.meta.env.VITE_API}/api/v1/updateFavorites/${action}`,
     {
       method: "PATCH",
       headers: {
@@ -92,6 +96,7 @@ export const updateFavorites = async (id: number) => {
     throw err.message;
   }
   const data: APIRes = await res.json();
+  console.log(data.user);
   return data.user;
 };
 

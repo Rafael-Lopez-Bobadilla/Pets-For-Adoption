@@ -18,7 +18,8 @@ const FavButton = ({ id, background }: Props) => {
   };
   const onHeartClick = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    id: number
+    id: number,
+    action: "add" | "remove"
   ) => {
     e.stopPropagation();
     if (!user) {
@@ -26,7 +27,7 @@ const FavButton = ({ id, background }: Props) => {
       return;
     }
     try {
-      const updatedUser = await updateFavorites(id);
+      const updatedUser = await updateFavorites(id, action);
       updateUser(updatedUser);
     } catch (err) {
       console.log(err);
@@ -42,7 +43,7 @@ const FavButton = ({ id, background }: Props) => {
       >
         <div
           className={s.heart}
-          onClick={(e) => onHeartClick(e, id)}
+          onClick={(e) => onHeartClick(e, id, isFavorite ? "remove" : "add")}
           style={{ backgroundColor: background }}
         >
           <img src={isFavorite ? favoriteFilled : favorite} />
