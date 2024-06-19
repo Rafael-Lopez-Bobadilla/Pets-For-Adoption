@@ -1,11 +1,8 @@
 import { useState, createContext, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getUser } from "../../services/pfaService";
-export type User = {
-  email: string;
-  name: string;
-  favorites: string[];
-} | null;
+import { TUser } from "../../services/pfaService";
+export type User = TUser | null;
 type TUserContext = {
   user: User;
   updateUser: (user: User) => void;
