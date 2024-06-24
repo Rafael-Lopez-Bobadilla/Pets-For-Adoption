@@ -6,7 +6,7 @@ import userIcon from "../../../../assets/svgs/userIcon.svg";
 import triangleDown from "../../../../assets/svgs/triangleDown.svg";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../../../services/pfaService";
+import { logout } from "../../../../services/userService";
 const HeaderOptions = () => {
   const navigate = useNavigate();
   const { openDialog } = useDialogUpdaterContext();

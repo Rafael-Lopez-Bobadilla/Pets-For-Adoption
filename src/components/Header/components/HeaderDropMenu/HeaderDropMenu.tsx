@@ -2,7 +2,7 @@ import s from "./HeaderDropMenu.module.css";
 import { useDialogUpdaterContext } from "../../../../context/DialogProvider/DialogProvider";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
-import { logout } from "../../../../services/pfaService";
+import { logout } from "../../../../services/userService";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
 const DropMenu = ({

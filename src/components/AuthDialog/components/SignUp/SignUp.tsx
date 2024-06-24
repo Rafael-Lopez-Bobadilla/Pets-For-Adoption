@@ -2,11 +2,10 @@ import s from "../../AuthDialog.module.css";
 import { useForm } from "react-hook-form";
 import { useDialogUpdaterContext } from "../../../../context/DialogProvider/DialogProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema } from "./signUpSchema";
-import { z } from "zod";
-import { signUp } from "../../../../services/pfaService";
+import { signUpSchema, TSignUpSchema } from "./signUpSchema";
+import { signUp } from "../../../../services/userService";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
-export type SignUpSchema = z.infer<typeof signUpSchema>;
+import { AxiosError } from "axios";
 const SignUp = () => {
   const { openDialog, closeDialog } = useDialogUpdaterContext();
   const { updateUser } = useUserContext();
@@ -15,17 +14,19 @@ const SignUp = () => {
     handleSubmit,
     formState: { isSubmitting, errors },
     setError,
-  } = useForm<SignUpSchema>({
+  } = useForm<TSignUpSchema>({
     resolver: zodResolver(signUpSchema),
   });
-  const onSubmit = async (data: SignUpSchema) => {
+  const onSubmit = async (data: TSignUpSchema) => {
     try {
       const user = await signUp(data);
       updateUser(user);
       closeDialog();
     } catch (err) {
-      const message = err as string;
-      setError("email", { message });
+      if (err instanceof AxiosError && err.response?.status === 400) {
+        const message = "An account with this email already exists";
+        setError("email", { message });
+      }
     }
   };
   return (

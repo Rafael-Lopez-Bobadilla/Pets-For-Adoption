@@ -1,8 +1,8 @@
 import { useState, createContext, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { getUser } from "../../services/pfaService";
-import { TUser } from "../../services/pfaService";
-export type User = TUser | null;
+import { authenticate } from "../../services/userService";
+import { TUserSchema } from "../../services/userService";
+type User = TUserSchema | null;
 type TUserContext = {
   user: User;
   updateUser: (user: User) => void;
@@ -16,19 +16,19 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(user);
   };
 
-  const authenticate = async () => {
+  const getUser = async () => {
     try {
-      const user = await getUser();
+      const user = await authenticate();
       updateUser(user);
-      if (user?.favorites.length === 0 && pathname === "/favorites")
-        navigate("/search");
     } catch (err) {
-      if (pathname === "/favorites") navigate("/search");
+    } finally {
+      if ((!user || user.favorites.length === 0) && pathname === "/favorites")
+        navigate("/search");
     }
   };
 
   useEffect(() => {
-    authenticate();
+    getUser();
   }, []);
   return (
     <UserContext.Provider value={{ user, updateUser }}>

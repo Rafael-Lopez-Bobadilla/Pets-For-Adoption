@@ -2,7 +2,7 @@ import favorite from "../../assets/svgs/favorite.svg";
 import favoriteFilled from "../../assets/svgs/favoriteFilled.svg";
 import { useUserContext } from "../../context/UserProvider/UserProvider";
 import s from "./FavButton.module.css";
-import { updateFavorites } from "../../services/pfaService";
+import { updateFavorites } from "../../services/userService";
 import { Tooltip } from "@mui/material";
 import NoUserDialog from "../NoUserDialog/NoUserDialog";
 import { useState } from "react";

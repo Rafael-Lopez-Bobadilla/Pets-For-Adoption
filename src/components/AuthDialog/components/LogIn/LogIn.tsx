@@ -1,12 +1,11 @@
 import s from "../../AuthDialog.module.css";
 import { useDialogUpdaterContext } from "../../../../context/DialogProvider/DialogProvider";
 import { useForm } from "react-hook-form";
-import { logInSchema } from "./logInSchema";
+import { logInSchema, TLogInSchema } from "./logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
-import { logIn } from "../../../../services/pfaService";
-export type LogInSchema = z.infer<typeof logInSchema>;
+import { logIn } from "../../../../services/userService";
+import { AxiosError } from "axios";
 const LogIn = () => {
   const { openDialog, closeDialog } = useDialogUpdaterContext();
   const { updateUser } = useUserContext();
@@ -15,18 +14,25 @@ const LogIn = () => {
     handleSubmit,
     formState: { isSubmitting, errors },
     setError,
-  } = useForm<LogInSchema>({
+  } = useForm<TLogInSchema>({
     resolver: zodResolver(logInSchema),
   });
-  const onSubmit = async (formData: LogInSchema) => {
+  const onSubmit = async (formData: TLogInSchema) => {
     try {
       const user = await logIn(formData);
       updateUser(user);
       closeDialog();
     } catch (err) {
-      const message = err as string;
-      setError("email", { message });
-      setError("password", { message });
+      if (err instanceof AxiosError && err.response?.status === 401) {
+        if (err.response.data === "email") {
+          const message = "An account with this email does not exists";
+          setError("email", { message });
+        }
+        if (err.response.data === "password") {
+          const message = "Incorrect password";
+          setError("password", { message });
+        }
+      }
     }
   };
   return (
