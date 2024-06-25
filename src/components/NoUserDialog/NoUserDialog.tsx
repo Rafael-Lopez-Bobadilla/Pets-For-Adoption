@@ -1,12 +1,12 @@
 import s from "./NoUserDialog.module.css";
 import { Dialog } from "@mui/material";
-import { useDialogUpdaterContext } from "../../context/DialogProvider/DialogProvider";
+import { useAuthDialogUpdater } from "../../context/DialogProvider/DialogProvider";
 type Props = {
   open: boolean;
   closeDialog: () => void;
 };
 const NoUserDialog = ({ open, closeDialog }: Props) => {
-  const { openDialog } = useDialogUpdaterContext();
+  const { openDialog } = useAuthDialogUpdater();
   const openAuthDialog = (type: string) => {
     closeDialog();
     openDialog(type);

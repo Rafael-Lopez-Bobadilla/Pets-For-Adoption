@@ -5,17 +5,17 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Search from "./pages/Search/Search";
 const Favorites = lazy(() => import("./pages/Favorites/Favorites"));
 const Pet = lazy(() => import("./pages/Pet/Pet"));
-import { TokenProvider } from "./components/TokenProvider/TokenProvider";
+import { TokenProvider } from "./context/TokenProvider/TokenProvider";
 import { Navigate } from "react-router-dom";
 import AuthDialog from "./components/AuthDialog/AuthDialog";
-import DialogProvider from "./context/DialogProvider/DialogProvider";
+import AuthDialogProvider from "./context/DialogProvider/DialogProvider";
 import UserProvider from "./context/UserProvider/UserProvider";
 function App() {
   return (
     <>
       <Router>
         <UserProvider>
-          <DialogProvider>
+          <AuthDialogProvider>
             <Header />
             <AuthDialog />
             <TokenProvider>
@@ -28,7 +28,7 @@ function App() {
                 </Routes>
               </Suspense>
             </TokenProvider>
-          </DialogProvider>
+          </AuthDialogProvider>
         </UserProvider>
       </Router>
     </>

@@ -1,14 +1,13 @@
 import s from "./Pet.module.css";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
-import { TokenContext } from "../../components/TokenProvider/TokenProvider";
+import { usePetfinderToken } from "../../context/TokenProvider/TokenProvider";
 import { Pet as IPet } from "../Search/components/SearchBody/PetList/utils/IPets";
 import Photos from "./components/Photos/Photos";
 import FavButton from "../../components/FavButton/FavButton";
 import { CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 const Pet = () => {
-  const token = useContext(TokenContext);
+  const { token } = usePetfinderToken();
   const { id } = useParams();
   const { data, isPending } = useQuery({
     queryKey: [id],

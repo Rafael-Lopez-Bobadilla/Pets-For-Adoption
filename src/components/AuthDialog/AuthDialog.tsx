@@ -1,7 +1,7 @@
 import { Dialog } from "@mui/material";
 import {
-  useDialogContext,
-  useDialogUpdaterContext,
+  useAuthDialog,
+  useAuthDialogUpdater,
 } from "../../context/DialogProvider/DialogProvider";
 import SignUp from "./components/SignUp/SignUp";
 import LogIn from "./components/LogIn/LogIn";
@@ -9,8 +9,8 @@ import closeBlack from "../../assets/svgs/closeBlack.svg";
 import s from "./AuthDialog.module.css";
 import GoogleButton from "./components/GoogleButton/GoogleButton";
 const AuthDialog = () => {
-  const { open, type } = useDialogContext();
-  const { closeDialog } = useDialogUpdaterContext();
+  const { open, type } = useAuthDialog();
+  const { closeDialog } = useAuthDialogUpdater();
   return (
     <Dialog open={open} onClose={closeDialog} scroll="body" keepMounted={true}>
       <div className={s.container} style={{ display: open ? "block" : "none" }}>

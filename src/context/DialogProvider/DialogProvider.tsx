@@ -15,7 +15,7 @@ type TUpdaterContext = {
 };
 export const DialogContext = createContext<TDialogContext | null>(null);
 export const DialogUpdaterContext = createContext<TUpdaterContext | null>(null);
-const DialogProvider = ({ children }: { children: React.ReactNode }) => {
+const AuthDialogProvider = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState("none");
   const closeDialog = useCallback(() => {
@@ -42,18 +42,20 @@ const DialogProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const useDialogContext = () => {
+export const useAuthDialog = () => {
   const dialogContext = useContext(DialogContext);
   if (!dialogContext)
-    throw new Error("Dialog context has to be used within its provider");
+    throw new Error("Auth Dialog context has to be used within its provider");
   return dialogContext;
 };
 
-export const useDialogUpdaterContext = () => {
+export const useAuthDialogUpdater = () => {
   const dialogContext = useContext(DialogUpdaterContext);
   if (!dialogContext)
-    throw new Error("Dialog update context has to be used within its provider");
+    throw new Error(
+      "Auth Dialog update context has to be used within its provider"
+    );
   return dialogContext;
 };
 
-export default DialogProvider;
+export default AuthDialogProvider;

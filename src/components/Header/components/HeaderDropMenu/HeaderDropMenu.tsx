@@ -1,5 +1,5 @@
 import s from "./HeaderDropMenu.module.css";
-import { useDialogUpdaterContext } from "../../../../context/DialogProvider/DialogProvider";
+import { useAuthDialogUpdater } from "../../../../context/DialogProvider/DialogProvider";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import { logout } from "../../../../services/userService";
@@ -10,7 +10,7 @@ const DropMenu = ({
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { openDialog } = useDialogUpdaterContext();
+  const { openDialog } = useAuthDialogUpdater();
   const { user, updateUser } = useUserContext();
   const navigate = useNavigate();
   const onLogout = async () => {

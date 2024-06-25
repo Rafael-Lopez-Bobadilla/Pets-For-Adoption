@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { TokenContext } from "../../../../../components/TokenProvider/TokenProvider";
+import { usePetfinderToken } from "../../../../../context/TokenProvider/TokenProvider";
 import { useSearchParams } from "react-router-dom";
 import { getPets } from "./utils/getPets";
 import { CircularProgress } from "@mui/material";
@@ -19,7 +19,7 @@ const PetList = memo(
     pageCount: number;
   }) => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const token = useContext(TokenContext);
+    const { token } = usePetfinderToken();
     const { location, setLocation } = useContext(LocationContext);
     const { data, isPending } = useQuery({
       queryKey: [`${searchParams.toString()}`],

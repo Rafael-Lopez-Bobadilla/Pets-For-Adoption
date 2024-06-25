@@ -1,5 +1,5 @@
 import s from "../../AuthDialog.module.css";
-import { useDialogUpdaterContext } from "../../../../context/DialogProvider/DialogProvider";
+import { useAuthDialogUpdater } from "../../../../context/DialogProvider/DialogProvider";
 import { useForm } from "react-hook-form";
 import { logInSchema, TLogInSchema } from "./logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,7 +7,7 @@ import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import { logIn } from "../../../../services/userService";
 import { handleError } from "./handleError";
 const LogIn = () => {
-  const { openDialog, closeDialog } = useDialogUpdaterContext();
+  const { openDialog, closeDialog } = useAuthDialogUpdater();
   const { updateUser } = useUserContext();
   const {
     register,
