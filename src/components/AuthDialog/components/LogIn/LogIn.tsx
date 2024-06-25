@@ -5,7 +5,7 @@ import { logInSchema, TLogInSchema } from "./logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import { logIn } from "../../../../services/userService";
-import { AxiosError } from "axios";
+import { handleError } from "./handleError";
 const LogIn = () => {
   const { openDialog, closeDialog } = useDialogUpdaterContext();
   const { updateUser } = useUserContext();
@@ -17,22 +17,16 @@ const LogIn = () => {
   } = useForm<TLogInSchema>({
     resolver: zodResolver(logInSchema),
   });
+  const createError = (key: "email" | "password", message: string) => {
+    setError(key, { message });
+  };
   const onSubmit = async (formData: TLogInSchema) => {
     try {
       const user = await logIn(formData);
       updateUser(user);
       closeDialog();
     } catch (err) {
-      if (err instanceof AxiosError && err.response?.status === 401) {
-        if (err.response.data === "email") {
-          const message = "An account with this email does not exists";
-          setError("email", { message });
-        }
-        if (err.response.data === "password") {
-          const message = "Incorrect password";
-          setError("password", { message });
-        }
-      }
+      handleError(err, createError);
     }
   };
   return (

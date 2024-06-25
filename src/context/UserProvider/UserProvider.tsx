@@ -1,37 +1,28 @@
-import { useState, createContext, useEffect, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { createContext, useContext } from "react";
 import { authenticate } from "../../services/userService";
 import { TUserSchema } from "../../services/userService";
+import { useFetch } from "../../useFetch";
 type User = TUserSchema | null;
 type TUserContext = {
   user: User;
-  updateUser: (user: User) => void;
+  updateUser: (data: User) => void;
+  loading: boolean;
+  error: boolean;
 };
 export const UserContext = createContext<TUserContext | null>(null);
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const {
+    data: user,
+    loading,
+    error,
+    setData,
+  } = useFetch<TUserSchema>(authenticate);
   const updateUser = (user: User) => {
-    setUser(user);
+    setData(user);
   };
 
-  const getUser = async () => {
-    try {
-      const user = await authenticate();
-      updateUser(user);
-    } catch (err) {
-    } finally {
-      if ((!user || user.favorites.length === 0) && pathname === "/favorites")
-        navigate("/search");
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, updateUser, loading, error }}>
       {children}
     </UserContext.Provider>
   );
