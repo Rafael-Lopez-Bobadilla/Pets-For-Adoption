@@ -7,17 +7,15 @@ const Favorites = lazy(() => import("./pages/Favorites/Favorites"));
 const Pet = lazy(() => import("./pages/Pet/Pet"));
 import { TokenProvider } from "./context/TokenProvider/TokenProvider";
 import { Navigate } from "react-router-dom";
-import AuthDialog from "./components/AuthDialog/AuthDialog";
-import AuthDialogProvider from "./context/DialogProvider/DialogProvider";
+import DialogProvider from "./context/DialogProvider/DialogProvider";
 import UserProvider from "./context/UserProvider/UserProvider";
 function App() {
   return (
     <>
       <Router>
         <UserProvider>
-          <AuthDialogProvider>
+          <DialogProvider>
             <Header />
-            <AuthDialog />
             <TokenProvider>
               <Suspense>
                 <Routes>
@@ -28,7 +26,7 @@ function App() {
                 </Routes>
               </Suspense>
             </TokenProvider>
-          </AuthDialogProvider>
+          </DialogProvider>
         </UserProvider>
       </Router>
     </>

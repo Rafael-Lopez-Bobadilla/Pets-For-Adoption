@@ -1,16 +1,18 @@
 import s from "./HeaderDropMenu.module.css";
-import { useAuthDialogUpdater } from "../../../../context/DialogProvider/DialogProvider";
+import { useDialog } from "../../../../context/DialogProvider/DialogProvider";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import { logout } from "../../../../services/userService";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
+import SignUp from "../../../AuthForms/SignUp/SignUp";
+import LogIn from "../../../AuthForms/LogIn/LogIn";
 const DropMenu = ({
   setIsOpen,
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { openDialog } = useAuthDialogUpdater();
+  const { showDialog } = useDialog();
   const { user, updateUser } = useUserContext();
   const navigate = useNavigate();
   const onLogout = async () => {
@@ -34,8 +36,12 @@ const DropMenu = ({
       <FavButton icon={false} />
       {!user && (
         <>
-          <button onClick={() => openDialog("signup")}>Sign Up</button>
-          <button onClick={() => openDialog("login")}>Log In</button>
+          <button onClick={() => showDialog("Sign Up", <SignUp />)}>
+            Sign Up
+          </button>
+          <button onClick={() => showDialog("Log In", <LogIn />)}>
+            Log In
+          </button>
         </>
       )}
       {user && <button onClick={onLogout}>Log out</button>}

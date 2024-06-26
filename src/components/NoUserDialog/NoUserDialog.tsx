@@ -1,16 +1,14 @@
 import s from "./NoUserDialog.module.css";
 import { Dialog } from "@mui/material";
-import { useAuthDialogUpdater } from "../../context/DialogProvider/DialogProvider";
+import { useDialog } from "../../context/DialogProvider/DialogProvider";
+import LogIn from "../AuthForms/LogIn/LogIn";
+import SignUp from "../AuthForms/SignUp/SignUp";
 type Props = {
   open: boolean;
   closeDialog: () => void;
 };
 const NoUserDialog = ({ open, closeDialog }: Props) => {
-  const { openDialog } = useAuthDialogUpdater();
-  const openAuthDialog = (type: string) => {
-    closeDialog();
-    openDialog(type);
-  };
+  const { showDialog } = useDialog();
   const closeAndStop = (e: any) => {
     e.stopPropagation();
     closeDialog();
@@ -24,9 +22,9 @@ const NoUserDialog = ({ open, closeDialog }: Props) => {
       <div className={s.noUser}>
         <h3>Join us to select favorite pets!</h3>
         <p>
-          <span onClick={() => openAuthDialog("login")}>Log in</span>
+          <span onClick={() => showDialog("Log In", <LogIn />)}>Log in</span>
           {" or "}
-          <span onClick={() => openAuthDialog("signup")}>
+          <span onClick={() => showDialog("Sign Up", <SignUp />)}>
             Create an account
           </span>
         </p>

@@ -1,27 +1,11 @@
-.container {
-  width: 100%;
-  padding: 50px 20px;
-
-  @media (min-width: 768px) {
-    padding: 50px 80px;
-  }
-
-  font-family: 'Inter';
-}
-
-.container>h3 {
-  font-size: 22px;
-  margin-bottom: 25px;
-}
-
-.form>label {
+.form > label {
   display: block;
   margin-bottom: 5px;
   margin-top: 20px;
   font-size: 16px;
 }
 
-.form>input {
+.form > input {
   width: 250px;
   font-size: 16px;
   border-radius: 5px;
@@ -29,20 +13,20 @@
   border: 1px solid gray;
 }
 
-.form>p {
+.form > p {
   color: red;
   font-size: 14px;
   margin-top: 3px;
   max-width: 250px;
 }
 
-.form>button {
+.form > button {
   width: 200px;
   margin: 40px auto 20px auto;
   color: white;
   background-color: var(--green);
   border: none;
-  font-family: 'Inter';
+  font-family: "Inter";
   padding: 5px 0;
   font-size: 16px;
   border-radius: 10px;
@@ -53,14 +37,6 @@
 .link {
   color: var(--green);
   text-decoration: underline;
-  cursor: pointer;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  width: 25px;
   cursor: pointer;
 }
 

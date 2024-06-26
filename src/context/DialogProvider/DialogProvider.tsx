@@ -1,61 +1,41 @@
-import {
-  useState,
-  createContext,
-  useContext,
-  useCallback,
-  useMemo,
-} from "react";
+import { ReactNode, useContext, useState } from "react";
+import { createContext } from "react";
+import Dialog from "./Dialog/Dialog";
 type TDialogContext = {
-  open: boolean;
-  type: string;
-};
-type TUpdaterContext = {
-  openDialog: (type: string) => void;
+  showDialog: (title: string, content: ReactNode) => void;
   closeDialog: () => void;
 };
-export const DialogContext = createContext<TDialogContext | null>(null);
-export const DialogUpdaterContext = createContext<TUpdaterContext | null>(null);
-const AuthDialogProvider = ({ children }: { children: React.ReactNode }) => {
+const DialogContext = createContext<TDialogContext | null>(null);
+const DialogProvider = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
-  const [type, setType] = useState("none");
-  const closeDialog = useCallback(() => {
-    setType("none");
-    setOpen(false);
-  }, []);
-  const openDialog = useCallback((type: string) => {
+  const [content, setContent] = useState<ReactNode>(null);
+  const [title, setTitle] = useState<string>("");
+  const showDialog = (title: string, content: ReactNode) => {
+    setContent(content);
+    setTitle(title);
     setOpen(true);
-    setType(type);
-  }, []);
-  const updaterValue = useMemo(
-    () => ({
-      openDialog,
-      closeDialog,
-    }),
-    []
-  );
+  };
+  const closeDialog = () => {
+    setOpen(false);
+  };
   return (
-    <DialogContext.Provider value={{ open, type }}>
-      <DialogUpdaterContext.Provider value={updaterValue}>
-        {children}
-      </DialogUpdaterContext.Provider>
+    <DialogContext.Provider value={{ showDialog, closeDialog }}>
+      {children}
+      <Dialog
+        open={open}
+        title={title}
+        content={content}
+        closeDialog={closeDialog}
+      />
     </DialogContext.Provider>
   );
 };
 
-export const useAuthDialog = () => {
-  const dialogContext = useContext(DialogContext);
-  if (!dialogContext)
-    throw new Error("Auth Dialog context has to be used within its provider");
-  return dialogContext;
+export const useDialog = () => {
+  const dialog = useContext(DialogContext);
+  if (!dialog)
+    throw new Error("Dialog context has to be used within its provider");
+  return dialog;
 };
 
-export const useAuthDialogUpdater = () => {
-  const dialogContext = useContext(DialogUpdaterContext);
-  if (!dialogContext)
-    throw new Error(
-      "Auth Dialog update context has to be used within its provider"
-    );
-  return dialogContext;
-};
-
-export default AuthDialogProvider;
+export default DialogProvider;

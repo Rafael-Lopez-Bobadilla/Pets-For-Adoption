@@ -1,5 +1,5 @@
 import { TLogInSchema } from "../components/AuthDialog/components/LogIn/logInSchema";
-import { TSignUpSchema } from "../components/AuthDialog/components/SignUp/signUpSchema";
+import { TSignUpSchema } from "../components/AuthForms/SignUp/signUpSchema";
 import axios from "axios";
 import { z } from "zod";
 

@@ -1,13 +1,14 @@
-import s from "../../AuthDialog.module.css";
-import { useAuthDialogUpdater } from "../../../../context/DialogProvider/DialogProvider";
+import s from "../AuthForm.module.css";
 import { useForm } from "react-hook-form";
 import { logInSchema, TLogInSchema } from "./logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUserContext } from "../../../../context/UserProvider/UserProvider";
-import { logIn } from "../../../../services/userService";
+import { useUserContext } from "../../../context/UserProvider/UserProvider";
+import { logIn } from "../../../services/userService";
 import { handleError } from "./handleError";
+import { useDialog } from "../../../context/DialogProvider/DialogProvider";
+import SignUp from "../SignUp/SignUp";
 const LogIn = () => {
-  const { openDialog, closeDialog } = useAuthDialogUpdater();
+  const { showDialog, closeDialog } = useDialog();
   const { updateUser } = useUserContext();
   const {
     register,
@@ -42,7 +43,10 @@ const LogIn = () => {
       </form>
       <p className={s.alt}>
         {`No account? `}
-        <span className={s.link} onClick={() => openDialog("signup")}>
+        <span
+          className={s.link}
+          onClick={() => showDialog("Sign Up", <SignUp />)}
+        >
           Create one
         </span>
       </p>
