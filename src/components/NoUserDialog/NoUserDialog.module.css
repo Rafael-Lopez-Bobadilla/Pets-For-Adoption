@@ -1,21 +1,21 @@
 .noUser {
   padding: 40px 40px;
-  font-family: 'Inter';
+  font-family: "Inter";
   text-align: center;
   max-width: 300px;
 }
 
-.noUser>h3 {
+.noUser > h3 {
   margin-bottom: 20px;
   font-size: 25px;
 }
 
-.noUser>p {
+.noUser > p {
   font-size: 18px;
   line-height: 1.5;
 }
 
-.noUser>p>span {
+.noUser > p > span {
   color: var(--green);
   font-weight: bold;
   cursor: pointer;

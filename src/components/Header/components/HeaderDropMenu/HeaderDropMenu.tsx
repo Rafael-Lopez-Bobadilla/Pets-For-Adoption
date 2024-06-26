@@ -5,14 +5,12 @@ import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import { logout } from "../../../../services/userService";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
-import SignUp from "../../../AuthForms/SignUp/SignUp";
-import LogIn from "../../../AuthForms/LogIn/LogIn";
 const DropMenu = ({
   setIsOpen,
 }: {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { showDialog } = useDialog();
+  const { showSignUp, showLogIn } = useDialog();
   const { user, updateUser } = useUserContext();
   const navigate = useNavigate();
   const onLogout = async () => {
@@ -36,12 +34,8 @@ const DropMenu = ({
       <FavButton icon={false} />
       {!user && (
         <>
-          <button onClick={() => showDialog("Sign Up", <SignUp />)}>
-            Sign Up
-          </button>
-          <button onClick={() => showDialog("Log In", <LogIn />)}>
-            Log In
-          </button>
+          <button onClick={() => showSignUp()}>Sign Up</button>
+          <button onClick={() => showLogIn()}>Log In</button>
         </>
       )}
       {user && <button onClick={onLogout}>Log out</button>}

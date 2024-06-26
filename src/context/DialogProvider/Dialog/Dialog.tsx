@@ -17,7 +17,7 @@ const Dialog = ({ open, title, content, closeDialog }: DialogProps) => {
       keepMounted={true}
       scroll="body"
     >
-      <div className={s.dialog}>
+      <div className={isAuthDialog ? s.dialog : ""}>
         <h3>{title}</h3>
         <div style={{ display: isAuthDialog ? "block" : "none" }}>
           <GoogleButton />

@@ -3,7 +3,7 @@
   border: none;
   cursor: pointer;
   color: white;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 16px;
   cursor: pointer;
   display: flex;
@@ -14,44 +14,6 @@
   }
 }
 
-.button>img {
+.button > img {
   width: 30px;
-}
-
-.noFav {
-  padding: 40px 40px;
-  font-family: 'Inter';
-  text-align: center;
-  max-width: 300px;
-}
-
-.noFav>h3 {
-  margin-bottom: 20px;
-  font-size: 25px;
-}
-
-.noFav>p {
-  font-size: 18px;
-  line-height: 1.5;
-}
-
-.noFav>p>img {
-  width: 20px;
-  vertical-align: middle;
-}
-
-.noFav>button {
-  background-color: var(--green);
-  padding: 5px 0;
-  width: 100px;
-  margin: 30px auto;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgb(25, 61, 25);
-  }
 }

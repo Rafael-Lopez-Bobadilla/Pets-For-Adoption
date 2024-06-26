@@ -6,9 +6,9 @@ import { useUserContext } from "../../../context/UserProvider/UserProvider";
 import { logIn } from "../../../services/userService";
 import { handleError } from "./handleError";
 import { useDialog } from "../../../context/DialogProvider/DialogProvider";
-import SignUp from "../SignUp/SignUp";
+
 const LogIn = () => {
-  const { showDialog, closeDialog } = useDialog();
+  const { showSignUp, closeDialog } = useDialog();
   const { updateUser } = useUserContext();
   const {
     register,
@@ -43,10 +43,7 @@ const LogIn = () => {
       </form>
       <p className={s.alt}>
         {`No account? `}
-        <span
-          className={s.link}
-          onClick={() => showDialog("Sign Up", <SignUp />)}
-        >
+        <span className={s.link} onClick={() => showSignUp()}>
           Create one
         </span>
       </p>

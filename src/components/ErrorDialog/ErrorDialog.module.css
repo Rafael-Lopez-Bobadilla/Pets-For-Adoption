@@ -1,0 +1,27 @@
+.dialog {
+  padding: 40px;
+  text-align: center;
+  font-family: "Inter";
+}
+
+.dialog > h3 {
+  font-size: 22px;
+}
+
+.dialog > p {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.dialog > button {
+  background-color: var(--green);
+  color: white;
+  border-radius: 5px;
+  padding: 5px 20px;
+  border: none;
+  margin-top: 15px;
+  font-size: 18px;
+  &:hover {
+    background-color: rgb(61, 99, 61);
+  }
+}

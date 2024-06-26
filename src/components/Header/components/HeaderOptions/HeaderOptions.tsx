@@ -5,13 +5,9 @@ import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import userIcon from "../../../../assets/svgs/userIcon.svg";
 import triangleDown from "../../../../assets/svgs/triangleDown.svg";
 import FavButton from "../FavButton/FavButton";
-import { useNavigate } from "react-router-dom";
 import { logout } from "../../../../services/userService";
-import LogIn from "../../../AuthForms/LogIn/LogIn";
-import SignUp from "../../../AuthForms/SignUp/SignUp";
 const HeaderOptions = () => {
-  const navigate = useNavigate();
-  const { showDialog } = useDialog();
+  const { showSignUp, showLogIn } = useDialog();
   const { user, updateUser } = useUserContext();
   const [openLogout, setOpenLogout] = useState(false);
   const onLogout = async () => {
@@ -19,7 +15,6 @@ const HeaderOptions = () => {
       await logout();
       updateUser(null);
       setOpenLogout(false);
-      if (location.pathname === "/favorites") navigate("/search");
     } catch (err) {
       console.log(err);
     }
@@ -30,12 +25,8 @@ const HeaderOptions = () => {
       <div className={s.line}></div>
       {!user && (
         <>
-          <button onClick={() => showDialog("Sign Up", <SignUp />)}>
-            Sign Up
-          </button>
-          <button onClick={() => showDialog("Log In", <LogIn />)}>
-            Log In
-          </button>
+          <button onClick={() => showSignUp()}>Sign Up</button>
+          <button onClick={() => showLogIn()}>Log In</button>
         </>
       )}
       {user && (

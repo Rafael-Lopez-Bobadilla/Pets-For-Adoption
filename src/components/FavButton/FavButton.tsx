@@ -5,17 +5,14 @@ import s from "./FavButton.module.css";
 import { updateFavorites } from "../../services/userService";
 import { Tooltip } from "@mui/material";
 import NoUserDialog from "../NoUserDialog/NoUserDialog";
-import { useState } from "react";
+import { useDialog } from "../../context/DialogProvider/DialogProvider";
 type Props = {
   id: number;
   background: "white" | "#e6dede";
 };
 const FavButton = ({ id, background }: Props) => {
   const { user, updateUser } = useUserContext();
-  const [openDialog, setOpenDialog] = useState(false);
-  const closeDialog = () => {
-    setOpenDialog(false);
-  };
+  const { showDialog } = useDialog();
   const onHeartClick = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     id: number,
@@ -23,7 +20,7 @@ const FavButton = ({ id, background }: Props) => {
   ) => {
     e.stopPropagation();
     if (!user) {
-      setOpenDialog(true);
+      showDialog("", <NoUserDialog />);
       return;
     }
     try {
@@ -49,7 +46,6 @@ const FavButton = ({ id, background }: Props) => {
           <img src={isFavorite ? favoriteFilled : favorite} />
         </div>
       </Tooltip>
-      <NoUserDialog open={openDialog} closeDialog={closeDialog} />
     </>
   );
 };

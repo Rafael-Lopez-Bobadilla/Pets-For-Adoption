@@ -6,9 +6,9 @@ import { signUpSchema, TSignUpSchema } from "./signUpSchema";
 import { signUp } from "../../../services/userService";
 import { useUserContext } from "../../../context/UserProvider/UserProvider";
 import { AxiosError } from "axios";
-import LogIn from "../LogIn/LogIn";
+import ErrorDialog from "../../ErrorDialog/ErrorDialog";
 const SignUp = () => {
-  const { showDialog, closeDialog } = useDialog();
+  const { showLogIn, closeDialog, showDialog } = useDialog();
   const { updateUser } = useUserContext();
   const {
     register,
@@ -27,7 +27,9 @@ const SignUp = () => {
       if (err instanceof AxiosError && err.response?.status === 400) {
         const message = "An account with this email already exists";
         setError("email", { message });
+        return;
       }
+      showDialog("", <ErrorDialog message="Unsuccessful Sign Up" />);
     }
   };
   return (
@@ -49,10 +51,7 @@ const SignUp = () => {
       </form>
       <p className={s.alt}>
         {`Already have an account? `}
-        <span
-          className={s.link}
-          onClick={() => showDialog("Log In", <LogIn />)}
-        >
+        <span className={s.link} onClick={() => showLogIn()}>
           Log in
         </span>
       </p>
