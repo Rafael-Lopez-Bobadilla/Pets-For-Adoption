@@ -1,5 +1,5 @@
 import s from "./HeaderDropMenu.module.css";
-import { useDialogUpdate } from "../../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../../context/DialogProvider/context";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import { logout } from "../../../../services/userService";

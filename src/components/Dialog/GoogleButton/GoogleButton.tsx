@@ -1,7 +1,7 @@
 import { useRef, useEffect, memo } from "react";
 import { useUserContext } from "../../../context/UserProvider/UserProvider";
 import { AuthWithGoogle } from "../../../services/userService";
-import { useDialogUpdate } from "../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../context/DialogProvider/context";
 const GoogleButton = memo(() => {
   const googleRef = useRef<HTMLDivElement>(null);
   const { updateUser } = useUserContext();

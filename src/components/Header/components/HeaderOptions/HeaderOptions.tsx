@@ -1,5 +1,5 @@
 import s from "./HeaderOptions.module.css";
-import { useDialogUpdate } from "../../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../../context/DialogProvider/context";
 import { useState } from "react";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import userIcon from "../../../../assets/svgs/userIcon.svg";

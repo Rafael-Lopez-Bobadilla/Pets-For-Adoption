@@ -4,7 +4,7 @@ import GoogleButton from "./GoogleButton/GoogleButton";
 import {
   useDialog,
   useDialogUpdate,
-} from "../../context/DialogProvider/DialogProvider";
+} from "../../context/DialogProvider/context";
 import s from "./Dialog.module.css";
 const Dialog = () => {
   const { open, title, content } = useDialog();

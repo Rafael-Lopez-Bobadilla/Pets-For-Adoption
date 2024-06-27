@@ -1,21 +1,8 @@
-import { ReactNode, useCallback, useContext, useMemo, useState } from "react";
-import { createContext } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 import LogIn from "../../components/AuthForms/LogIn/LogIn";
 import SignUp from "../../components/AuthForms/SignUp/SignUp";
+import { DialogContext, UpdateDialogContext } from "./context";
 
-type TUpdateDialogContext = {
-  showDialog: (title: string, content: ReactNode) => void;
-  closeDialog: () => void;
-  showSignUp: () => void;
-  showLogIn: () => void;
-};
-type TDialogContext = {
-  open: boolean;
-  title: string;
-  content: ReactNode;
-};
-const DialogContext = createContext<TDialogContext | null>(null);
-const UpdateDialogContext = createContext<TUpdateDialogContext | null>(null);
 const DialogProvider = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState<ReactNode>(null);
@@ -44,22 +31,6 @@ const DialogProvider = ({ children }: { children: ReactNode }) => {
       </UpdateDialogContext.Provider>
     </DialogContext.Provider>
   );
-};
-
-export const useDialog = () => {
-  const value = useContext(DialogContext);
-  if (!value)
-    throw new Error("Dialog context can only be used within its provider");
-  return value;
-};
-
-export const useDialogUpdate = () => {
-  const value = useContext(UpdateDialogContext);
-  if (!value)
-    throw new Error(
-      "Update Dialog context can only be used within its provider"
-    );
-  return value;
 };
 
 export default DialogProvider;

@@ -5,7 +5,7 @@ import s from "./FavButton.module.css";
 import { updateFavorites } from "../../services/userService";
 import { Tooltip } from "@mui/material";
 import NoUserDialog from "../NoUserDialog/NoUserDialog";
-import { useDialogUpdate } from "../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../context/DialogProvider/context";
 type Props = {
   id: number;
   background: "white" | "#e6dede";

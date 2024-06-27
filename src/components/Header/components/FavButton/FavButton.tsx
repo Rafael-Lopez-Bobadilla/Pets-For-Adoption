@@ -1,7 +1,7 @@
 import heart from "../../../../assets/svgs/heart.svg";
 import s from "./FavButton.module.css";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
-import { useDialogUpdate } from "../../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../../context/DialogProvider/context";
 import NoFavoritesDialog from "./NoFavoritesDialog/NoFavoritesDialog";
 import { useNavigate } from "react-router-dom";
 import NoUserDialog from "../../../NoUserDialog/NoUserDialog";

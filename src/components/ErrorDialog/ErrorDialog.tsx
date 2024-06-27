@@ -1,5 +1,5 @@
 import s from "./ErrorDialog.module.css";
-import { useDialogUpdate } from "../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../context/DialogProvider/context";
 const ErrorDialog = ({ message }: { message: string }) => {
   const { closeDialog } = useDialogUpdate();
   return (

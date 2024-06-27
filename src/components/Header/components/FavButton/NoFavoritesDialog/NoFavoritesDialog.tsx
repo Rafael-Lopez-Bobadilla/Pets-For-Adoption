@@ -1,6 +1,6 @@
 import s from "./NoFavoritesDialog.module.css";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import { useDialogUpdate } from "../../../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../../../context/DialogProvider/context";
 const NoFavoritesDialog = () => {
   const { closeDialog } = useDialogUpdate();
   return (

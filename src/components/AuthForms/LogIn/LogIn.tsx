@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "../../../context/UserProvider/UserProvider";
 import { logIn } from "../../../services/userService";
 import { handleError } from "./handleError";
-import { useDialogUpdate } from "../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../context/DialogProvider/context";
 
 const LogIn = () => {
   const { showSignUp, closeDialog } = useDialogUpdate();

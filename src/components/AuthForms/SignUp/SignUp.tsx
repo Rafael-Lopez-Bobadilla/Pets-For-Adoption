@@ -1,6 +1,6 @@
 import s from "../AuthForm.module.css";
 import { useForm } from "react-hook-form";
-import { useDialogUpdate } from "../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../context/DialogProvider/context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, TSignUpSchema } from "./signUpSchema";
 import { signUp } from "../../../services/userService";
