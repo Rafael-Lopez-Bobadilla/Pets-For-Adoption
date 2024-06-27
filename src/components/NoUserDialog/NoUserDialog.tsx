@@ -1,8 +1,8 @@
 import s from "./NoUserDialog.module.css";
-import { useDialog } from "../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../context/DialogProvider/DialogProvider";
 
 const NoUserDialog = () => {
-  const { showSignUp, showLogIn } = useDialog();
+  const { showSignUp, showLogIn } = useDialogUpdate();
   return (
     <div className={s.noUser}>
       <h3>Join us to select favorite pets!</h3>

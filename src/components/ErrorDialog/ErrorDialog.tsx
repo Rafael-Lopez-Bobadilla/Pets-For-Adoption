@@ -1,7 +1,7 @@
 import s from "./ErrorDialog.module.css";
-import { useDialog } from "../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../context/DialogProvider/DialogProvider";
 const ErrorDialog = ({ message }: { message: string }) => {
-  const { closeDialog } = useDialog();
+  const { closeDialog } = useDialogUpdate();
   return (
     <div className={s.dialog}>
       <h3>Something went wrong!</h3>

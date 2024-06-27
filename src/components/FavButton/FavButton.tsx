@@ -5,14 +5,14 @@ import s from "./FavButton.module.css";
 import { updateFavorites } from "../../services/userService";
 import { Tooltip } from "@mui/material";
 import NoUserDialog from "../NoUserDialog/NoUserDialog";
-import { useDialog } from "../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../context/DialogProvider/DialogProvider";
 type Props = {
   id: number;
   background: "white" | "#e6dede";
 };
 const FavButton = ({ id, background }: Props) => {
   const { user, updateUser } = useUserContext();
-  const { showDialog } = useDialog();
+  const { showDialog } = useDialogUpdate();
   const onHeartClick = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     id: number,

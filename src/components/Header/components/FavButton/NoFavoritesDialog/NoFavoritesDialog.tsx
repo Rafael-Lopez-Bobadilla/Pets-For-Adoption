@@ -1,8 +1,8 @@
 import s from "./NoFavoritesDialog.module.css";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import { useDialog } from "../../../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../../../context/DialogProvider/DialogProvider";
 const NoFavoritesDialog = () => {
-  const { closeDialog } = useDialog();
+  const { closeDialog } = useDialogUpdate();
   return (
     <div className={s.noFav}>
       <h3>No favorites yet</h3>

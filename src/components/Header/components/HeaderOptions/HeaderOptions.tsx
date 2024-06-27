@@ -1,5 +1,5 @@
 import s from "./HeaderOptions.module.css";
-import { useDialog } from "../../../../context/DialogProvider/DialogProvider";
+import { useDialogUpdate } from "../../../../context/DialogProvider/DialogProvider";
 import { useState } from "react";
 import { useUserContext } from "../../../../context/UserProvider/UserProvider";
 import userIcon from "../../../../assets/svgs/userIcon.svg";
@@ -7,7 +7,7 @@ import triangleDown from "../../../../assets/svgs/triangleDown.svg";
 import FavButton from "../FavButton/FavButton";
 import { logout } from "../../../../services/userService";
 const HeaderOptions = () => {
-  const { showSignUp, showLogIn } = useDialog();
+  const { showSignUp, showLogIn } = useDialogUpdate();
   const { user, updateUser } = useUserContext();
   const [openLogout, setOpenLogout] = useState(false);
   const onLogout = async () => {

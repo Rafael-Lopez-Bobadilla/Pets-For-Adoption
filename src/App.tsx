@@ -9,6 +9,8 @@ import { TokenProvider } from "./context/TokenProvider/TokenProvider";
 import { Navigate } from "react-router-dom";
 import DialogProvider from "./context/DialogProvider/DialogProvider";
 import UserProvider from "./context/UserProvider/UserProvider";
+import Dialog from "./components/Dialog/Dialog";
+
 function App() {
   return (
     <>
@@ -26,6 +28,7 @@ function App() {
                 </Routes>
               </Suspense>
             </TokenProvider>
+            <Dialog />
           </DialogProvider>
         </UserProvider>
       </Router>

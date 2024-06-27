@@ -1,14 +1,14 @@
 import { Dialog as MuiDialog } from "@mui/material";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import GoogleButton from "./GoogleButton/GoogleButton";
+import {
+  useDialog,
+  useDialogUpdate,
+} from "../../context/DialogProvider/DialogProvider";
 import s from "./Dialog.module.css";
-type DialogProps = {
-  open: boolean;
-  title: string;
-  content: React.ReactNode;
-  closeDialog: () => void;
-};
-const Dialog = ({ open, title, content, closeDialog }: DialogProps) => {
+const Dialog = () => {
+  const { open, title, content } = useDialog();
+  const { closeDialog } = useDialogUpdate();
   const isAuthDialog = title === "Sign Up" || title === "Log In";
   return (
     <MuiDialog
