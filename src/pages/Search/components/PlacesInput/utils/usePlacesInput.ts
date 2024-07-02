@@ -2,10 +2,9 @@ import { useEffect, useRef, useState, useContext } from "react";
 import { Place } from "./IPlace";
 import { getPredictions } from "./getPredictions";
 import { useSearchParams } from "react-router-dom";
-import { LocationContext } from "../../LocationProvider/LocationProvider";
-import { getLocation } from "../../../utils/getLocation";
+import { useLocation } from "../../../context/LocationContext/context";
 import { AutocompleteContext } from "../../../Search";
-
+import { getLocationById } from "../../../../../services/placesService/placesService";
 const usePlacesInput = (closeOverlay?: () => void) => {
   const service = useContext(AutocompleteContext);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -14,8 +13,8 @@ const usePlacesInput = (closeOverlay?: () => void) => {
   const [value, setValue] = useState("");
   const [params, setParams] = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
-  const timeoutID = useRef<number | null>(null);
-  const { location, setLocation } = useContext(LocationContext);
+  const timeoutID = useRef<any>(null);
+  const { location, updateLocation } = useLocation();
   useEffect(() => {
     if (location && location.address !== value) setValue(location.address);
     if (!location && value !== "") setValue("");
@@ -30,7 +29,7 @@ const usePlacesInput = (closeOverlay?: () => void) => {
       ]);
       setSelected(0);
     } else {
-      getPredictions(timeoutID, service, text, setPlaces);
+      getPredictions(timeoutID.current, service, text, setPlaces);
     }
     setValue(text);
   };
@@ -52,16 +51,15 @@ const usePlacesInput = (closeOverlay?: () => void) => {
     inputRef.current?.blur();
     if (id === "Any") {
       setValue("");
-      setLocation(null);
+      updateLocation(null);
       newParams.delete("location");
       newParams.set("page", "1");
       setParams(newParams);
       return;
     }
     setValue(value);
-    const coords = await getLocation(id);
-    const { lat, lng } = coords.results[0].geometry.location;
-    setLocation({ id: id, coords: `${lat},${lng}`, address: value });
+    const data = await getLocationById(id);
+    updateLocation(data);
     newParams.set("location", id);
     newParams.set("page", "1");
     setParams(newParams);

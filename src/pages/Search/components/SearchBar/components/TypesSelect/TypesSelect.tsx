@@ -1,15 +1,16 @@
-import Select from "../../../Select/Select"
-import { TypesContext } from "../../../PetsInfoProvider/PetsInfoProvider"
-import { PetType } from "../../../../utils/IPetType"
-import { useContext } from "react"
+import Select from "../../../Select/Select";
+import { PetType } from "../../../../utils/IPetType";
+import { usePetTypes } from "../../../../context/PetTypesContext/context";
 const TypesSelect = ({ closeOverlay }: { closeOverlay?: () => void }) => {
-  const types = useContext(TypesContext)
-  const names = types ? types.map((type: PetType) => type.name) : null
+  const { types } = usePetTypes();
+  const names = types?.map((type: PetType) => type.name) || null;
   return (
     <>
-      {names && <Select options={names} field='type' closeOverlay={closeOverlay} />}
+      {names && (
+        <Select options={names} field="type" closeOverlay={closeOverlay} />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default TypesSelect
+export default TypesSelect;

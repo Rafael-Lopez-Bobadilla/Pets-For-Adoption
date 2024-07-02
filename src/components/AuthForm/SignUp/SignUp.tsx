@@ -1,15 +1,15 @@
 import s from "../AuthForm.module.css";
 import { useForm } from "react-hook-form";
-import { useDialogUpdate } from "../../../context/DialogProvider/context";
+import { useDialogUpdate } from "../../../context/DialogContext/context";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema, TSignUpSchema } from "./signUpSchema";
 import { signUp } from "../../../services/userService";
-import { useUserContext } from "../../../context/UserProvider/UserProvider";
+import { useUser } from "../../../context/UserContext/context";
 import { AxiosError } from "axios";
 import ErrorDialog from "../../ErrorDialog/ErrorDialog";
 const SignUp = () => {
   const { showLogIn, closeDialog, showDialog } = useDialogUpdate();
-  const { updateUser } = useUserContext();
+  const { updateUser } = useUser();
   const {
     register,
     handleSubmit,

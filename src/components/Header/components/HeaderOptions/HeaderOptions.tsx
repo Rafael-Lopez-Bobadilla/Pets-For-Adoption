@@ -1,14 +1,14 @@
 import s from "./HeaderOptions.module.css";
-import { useDialogUpdate } from "../../../../context/DialogProvider/context";
+import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import { useState } from "react";
-import { useUserContext } from "../../../../context/UserProvider/UserProvider";
+import { useUser } from "../../../../context/UserContext/context";
 import userIcon from "../../../../assets/svgs/userIcon.svg";
 import triangleDown from "../../../../assets/svgs/triangleDown.svg";
 import FavButton from "../FavButton/FavButton";
 import { logout } from "../../../../services/userService";
 const HeaderOptions = () => {
   const { showSignUp, showLogIn } = useDialogUpdate();
-  const { user, updateUser } = useUserContext();
+  const { user, updateUser } = useUser();
   const [openLogout, setOpenLogout] = useState(false);
   const onLogout = async () => {
     try {

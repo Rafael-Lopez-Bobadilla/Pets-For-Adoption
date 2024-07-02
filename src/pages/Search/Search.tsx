@@ -2,10 +2,10 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import s from "./Search.module.css";
 import Filters from "./components/Filters/Filters";
 import SearchBody from "./components/SearchBody/SearchBody";
-import PetsInfoProvider from "./components/PetsInfoProvider/PetsInfoProvider";
-import LocationProvider from "./components/LocationProvider/LocationProvider";
+import LocationProvider from "./context/LocationContext/LocationProvider";
 import { createContext, useEffect, useRef } from "react";
 import { loadLibrary } from "./utils/loadLibrary";
+import PetTypesProvider from "./context/PetTypesContext/PetTypesProvider";
 type service = google.maps.places.AutocompleteService;
 export const AutocompleteContext = createContext<service | null>(null);
 const Search = () => {
@@ -15,8 +15,8 @@ const Search = () => {
   });
   return (
     <AutocompleteContext.Provider value={service.current}>
-      <div className={s.search}>
-        <PetsInfoProvider>
+      <PetTypesProvider>
+        <div className={s.search}>
           <LocationProvider>
             <SearchBar />
             <div className={s.wrapper}>
@@ -28,8 +28,8 @@ const Search = () => {
               </div>
             </div>
           </LocationProvider>
-        </PetsInfoProvider>
-      </div>
+        </div>
+      </PetTypesProvider>
     </AutocompleteContext.Provider>
   );
 };

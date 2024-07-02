@@ -1,10 +1,12 @@
-import { Pet } from "../../utils/IPets";
 import s from "./PetCard.module.css";
 import { useNavigate } from "react-router-dom";
 import FavButton from "../../../../../../../components/FavButton/FavButton";
 import PetCardImg from "./PetCardImg/PetCardImg";
 import PetCardInfo from "./PetCardInfo/PetCardInfo";
-const PetCard = ({ pet }: { pet: Pet }) => {
+import { z } from "zod";
+import { petSchema } from "../../../../../../../services/petfinderService/schemas/PetsSchema";
+type TPet = z.infer<typeof petSchema>;
+const PetCard = ({ pet }: { pet: TPet }) => {
   const navigate = useNavigate();
   return (
     <>

@@ -2,14 +2,14 @@ import s from "../AuthForm.module.css";
 import { useForm } from "react-hook-form";
 import { logInSchema, TLogInSchema } from "./logInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUserContext } from "../../../context/UserProvider/UserProvider";
+import { useUser } from "../../../context/UserContext/context";
 import { logIn } from "../../../services/userService";
 import { handleError } from "./handleError";
-import { useDialogUpdate } from "../../../context/DialogProvider/context";
+import { useDialogUpdate } from "../../../context/DialogContext/context";
 
 const LogIn = () => {
   const { showSignUp, closeDialog } = useDialogUpdate();
-  const { updateUser } = useUserContext();
+  const { updateUser } = useUser();
   const {
     register,
     handleSubmit,

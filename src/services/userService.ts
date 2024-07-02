@@ -1,15 +1,13 @@
-import { TLogInSchema } from "../components/AuthDialog/components/LogIn/logInSchema";
-import { TSignUpSchema } from "../components/AuthForms/SignUp/signUpSchema";
+import { TLogInSchema } from "../components/AuthForm/LogIn/logInSchema";
+import { TSignUpSchema } from "../components/AuthForm/SignUp/signUpSchema";
 import axios from "axios";
 import { z } from "zod";
 
-const UserSchema = z.object({
+export const UserSchema = z.object({
   name: z.string(),
   email: z.string(),
   favorites: z.array(z.string()),
 });
-
-export type TUserSchema = z.infer<typeof UserSchema>;
 
 const userClient = axios.create({
   baseURL: `${import.meta.env.VITE_API}`,

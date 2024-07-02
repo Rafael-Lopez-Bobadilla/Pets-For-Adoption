@@ -1,12 +1,12 @@
 import { Place } from "./IPlace";
 export const getPredictions = (
-  timeoutID: React.MutableRefObject<number | null>,
+  timeoutID: any,
   service: google.maps.places.AutocompleteService | null,
   text: string,
   setPlaces: React.Dispatch<React.SetStateAction<[] | Place[]>>
 ) => {
-  timeoutID.current = setTimeout(async () => {
-    timeoutID.current = null;
+  timeoutID = setTimeout(async () => {
+    timeoutID = null;
     service?.getPlacePredictions(
       {
         input: text,

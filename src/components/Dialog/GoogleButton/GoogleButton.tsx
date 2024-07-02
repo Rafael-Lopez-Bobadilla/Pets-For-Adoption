@@ -1,10 +1,10 @@
 import { useRef, useEffect, memo } from "react";
-import { useUserContext } from "../../../context/UserProvider/UserProvider";
+import { useUser } from "../../../context/UserContext/context";
 import { AuthWithGoogle } from "../../../services/userService";
-import { useDialogUpdate } from "../../../context/DialogProvider/context";
+import { useDialogUpdate } from "../../../context/DialogContext/context";
 const GoogleButton = memo(() => {
   const googleRef = useRef<HTMLDivElement>(null);
-  const { updateUser } = useUserContext();
+  const { updateUser } = useUser();
   const { closeDialog } = useDialogUpdate();
   const onSignIn = async (response: google.accounts.id.CredentialResponse) => {
     try {

@@ -1,7 +1,7 @@
 import s from "./HeaderDropMenu.module.css";
-import { useDialogUpdate } from "../../../../context/DialogProvider/context";
+import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
-import { useUserContext } from "../../../../context/UserProvider/UserProvider";
+import { useUser } from "../../../../context/UserContext/context";
 import { logout } from "../../../../services/userService";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ const DropMenu = ({
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { showSignUp, showLogIn } = useDialogUpdate();
-  const { user, updateUser } = useUserContext();
+  const { user, updateUser } = useUser();
   const navigate = useNavigate();
   const onLogout = async () => {
     try {

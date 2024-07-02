@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Search from "./pages/Search/Search";
 const Favorites = lazy(() => import("./pages/Favorites/Favorites"));
 const Pet = lazy(() => import("./pages/Pet/Pet"));
-import { TokenProvider } from "./context/TokenProvider/TokenProvider";
+import { TokenProvider } from "./context/TokenContext/TokenProvider";
 import { Navigate } from "react-router-dom";
-import DialogProvider from "./context/DialogProvider/DialogProvider";
-import UserProvider from "./context/UserProvider/UserProvider";
+import DialogProvider from "./context/DialogContext/DialogProvider";
+import UserProvider from "./context/UserContext/UserProvider";
 import Dialog from "./components/Dialog/Dialog";
 
 function App() {

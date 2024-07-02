@@ -1,14 +1,14 @@
 import s from "./Favorites.module.css";
 import { useEffect, useState } from "react";
-import { useUserContext } from "../../context/UserProvider/UserProvider";
-import { usePetfinderToken } from "../../context/TokenProvider/TokenProvider";
+import { useUser } from "../../context/UserContext/context";
+import { usePetfinderToken } from "../../context/TokenContext/context";
 import { getPet } from "./getPet";
 import { Pet } from "../Search/components/SearchBody/PetList/utils/IPets";
 import PetCard from "../Search/components/SearchBody/PetList/components/PetCard/PetCard";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 const Favorites = () => {
-  const { user, error } = useUserContext();
+  const { user, error } = useUser();
   const { token } = usePetfinderToken();
   const [favorites, setFavorites] = useState<Pet[]>([]);
   const navigate = useNavigate();
