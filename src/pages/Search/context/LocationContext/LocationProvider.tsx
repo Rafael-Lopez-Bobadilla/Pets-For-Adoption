@@ -30,7 +30,7 @@ const LocationProvider = ({ children }: { children: React.ReactNode }) => {
     if (id && (!location || id !== location.id)) {
       changeLocation(id);
     }
-    if (id && location) updateLocation(null);
+    if (!id && location) updateLocation(null);
   }, [params]);
   const location = extractLocation(data);
   return (

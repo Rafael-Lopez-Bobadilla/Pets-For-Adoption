@@ -1,12 +1,13 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Place } from "./IPlace";
+import { loadLibrary } from "../../../utils/loadLibrary";
 import { getPredictions } from "./getPredictions";
 import { useSearchParams } from "react-router-dom";
 import { useLocation } from "../../../context/LocationContext/context";
-import { AutocompleteContext } from "../../../Search";
 import { getLocationById } from "../../../../../services/placesService/placesService";
+type service = google.maps.places.AutocompleteService;
 const usePlacesInput = (closeOverlay?: () => void) => {
-  const service = useContext(AutocompleteContext);
+  const service = useRef<service>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [places, setPlaces] = useState<Place[] | []>([]);
   const [selected, setSelected] = useState(0);
@@ -15,6 +16,9 @@ const usePlacesInput = (closeOverlay?: () => void) => {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutID = useRef<any>(null);
   const { location, updateLocation } = useLocation();
+  useEffect(() => {
+    loadLibrary(service);
+  }, []);
   useEffect(() => {
     if (location && location.address !== value) setValue(location.address);
     if (!location && value !== "") setValue("");
@@ -29,7 +33,7 @@ const usePlacesInput = (closeOverlay?: () => void) => {
       ]);
       setSelected(0);
     } else {
-      getPredictions(timeoutID.current, service, text, setPlaces);
+      getPredictions(timeoutID.current, service.current, text, setPlaces);
     }
     setValue(text);
   };

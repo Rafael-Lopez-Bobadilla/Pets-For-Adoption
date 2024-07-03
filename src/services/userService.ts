@@ -3,11 +3,13 @@ import { TSignUpSchema } from "../components/AuthForm/SignUp/signUpSchema";
 import axios from "axios";
 import { z } from "zod";
 
-export const UserSchema = z.object({
-  name: z.string(),
-  email: z.string(),
-  favorites: z.array(z.string()),
-});
+export const UserSchema = z
+  .object({
+    name: z.string(),
+    email: z.string(),
+    favorites: z.array(z.string()),
+  })
+  .strict();
 
 const userClient = axios.create({
   baseURL: `${import.meta.env.VITE_API}`,

@@ -1,12 +1,10 @@
 import Autocomplete from "../../Autocomplete/Autocomplete";
 import { useQuery } from "@tanstack/react-query";
 import { SelectedTypeSchema } from "../../../../../services/petfinderService/schemas/TypesSchema";
-import { BreedsSchema } from "../../../../../services/petfinderService/schemas/BreedsSchema";
 import { z } from "zod";
 import { getBreeds } from "../../../../../services/petfinderService/petfinderService";
 import { usePetfinderToken } from "../../../../../context/TokenContext/context";
 type TSelected = z.infer<typeof SelectedTypeSchema>;
-type BreedsResponse = z.infer<typeof BreedsSchema>;
 type Props = {
   closeOverlay?: () => void;
   selected: TSelected | null;
@@ -14,10 +12,10 @@ type Props = {
 const BreedsFilter = ({ closeOverlay, selected }: Props) => {
   const { token } = usePetfinderToken();
   const getData = () => {
-    if (!selected || !token) return undefined;
+    if (!selected || !token) throw new Error("token or selected not ready");
     return getBreeds(token, selected._links.breeds.href);
   };
-  const { data } = useQuery<BreedsResponse | undefined>({
+  const { data } = useQuery({
     queryKey: [selected?.name],
     queryFn: () => getData(),
   });

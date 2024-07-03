@@ -12,7 +12,7 @@ import { validateParams } from "./utils/validateParams";
 import { manageLocation } from "./utils/manageLocation";
 import { handleColorParam } from "./handleColorParam";
 import { getAnimals } from "../../../../../services/petfinderService/petfinderService";
-import { ZodError } from "zod";
+import { AxiosError } from "axios";
 const PetList = memo(
   ({
     setPageCount,
@@ -22,8 +22,12 @@ const PetList = memo(
     const [params, setParams] = useSearchParams();
     const { token } = usePetfinderToken();
     const { location } = useLocation();
-    const validParams = validateParams(setParams, params);
-    const getData = async (token: string, validParams: URLSearchParams) => {
+    const getData = async () => {
+      if (!token) throw new Error("Token not ready");
+      const validParams = validateParams(setParams, params);
+      if (!validParams) throw new Error("Invalid params");
+      if (!isLocationSync(params, location))
+        throw new Error("Invalid Location");
       const readyParams = handleColorParam(validParams);
       const requestParams = manageLocation(location, readyParams);
       try {
@@ -31,36 +35,15 @@ const PetList = memo(
         setPageCount(data.pagination.total_pages);
         return data;
       } catch (err) {
-        if (err instanceof ZodError) console.log(err.issues);
+        if (err instanceof AxiosError && err.response?.status === 400) {
+          setParams(new URLSearchParams({ type: "Dog", page: "1" }));
+        }
       }
     };
-    const isRequestReady = () => {
-      if (!token) return false;
-      if (!validParams) return false;
-      if (!isLocationSync(params, location)) return false;
-    };
     const { data, isPending } = useQuery({
-      queryKey: [`${params.toString()}`],
-      queryFn: () => getData(token!, validParams as URLSearchParams),
-      enabled: isRequestReady(),
+      queryKey: ["pets", Object.fromEntries(params)],
+      queryFn: () => getData(),
     });
-    //if error, reset params
-    /**
-       if (res.status === 400) {
-    setSearchParams(new URLSearchParams({ type: "Dog", page: "1" }));
-    throw new Error("reset");
-  }
-  const data: PetsData = await res.json();
-  const compareByImg = (a: Pet, b: Pet) => {
-    const aImg = a.primary_photo_cropped;
-    const bImg = b.primary_photo_cropped;
-    if (aImg && !bImg) return -1;
-    if (bImg && !aImg) return 1;
-    return 0;
-  };
-  data.animals.sort(compareByImg);
-     */
-    //order pets by images
     return (
       <>
         <div className={s.list}>
