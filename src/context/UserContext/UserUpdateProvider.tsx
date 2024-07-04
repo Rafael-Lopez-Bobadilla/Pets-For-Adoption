@@ -5,11 +5,12 @@ import {
   TUserSchema,
 } from "../../services/userService/schemas";
 import { UserUpdateContext } from "./updateContext";
+import { memo } from "react";
 type Props = {
   children: React.ReactNode;
   updateUser: (user: TUserSchema | null) => void;
 };
-const UserUpdateProvider = ({ children, updateUser }: Props) => {
+const UserUpdateProvider = memo(({ children, updateUser }: Props) => {
   const signup = async (formData: TSignUpSchema) => {
     const user = await userService.signUp(formData);
     updateUser(user);
@@ -37,6 +38,6 @@ const UserUpdateProvider = ({ children, updateUser }: Props) => {
       {children}
     </UserUpdateContext.Provider>
   );
-};
+});
 
 export default UserUpdateProvider;

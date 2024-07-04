@@ -4,16 +4,16 @@
   left: 0;
   z-index: 4;
   background-color: var(--green);
-  padding: 10px var(--wrapper-padding);
+  padding: 10px var(--sides-padding);
   width: 100%;
 }
 
-.dropMenu>* {
+.dropMenu > * {
   margin: 20px 0;
   background-color: transparent;
   color: white;
   font-size: 16px;
-  font-family: 'Inter';
+  font-family: "Inter";
   border: none;
   display: block;
   font-weight: bold;
@@ -24,18 +24,28 @@
   align-items: center;
 }
 
-.userIcon {
-  width: 25px;
-}
-
 .name {
   color: #d3d3d3;
   font-weight: bold;
   margin-left: 5px;
 }
 
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-family: "Inter";
+}
+
+.button > img {
+  width: 30px;
+}
 @media (min-width: 768px) {
   .dropMenu {
+    display: none;
+  }
+  .button {
     display: none;
   }
 }

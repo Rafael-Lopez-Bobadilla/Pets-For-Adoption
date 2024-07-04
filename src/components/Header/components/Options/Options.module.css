@@ -1,0 +1,29 @@
+.options {
+  display: none;
+  align-items: center;
+  gap: 30px;
+}
+
+.line {
+  width: 2px;
+  background-color: white;
+  height: calc(var(--header-height) - 10px);
+}
+
+.options > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-family: "Inter";
+  font-size: 16px;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+@media (min-width: 768px) {
+  .options {
+    display: flex;
+  }
+}

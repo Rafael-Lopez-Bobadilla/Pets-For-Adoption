@@ -1,0 +1,11 @@
+.button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-family: "Inter";
+}
+
+.button > img {
+  width: 30px;
+}

@@ -8,13 +8,15 @@
   max-width: var(--max-width);
   padding: 10px 5px;
   margin: 0 auto;
-  font-family: 'Inter';
+  font-family: "Inter";
 
   @media (min-width: 1000px) {
     display: grid;
     --filters-width: calc(var(--select-width) + var(--select-margin));
-    grid-template-columns: var(--filters-width) calc(100% - var(--filters-width));
-    padding: 10px var(--wrapper-padding);
+    grid-template-columns: var(--filters-width) calc(
+        100% - var(--filters-width)
+      );
+    padding: 10px var(--sides-padding);
   }
 }
 

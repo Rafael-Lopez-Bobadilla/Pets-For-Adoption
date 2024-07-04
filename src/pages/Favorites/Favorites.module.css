@@ -5,7 +5,7 @@
   font-family: "Inter";
 
   @media (min-width: 1000px) {
-    padding: 10px var(--wrapper-padding);
+    padding: 10px var(--sides-padding);
   }
 }
 

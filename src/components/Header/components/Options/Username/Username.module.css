@@ -1,0 +1,49 @@
+.user {
+  position: relative;
+}
+.name {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+  color: white;
+  font-family: "Inter";
+  font-size: 16px;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.arrow {
+  width: 20px;
+  margin-left: 10px;
+}
+
+.name > span {
+  max-width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 3px;
+}
+
+.logout {
+  position: absolute;
+  top: calc(100% + 10px);
+  border-radius: 5px;
+  left: 0;
+  background-color: var(--green);
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 5px 0;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  z-index: 5;
+  font-weight: bold;
+
+  &:hover {
+    background-color: rgb(61, 99, 61);
+  }
+}

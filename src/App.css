@@ -1,7 +1,7 @@
 :root {
-  --green: #267C5B;
+  --green: #267c5b;
   --max-width: 1240px;
-  --wrapper-padding: 20px;
+  --sides-padding: 20px;
   --header-height: 50px;
   --input-padding: 7px 15px;
   --input-radius: 8px;
@@ -18,8 +18,8 @@ a {
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('./assets/fonts/Inter-VariableFont_slnt,wght.ttf');
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter-VariableFont_slnt,wght.ttf");
 }
 
 body {

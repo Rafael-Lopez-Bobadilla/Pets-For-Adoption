@@ -2,14 +2,14 @@
   background-color: var(--green);
   width: 100%;
   color: white;
-  font-family: 'Inter';
+  font-family: "Inter";
   position: relative;
 }
 
-.wrapper {
+.header > nav {
   max-width: var(--max-width);
   height: var(--header-height);
-  padding: 0 var(--wrapper-padding);
+  padding: 0 var(--sides-padding);
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -22,25 +22,7 @@
   color: white;
 }
 
-.name img,
-.button img {
+.name > img {
   width: 30px;
-}
-
-.name img {
   margin-right: 10px;
-}
-
-.button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-family: 'Inter';
-}
-
-@media(min-width: 768px) {
-  .button {
-    display: none;
-  }
 }
