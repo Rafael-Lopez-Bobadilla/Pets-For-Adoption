@@ -1,21 +1,24 @@
-import { authenticate } from "../../services/userService";
-import { TUserSchema } from "./context";
+import { userService } from "../../services/userService/userService";
+import { TUserSchema } from "../../services/userService/schemas";
 import { useFetch } from "../../useFetch";
-import { UserContext, User } from "./context";
+import { UserContext } from "./context";
+import { useCallback } from "react";
+import UserUpdateProvider from "./UserUpdateProvider";
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const {
     data: user,
     loading,
     error,
     setData,
-  } = useFetch<TUserSchema>(authenticate);
-  const updateUser = (user: User) => {
+  } = useFetch<TUserSchema>(userService.authenticate);
+  const updateUser = useCallback((user: TUserSchema | null) => {
     setData(user);
-  };
-
+  }, []);
   return (
-    <UserContext.Provider value={{ user, updateUser, loading, error }}>
-      {children}
+    <UserContext.Provider value={{ user, loading, error }}>
+      <UserUpdateProvider updateUser={updateUser}>
+        {children}
+      </UserUpdateProvider>
     </UserContext.Provider>
   );
 };

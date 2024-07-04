@@ -2,7 +2,7 @@ import s from "./HeaderDropMenu.module.css";
 import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import userIconGray from "../../../../assets/svgs/userIconGray.svg";
 import { useUser } from "../../../../context/UserContext/context";
-import { logout } from "../../../../services/userService";
+import { userUserUpdate } from "../../../../context/UserContext/updateContext";
 import FavButton from "../FavButton/FavButton";
 import { useNavigate } from "react-router-dom";
 const DropMenu = ({
@@ -11,12 +11,12 @@ const DropMenu = ({
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { showSignUp, showLogIn } = useDialogUpdate();
-  const { user, updateUser } = useUser();
+  const { user } = useUser();
+  const { logout } = userUserUpdate();
   const navigate = useNavigate();
   const onLogout = async () => {
     try {
       await logout();
-      updateUser(null);
       setIsOpen(false);
       if (location.pathname === "/favorites") navigate("/search");
     } catch (err) {

@@ -2,14 +2,16 @@ import s from "../AuthForm.module.css";
 import { useForm } from "react-hook-form";
 import { useDialogUpdate } from "../../../context/DialogContext/context";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchema, TSignUpSchema } from "./signUpSchema";
-import { signUp } from "../../../services/userService";
-import { useUser } from "../../../context/UserContext/context";
+import {
+  signUpSchema,
+  TSignUpSchema,
+} from "../../../services/userService/schemas";
+import { userUserUpdate } from "../../../context/UserContext/updateContext";
 import { AxiosError } from "axios";
 import ErrorDialog from "../../ErrorDialog/ErrorDialog";
 const SignUp = () => {
   const { showLogIn, closeDialog, showDialog } = useDialogUpdate();
-  const { updateUser } = useUser();
+  const { signup } = userUserUpdate();
   const {
     register,
     handleSubmit,
@@ -20,8 +22,7 @@ const SignUp = () => {
   });
   const onSubmit = async (data: TSignUpSchema) => {
     try {
-      const user = await signUp(data);
-      updateUser(user);
+      await signup(data);
       closeDialog();
     } catch (err) {
       if (err instanceof AxiosError && err.response?.status === 400) {

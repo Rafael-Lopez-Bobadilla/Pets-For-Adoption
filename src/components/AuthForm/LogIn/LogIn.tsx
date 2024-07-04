@@ -1,15 +1,17 @@
 import s from "../AuthForm.module.css";
 import { useForm } from "react-hook-form";
-import { logInSchema, TLogInSchema } from "./logInSchema";
+import {
+  logInSchema,
+  TLogInSchema,
+} from "../../../services/userService/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUser } from "../../../context/UserContext/context";
-import { logIn } from "../../../services/userService";
+import { userUserUpdate } from "../../../context/UserContext/updateContext";
 import { handleError } from "./handleError";
 import { useDialogUpdate } from "../../../context/DialogContext/context";
 
 const LogIn = () => {
   const { showSignUp, closeDialog } = useDialogUpdate();
-  const { updateUser } = useUser();
+  const { login } = userUserUpdate();
   const {
     register,
     handleSubmit,
@@ -23,8 +25,7 @@ const LogIn = () => {
   };
   const onSubmit = async (formData: TLogInSchema) => {
     try {
-      const user = await logIn(formData);
-      updateUser(user);
+      await login(formData);
       closeDialog();
     } catch (err) {
       handleError(err, createError);
