@@ -6,7 +6,7 @@ const Close = ({ color, width }: Props) => {
   return (
     <svg
       width={width}
-      height="auto"
+      height={width}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

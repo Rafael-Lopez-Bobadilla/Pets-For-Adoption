@@ -4,19 +4,21 @@
   left: 0;
   z-index: 4;
   background-color: var(--green);
-  padding: 10px var(--sides-padding);
+  padding: 30px var(--sides-padding);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
 }
 
-.dropMenu > * {
-  margin: 20px 0;
+.user,
+.button {
   background-color: transparent;
-  color: white;
+  border: none;
   font-size: 16px;
   font-family: "Inter";
-  border: none;
-  display: block;
-  font-weight: bold;
+  color: white;
 }
 
 .user {
@@ -30,22 +32,8 @@
   margin-left: 5px;
 }
 
-.button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: white;
-  font-family: "Inter";
-}
-
-.button > img {
-  width: 30px;
-}
 @media (min-width: 768px) {
   .dropMenu {
-    display: none;
-  }
-  .button {
     display: none;
   }
 }

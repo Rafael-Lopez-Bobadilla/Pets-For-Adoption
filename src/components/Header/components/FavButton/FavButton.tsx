@@ -1,11 +1,11 @@
-import heart from "../../../../assets/svgs/heart.svg";
 import s from "./FavButton.module.css";
 import { useUser } from "../../../../context/UserContext/context";
 import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import NoFavoritesDialog from "./NoFavoritesDialog/NoFavoritesDialog";
 import { useNavigate } from "react-router-dom";
 import NoUserDialog from "../../../NoUserDialog/NoUserDialog";
-const FavButton = ({ icon }: { icon: boolean }) => {
+import HeartIcon from "../../../Icons/HeartIcon";
+const FavButton = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const { showDialog } = useDialogUpdate();
@@ -18,8 +18,8 @@ const FavButton = ({ icon }: { icon: boolean }) => {
   return (
     <>
       <button className={s.button} onClick={handleClick}>
-        {icon && <img src={heart} />}
-        Favorites
+        <HeartIcon width="28px" color="white" border="transparent" />
+        <span>Favorites</span>
       </button>
     </>
   );

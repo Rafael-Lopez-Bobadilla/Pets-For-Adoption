@@ -7,9 +7,9 @@ import UserIcon from "../../../Icons/UserIcon";
 import OptionsToggle from "./OptionsToggle/OptionsToggle";
 import { userUserUpdate } from "../../../../context/UserContext/updateContext";
 import ErrorDialog from "../../../ErrorDialog/ErrorDialog";
+import AuthOptions from "../AuthOptions/AuthOptions";
 const MobileOptions = () => {
   const [open, setOpen] = useState(false);
-  const { showSignUp, showLogIn } = useDialogUpdate();
   const { user } = useUser();
   const { logout } = userUserUpdate();
   const { showDialog } = useDialogUpdate();
@@ -27,22 +27,23 @@ const MobileOptions = () => {
   return (
     <>
       <OptionsToggle open={open} toggle={toggle} />
-      <div className={s.dropMenu}>
-        {user && (
-          <button className={s.user}>
-            <UserIcon color="#d3d3d3" width="25px" />
-            <span className={s.name}>{user?.name}</span>
-          </button>
-        )}
-        <FavButton icon={false} />
-        {!user && (
-          <>
-            <button onClick={() => showSignUp()}>Sign Up</button>
-            <button onClick={() => showLogIn()}>Log In</button>
-          </>
-        )}
-        {user && <button onClick={onLogout}>Log out</button>}
-      </div>
+      {open && (
+        <div className={s.dropMenu}>
+          {user && (
+            <button className={s.user}>
+              <UserIcon color="#d3d3d3" width="25px" />
+              <span className={s.name}>{user.name}</span>
+            </button>
+          )}
+          <FavButton />
+          {!user && <AuthOptions />}
+          {user && (
+            <button onClick={onLogout} className={s.button}>
+              Log out
+            </button>
+          )}
+        </div>
+      )}
     </>
   );
 };
