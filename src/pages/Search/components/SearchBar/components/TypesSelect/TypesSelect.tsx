@@ -1,9 +1,8 @@
 import Select from "../../../Select/Select";
-import { PetType } from "../../../../utils/IPetType";
 import { usePetTypes } from "../../../../context/PetTypesContext/context";
 const TypesSelect = ({ closeOverlay }: { closeOverlay?: () => void }) => {
   const { types } = usePetTypes();
-  const names = types?.map((type: PetType) => type.name) || null;
+  const names = types?.map((type) => type.name) || null;
   return (
     <>
       {names && (

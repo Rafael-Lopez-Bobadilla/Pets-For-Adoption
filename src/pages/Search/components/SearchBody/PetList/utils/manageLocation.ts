@@ -1,6 +1,6 @@
-import { Location } from "../../../../utils/ILocation";
+import { TLocation } from "../../../../context/LocationContext/context";
 export const manageLocation = (
-  location: Location | null,
+  location: TLocation | null,
   params: URLSearchParams
 ) => {
   if (location) {

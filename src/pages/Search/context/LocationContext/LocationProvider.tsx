@@ -1,42 +1,34 @@
 import { LocationContext } from "./context";
-import { useFetch } from "../../../../useFetch";
 import { getLocationById } from "../../../../services/placesService/placesService";
 import { useSearchParams } from "react-router-dom";
-import { TGeocodingResponse } from "./context";
 import { extractLocation } from "./extractLocation";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 const LocationProvider = ({ children }: { children: React.ReactNode }) => {
   const [params, setParams] = useSearchParams();
-  const id = params.get("location");
+  const idParam = params.get("location");
   const getLocationInfo = () => {
-    if (!id) return null;
-    return getLocationById(id);
-  };
-  const updateLocation = (data: TGeocodingResponse | null) => {
-    setData(data);
-  };
-  const changeLocation = async (id: string) => {
+    if (!idParam) return null;
     try {
-      const data = await getLocationById(id);
-      updateLocation(data);
+      return getLocationById(idParam);
     } catch (err) {
-      params.delete("location");
-      setParams(new URLSearchParams(params));
+      throw new Error("Invalid Location");
     }
   };
-  const { data, loading, error, setData } =
-    useFetch<TGeocodingResponse>(getLocationInfo);
+  const { data, isPending, error } = useQuery({
+    queryKey: ["location", idParam],
+    queryFn: () => getLocationInfo(),
+  });
   useEffect(() => {
-    if (id && (!location || id !== location.id)) {
-      changeLocation(id);
+    if (error) {
+      const newParams = new URLSearchParams(params);
+      newParams.delete("location");
+      setParams(newParams);
     }
-    if (!id && location) updateLocation(null);
-  }, [params]);
+  }, [error]);
   const location = extractLocation(data);
   return (
-    <LocationContext.Provider
-      value={{ location, loading, error, updateLocation }}
-    >
+    <LocationContext.Provider value={{ location, loading: isPending, error }}>
       {children}
     </LocationContext.Provider>
   );

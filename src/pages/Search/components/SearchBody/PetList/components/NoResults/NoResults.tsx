@@ -1,15 +1,24 @@
 import s from "./NoResults.module.css";
 import { useSearchParams } from "react-router-dom";
-import { clearFilters, clearLocation } from "../../utils/clearingEvents";
 import { useLocation } from "../../../../../context/LocationContext/context";
 const NoResults = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { location, updateLocation } = useLocation();
+  const [params, setParams] = useSearchParams();
+  const { location } = useLocation();
+  const clearLocation = () => {
+    params.delete("location");
+    params.set("page", "1");
+    setParams(new URLSearchParams(params));
+  };
+  const clearFilters = () => {
+    const newParams = new URLSearchParams(params);
+    newParams.delete("breed");
+    newParams.delete("color");
+    newParams.delete("coat");
+    newParams.delete("gender");
+    setParams(newParams);
+  };
   const filtersExists = () => {
-    if (
-      searchParams.size > 3 ||
-      (searchParams.size > 2 && !searchParams.has("location"))
-    ) {
+    if (params.size > 3 || (params.size > 2 && !params.has("location"))) {
       return true;
     } else {
       return false;
@@ -23,18 +32,12 @@ const NoResults = () => {
           <span>
             {" "}
             looking for pets{" "}
-            <a onClick={() => clearLocation(updateLocation, setSearchParams)}>
-              Anywhere in North America
-            </a>
+            <a onClick={clearLocation}>Anywhere in North America</a>
           </span>
           {filtersExists() && " or "}
         </>
       )}
-      {filtersExists() && (
-        <a onClick={() => clearFilters(searchParams, setSearchParams)}>
-          Clearing the filters
-        </a>
-      )}
+      {filtersExists() && <a onClick={clearFilters}>Clearing the filters</a>}
     </h2>
   );
 };

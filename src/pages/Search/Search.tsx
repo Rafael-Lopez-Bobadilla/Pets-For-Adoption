@@ -7,19 +7,19 @@ import PetTypesProvider from "./context/PetTypesContext/PetTypesProvider";
 const Search = () => {
   return (
     <PetTypesProvider>
-      <div className={s.search}>
-        <LocationProvider>
+      <LocationProvider>
+        <div className={s.search}>
           <SearchBar />
           <div className={s.wrapper}>
             <div className={s.filters}>
               <Filters />
             </div>
-            <div className={s.body}>
+            <main>
               <SearchBody />
-            </div>
+            </main>
           </div>
-        </LocationProvider>
-      </div>
+        </div>
+      </LocationProvider>
     </PetTypesProvider>
   );
 };

@@ -1,7 +1,8 @@
 import { usePetfinderToken } from "../../../../context/TokenContext/context";
 import { getPetTypes } from "../../../../services/petfinderService/petfinderService";
 import { useFetch } from "../../../../useFetch";
-import { PetTypesContext, TPetTypesResponse } from "./context";
+import { PetTypesContext } from "./context";
+import { TPetTypesResponse } from "../../../../services/petfinderService/schemas/TypesSchema";
 
 const PetTypesProvider = ({ children }: { children: React.ReactNode }) => {
   const { token } = usePetfinderToken();

@@ -3,9 +3,8 @@ import { TypesSchema } from "./schemas/TypesSchema";
 import { BreedsSchema } from "./schemas/BreedsSchema";
 import { TokenSchema } from "./schemas/TokenSchema";
 import { PetsSchema } from "./schemas/PetsSchema";
-const baseURL = "https://api.petfinder.com";
 const petfinderClient = axios.create({
-  baseURL,
+  baseURL: "https://api.petfinder.com",
 });
 export const getToken = async () => {
   const res = await petfinderClient.post(

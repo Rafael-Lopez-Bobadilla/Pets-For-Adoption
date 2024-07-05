@@ -1,9 +1,6 @@
 import { createContext, useContext } from "react";
-import { z } from "zod";
-import { TypesSchema } from "../../../../services/petfinderService/schemas/TypesSchema";
+import { TPetTypes } from "../../../../services/petfinderService/schemas/TypesSchema";
 
-export type TPetTypesResponse = z.infer<typeof TypesSchema>;
-type TPetTypes = z.infer<typeof TypesSchema.shape.types>;
 type TPetTypesContext = {
   types: TPetTypes | null;
   loading: boolean;

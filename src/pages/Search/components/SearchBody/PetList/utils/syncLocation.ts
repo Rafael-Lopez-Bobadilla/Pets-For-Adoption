@@ -1,8 +1,8 @@
-import { Location } from "../../../../utils/ILocation";
+import { TLocation } from "../../../../context/LocationContext/context";
 
 export const isLocationSync = (
   params: URLSearchParams,
-  location: Location | null
+  location: TLocation | null
 ) => {
   if (
     params.has("location") &&

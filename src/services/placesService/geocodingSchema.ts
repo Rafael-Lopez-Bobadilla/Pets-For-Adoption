@@ -44,3 +44,5 @@ export const GeocodingResponseSchema = z.object({
   results: z.array(resultSchema),
   status: z.string(),
 });
+
+export type TGeocodingResponse = z.infer<typeof GeocodingResponseSchema>;

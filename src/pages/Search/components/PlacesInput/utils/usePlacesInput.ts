@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Place } from "./IPlace";
-import { loadLibrary } from "../../../utils/loadLibrary";
+import { loadLibrary } from "./loadLibrary";
 import { getPredictions } from "./getPredictions";
 import { useSearchParams } from "react-router-dom";
 import { useLocation } from "../../../context/LocationContext/context";
-import { getLocationById } from "../../../../../services/placesService/placesService";
 type service = google.maps.places.AutocompleteService;
 const usePlacesInput = (closeOverlay?: () => void) => {
   const service = useRef<service>(null);
@@ -15,7 +14,7 @@ const usePlacesInput = (closeOverlay?: () => void) => {
   const [params, setParams] = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const timeoutID = useRef<any>(null);
-  const { location, updateLocation } = useLocation();
+  const { location } = useLocation();
   useEffect(() => {
     loadLibrary(service);
   }, []);
@@ -55,15 +54,12 @@ const usePlacesInput = (closeOverlay?: () => void) => {
     inputRef.current?.blur();
     if (id === "Any") {
       setValue("");
-      updateLocation(null);
       newParams.delete("location");
       newParams.set("page", "1");
       setParams(newParams);
       return;
     }
     setValue(value);
-    const data = await getLocationById(id);
-    updateLocation(data);
     newParams.set("location", id);
     newParams.set("page", "1");
     setParams(newParams);

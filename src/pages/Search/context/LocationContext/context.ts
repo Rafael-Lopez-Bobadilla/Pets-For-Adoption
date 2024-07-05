@@ -1,16 +1,14 @@
 import { createContext, useContext } from "react";
-import { z } from "zod";
-import { GeocodingResponseSchema } from "../../../../services/placesService/geocodingSchema";
-export type TGeocodingResponse = z.infer<typeof GeocodingResponseSchema>;
+
+export type TLocation = {
+  address: string;
+  coords: string;
+  id: string;
+};
 type TLocationContext = {
-  location: {
-    address: string;
-    coords: string;
-    id: string;
-  } | null;
+  location: TLocation | null;
   loading: boolean;
-  error: boolean;
-  updateLocation: (data: TGeocodingResponse | null) => void;
+  error: Error | null;
 };
 export const LocationContext = createContext<TLocationContext | null>(null);
 
