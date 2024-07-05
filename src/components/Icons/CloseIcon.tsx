@@ -2,7 +2,7 @@ type Props = {
   color: "white" | "black";
   width: string;
 };
-const Close = ({ color, width }: Props) => {
+const CloseIcon = ({ color, width }: Props) => {
   return (
     <svg
       width={width}
@@ -25,4 +25,4 @@ const Close = ({ color, width }: Props) => {
   );
 };
 
-export default Close;
+export default CloseIcon;

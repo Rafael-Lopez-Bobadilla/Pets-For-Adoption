@@ -9,7 +9,7 @@ import { TokenProvider } from "./context/TokenContext/TokenProvider";
 import { Navigate } from "react-router-dom";
 import DialogProvider from "./context/DialogContext/DialogProvider";
 import UserProvider from "./context/UserContext/UserProvider";
-import Dialog from "./components/Dialog/Dialog";
+import DialogWrapper from "./components/Dialogs/DialogWrapper/DialogWrapper";
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
                 </Routes>
               </Suspense>
             </TokenProvider>
-            <Dialog />
+            <DialogWrapper />
           </DialogProvider>
         </UserProvider>
       </Router>

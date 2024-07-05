@@ -1,8 +1,7 @@
 .noFav {
-  padding: 40px 40px;
+  padding: 40px;
   font-family: "Inter";
   text-align: center;
-  max-width: 300px;
 }
 
 .noFav > h3 {
@@ -13,6 +12,7 @@
 .noFav > p {
   font-size: 18px;
   line-height: 1.5;
+  max-width: 250px;
 }
 
 .noFav > p > div {

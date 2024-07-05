@@ -4,9 +4,9 @@ import GoogleButton from "./GoogleButton/GoogleButton";
 import {
   useDialog,
   useDialogUpdate,
-} from "../../context/DialogContext/context";
-import s from "./Dialog.module.css";
-const Dialog = () => {
+} from "../../../context/DialogContext/context";
+import s from "./DialogWrapper.module.css";
+const DialogWrapper = () => {
   const { open, title, content } = useDialog();
   const { closeDialog } = useDialogUpdate();
   const isAuthDialog = title === "Sign Up" || title === "Log In";
@@ -33,4 +33,4 @@ const Dialog = () => {
   );
 };
 
-export default Dialog;
+export default DialogWrapper;

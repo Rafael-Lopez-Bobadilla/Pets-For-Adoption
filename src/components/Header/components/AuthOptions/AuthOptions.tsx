@@ -1,5 +1,5 @@
 import { useDialogUpdate } from "../../../../context/DialogContext/context";
-import s from "./AuthOption.module.css";
+import s from "../button.module.css";
 const AuthOptions = () => {
   const { showLogIn, showSignUp } = useDialogUpdate();
   return (

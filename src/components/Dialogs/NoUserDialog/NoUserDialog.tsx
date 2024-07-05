@@ -1,5 +1,5 @@
 import s from "./NoUserDialog.module.css";
-import { useDialogUpdate } from "../../context/DialogContext/context";
+import { useDialogUpdate } from "../../../context/DialogContext/context";
 
 const NoUserDialog = () => {
   const { showSignUp, showLogIn } = useDialogUpdate();

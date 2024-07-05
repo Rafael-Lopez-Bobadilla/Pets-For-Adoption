@@ -1,17 +1,15 @@
 .user {
   position: relative;
 }
-.name {
+
+button.name {
   display: flex;
   align-items: center;
-  background-color: transparent;
-  cursor: pointer;
-  color: white;
-  font-family: "Inter";
-  font-size: 16px;
   border: 1px solid white;
-  border-radius: 5px;
   padding: 5px 10px;
+  &:hover {
+    transform: none;
+  }
 }
 
 .arrow {
@@ -27,23 +25,24 @@
   margin-left: 3px;
 }
 
-.logout {
+button.logout {
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
-  border-radius: 5px;
   background-color: var(--green);
-  border: none;
-  color: white;
-  font-size: 16px;
   padding: 5px 0;
   text-align: center;
   width: 100%;
-  cursor: pointer;
   z-index: 5;
   font-weight: bold;
 
   &:hover {
     background-color: rgb(61, 99, 61);
+    transform: none;
   }
+}
+
+.name,
+.logout {
+  border-radius: 8px;
 }

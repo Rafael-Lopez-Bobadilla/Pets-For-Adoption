@@ -1,6 +1,6 @@
 import { ReactNode, useCallback, useMemo, useState } from "react";
-import LogIn from "../../components/AuthForm/LogIn/LogIn";
-import SignUp from "../../components/AuthForm/SignUp/SignUp";
+import LogIn from "../../components/Dialogs/AuthForms/LogIn/LogIn";
+import SignUp from "../../components/Dialogs/AuthForms/SignUp/SignUp";
 import { DialogContext, UpdateDialogContext } from "./context";
 
 const DialogProvider = ({ children }: { children: ReactNode }) => {

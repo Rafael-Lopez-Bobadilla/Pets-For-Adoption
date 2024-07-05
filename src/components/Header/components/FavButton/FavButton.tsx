@@ -1,27 +1,28 @@
 import s from "./FavButton.module.css";
 import { useUser } from "../../../../context/UserContext/context";
 import { useDialogUpdate } from "../../../../context/DialogContext/context";
-import NoFavoritesDialog from "./NoFavoritesDialog/NoFavoritesDialog";
-import { useNavigate } from "react-router-dom";
-import NoUserDialog from "../../../NoUserDialog/NoUserDialog";
+import NoFavoritesDialog from "../../../Dialogs/NoFavoritesDialog/NoFavoritesDialog";
+import { Link } from "react-router-dom";
+import NoUserDialog from "../../../Dialogs/NoUserDialog/NoUserDialog";
 import HeartIcon from "../../../Icons/HeartIcon";
 const FavButton = () => {
-  const navigate = useNavigate();
   const { user } = useUser();
   const { showDialog } = useDialogUpdate();
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
     if (!user) showDialog("", <NoUserDialog />);
     if (user && user.favorites.length === 0)
       showDialog("", <NoFavoritesDialog />);
-    if (user && user.favorites.length > 0) navigate("/favorites");
+    if (!user || user.favorites.length === 0) e.preventDefault();
   };
   return (
-    <>
-      <button className={s.button} onClick={handleClick}>
-        <HeartIcon width="28px" color="white" border="transparent" />
+    <Link to="/favorites">
+      <div className={s.button} onClick={handleClick}>
+        <div className={s.icon}>
+          <HeartIcon width="28px" color="white" border="transparent" />
+        </div>
         <span>Favorites</span>
-      </button>
-    </>
+      </div>
+    </Link>
   );
 };
 

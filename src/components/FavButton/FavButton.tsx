@@ -4,7 +4,7 @@ import { useUser } from "../../context/UserContext/context";
 import { userUserUpdate } from "../../context/UserContext/updateContext";
 import s from "./FavButton.module.css";
 import { Tooltip } from "@mui/material";
-import NoUserDialog from "../NoUserDialog/NoUserDialog";
+import NoUserDialog from "../Dialogs/NoUserDialog/NoUserDialog";
 import { useDialogUpdate } from "../../context/DialogContext/context";
 type Props = {
   id: number;

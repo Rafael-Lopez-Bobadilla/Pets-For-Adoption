@@ -3,14 +3,15 @@ import { useForm } from "react-hook-form";
 import {
   logInSchema,
   TLogInSchema,
-} from "../../../services/userService/schemas";
+} from "../../../../services/userService/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userUserUpdate } from "../../../context/UserContext/updateContext";
-import { handleError } from "./handleError";
-import { useDialogUpdate } from "../../../context/DialogContext/context";
+import { userUserUpdate } from "../../../../context/UserContext/updateContext";
+import { getError } from "./getError";
+import { useDialogUpdate } from "../../../../context/DialogContext/context";
+import ErrorDialog from "../../ErrorDialog/ErrorDialog";
 
 const LogIn = () => {
-  const { showSignUp, closeDialog } = useDialogUpdate();
+  const { showSignUp, closeDialog, showDialog } = useDialogUpdate();
   const { login } = userUserUpdate();
   const {
     register,
@@ -20,15 +21,15 @@ const LogIn = () => {
   } = useForm<TLogInSchema>({
     resolver: zodResolver(logInSchema),
   });
-  const createError = (key: "email" | "password", message: string) => {
-    setError(key, { message });
-  };
   const onSubmit = async (formData: TLogInSchema) => {
     try {
       await login(formData);
       closeDialog();
     } catch (err) {
-      handleError(err, createError);
+      const authError = getError(err);
+      if (!authError)
+        showDialog("", <ErrorDialog message="Unsuccessful Login" />);
+      if (authError) setError(authError.key, { message: authError.message });
     }
   };
   return (

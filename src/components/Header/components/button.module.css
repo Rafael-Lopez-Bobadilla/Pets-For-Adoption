@@ -4,14 +4,8 @@
   cursor: pointer;
   color: white;
   font-family: "Inter";
-}
-
-.button > img {
-  width: 30px;
-}
-
-@media (min-width: 768px) {
-  .button {
-    display: none;
+  font-size: 16px;
+  &:hover {
+    transform: scale(1.05);
   }
 }

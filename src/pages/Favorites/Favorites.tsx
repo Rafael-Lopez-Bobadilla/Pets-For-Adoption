@@ -8,18 +8,18 @@ import PetCard from "../Search/components/SearchBody/PetList/components/PetCard/
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 const Favorites = () => {
-  const { user, error } = useUser();
+  const { user, loading } = useUser();
   const { token } = usePetfinderToken();
   const [favorites, setFavorites] = useState<Pet[]>([]);
   const navigate = useNavigate();
-  if (error || user?.favorites.length === 0) navigate("/");
   useEffect(() => {
+    if ((!loading && !user) || user?.favorites.length === 0) navigate("/");
     if (token && user && favorites.length === 0) {
       user.favorites.forEach((id) => {
         getPet(id, token, setFavorites);
       });
     }
-  }, [token, user]);
+  }, [token, user, loading]);
   return (
     <div className={s.wrapper}>
       {user && <h1>{`My Favorites (${user?.favorites.length})`}</h1>}

@@ -1,6 +1,6 @@
 import s from "./NoFavoritesDialog.module.css";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import { useDialogUpdate } from "../../../../../context/DialogContext/context";
+import { useDialogUpdate } from "../../../context/DialogContext/context";
+import HeartIcon from "../../Icons/HeartIcon";
 const NoFavoritesDialog = () => {
   const { closeDialog } = useDialogUpdate();
   return (
@@ -11,10 +11,7 @@ const NoFavoritesDialog = () => {
           "When you find a pet you like, add it your favorites list by tapping the "
         }
         <div>
-          <FavoriteBorderOutlinedIcon
-            fontSize="medium"
-            sx={{ color: "#267C5B" }}
-          />
+          <HeartIcon width="25px" color="transparent" border="#267C5B" />
         </div>
       </p>
       <button onClick={closeDialog}>OK</button>

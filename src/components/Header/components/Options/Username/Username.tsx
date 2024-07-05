@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { userUserUpdate } from "../../../../../context/UserContext/updateContext";
 import s from "./Username.module.css";
+import bs from "../../button.module.css";
 import arrow from "../../../../../assets/svgs/triangleDown.svg";
 import { useDialogUpdate } from "../../../../../context/DialogContext/context";
-import ErrorDialog from "../../../../ErrorDialog/ErrorDialog";
+import ErrorDialog from "../../../../Dialogs/ErrorDialog/ErrorDialog";
 import UserIcon from "../../../../Icons/UserIcon";
 const Username = ({ name }: { name: string | null }) => {
   const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ const Username = ({ name }: { name: string | null }) => {
   return (
     <div className={s.user}>
       <button
-        className={s.name}
+        className={`${bs.button} ${s.name}`}
         onClick={() => setOpen(!open)}
         onBlur={() => setOpen(false)}
       >
@@ -32,7 +33,7 @@ const Username = ({ name }: { name: string | null }) => {
         <button
           onClick={onLogout}
           onMouseDown={(e) => e.preventDefault()}
-          className={s.logout}
+          className={`${s.logout} ${bs.button}`}
         >
           Log out
         </button>
