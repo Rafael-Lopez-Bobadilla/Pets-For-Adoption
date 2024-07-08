@@ -1,4 +1,4 @@
-import { TGeocodingResponse } from "../../../../services/placesService/geocodingSchema";
+import { TGeocodingResponse } from "../../../../services/placesService/schemas/geocodingSchema";
 export const extractLocation = (
   data: TGeocodingResponse | undefined | null
 ) => {

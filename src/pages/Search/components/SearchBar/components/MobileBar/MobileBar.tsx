@@ -10,7 +10,7 @@ const MobileBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const closeOverlay = () => setIsOpen(false);
   useEffect(() => {
-    if (isOpen) closeOverlay;
+    if (isOpen) closeOverlay();
   }, [params]);
   const type = () => {
     const paramsType = params.get("type");

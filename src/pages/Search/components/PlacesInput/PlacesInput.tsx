@@ -1,24 +1,23 @@
 import s from "./PlacesInput.module.css";
-import usePlacesInput from "./utils/usePlacesInput";
+import usePlacesInput from "./hooks/usePlacesInput";
+import { useState } from "react";
 const PlacesInput = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const {
     value,
-    places,
-    isOpen,
+    options,
     selected,
-    setIsOpen,
     handleInput,
     handleKey,
     handleChange,
     inputRef,
-    handleBlur,
   } = usePlacesInput();
   return (
     <div className={s.places}>
       <input
         onInput={handleInput}
         onKeyDown={handleKey}
-        onBlur={handleBlur}
+        onBlur={() => setIsOpen(false)}
         onFocus={() => setIsOpen(true)}
         value={value}
         ref={inputRef}
@@ -28,7 +27,7 @@ const PlacesInput = () => {
       />
       {isOpen && (
         <div className={s.options}>
-          {places.map((place, index) => (
+          {options.map((place, index) => (
             <div
               key={place.place_id}
               className={selected === index ? s.selected : ""}
