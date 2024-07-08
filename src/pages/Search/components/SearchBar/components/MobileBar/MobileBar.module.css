@@ -1,0 +1,24 @@
+.message {
+  padding-right: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Inter";
+}
+
+.wrapper > img {
+  width: 30px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    display: none;
+  }
+}

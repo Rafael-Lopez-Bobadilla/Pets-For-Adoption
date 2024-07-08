@@ -1,22 +1,22 @@
 .overlay {
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   min-height: 100vh;
-  position: fixed;
   z-index: 3;
   padding: 80px 0;
   background-color: #f1f1f1;
   font-size: 18px;
 }
 
-.overlay>div {
+.overlay > div {
   margin: 0 auto;
   max-width: 300px;
   margin-bottom: 50px;
 }
 
-.overlay>div>span {
+.overlay > div > span {
   font-weight: bold;
   width: 100%;
   text-align: center;
@@ -24,13 +24,12 @@
   margin-bottom: 15px;
 }
 
-.overlay>div>span>p {
+.overlay > div > span > p {
   font-weight: normal;
   font-size: 14px;
 }
 
-.overlay>img {
-  width: 25px;
+.icon {
   position: fixed;
   z-index: 2;
   top: 15px;

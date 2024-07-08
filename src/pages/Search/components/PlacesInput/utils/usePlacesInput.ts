@@ -5,7 +5,7 @@ import { getPredictions } from "./getPredictions";
 import { useSearchParams } from "react-router-dom";
 import { useLocation } from "../../../context/LocationContext/context";
 type service = google.maps.places.AutocompleteService;
-const usePlacesInput = (closeOverlay?: () => void) => {
+const usePlacesInput = () => {
   const service = useRef<service>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [places, setPlaces] = useState<Place[] | []>([]);
@@ -49,7 +49,6 @@ const usePlacesInput = (closeOverlay?: () => void) => {
   const handleChange = async (value: string, id: string) => {
     let newParams = new URLSearchParams(params);
     setIsOpen(false);
-    if (closeOverlay !== undefined) closeOverlay();
     setPlaces([]);
     inputRef.current?.blur();
     if (id === "Any") {

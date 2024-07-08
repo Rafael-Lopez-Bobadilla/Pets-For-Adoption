@@ -1,24 +1,22 @@
-import s from './SearchBar.module.css'
-import pencil from '../../../../assets/svgs/pencil.svg'
-import { useState } from 'react'
-import OverlaySearch from './components/OverlaySearch/OverlaySearch'
-import Message from './components/Message/Message'
-import Controllers from './components/Controllers/Controllers'
-const SearchBar = () => {
-  const [isOpen, setIsOpen] = useState(false)
+import s from "./SearchBar.module.css";
+import TypesSelect from "./components/TypesSelect/TypesSelect";
+import PlacesInput from "../PlacesInput/PlacesInput";
+import MobileBar from "./components/MobileBar/MobileBar";
 
+const SearchBar = () => {
   return (
     <div className={s.bar}>
       <div className={s.wrapper}>
-        <Message />
-        <img src={pencil} onClick={() => setIsOpen(true)} />
-        <Controllers />
-        {isOpen &&
-          <OverlaySearch setIsOpen={setIsOpen} />
-        }
+        <MobileBar />
+        <div className={s.select}>
+          <TypesSelect />
+        </div>
+        <div className={s.input}>
+          <PlacesInput />
+        </div>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default SearchBar
+export default SearchBar;

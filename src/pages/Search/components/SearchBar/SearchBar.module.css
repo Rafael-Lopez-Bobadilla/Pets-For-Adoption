@@ -11,21 +11,22 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   font-family: "Inter";
 }
 
-.wrapper > img {
-  width: 30px;
+.select {
+  width: var(--select-width);
+  margin-right: 50px;
+}
+
+.select,
+.input {
+  display: none;
 }
 
 @media (min-width: 768px) {
-  .wrapper {
-    justify-content: left;
-  }
-
-  .wrapper > span,
-  .wrapper > img {
-    display: none;
+  .select,
+  .input {
+    display: block;
   }
 }

@@ -6,10 +6,9 @@ import { getBreeds } from "../../../../../services/petfinderService/petfinderSer
 import { usePetfinderToken } from "../../../../../context/TokenContext/context";
 type TSelected = z.infer<typeof SelectedTypeSchema>;
 type Props = {
-  closeOverlay?: () => void;
   selected: TSelected | null;
 };
-const BreedsFilter = ({ closeOverlay, selected }: Props) => {
+const BreedsFilter = ({ selected }: Props) => {
   const { token } = usePetfinderToken();
   const getData = () => {
     if (!selected || !token) throw new Error("token or selected not ready");
@@ -23,13 +22,7 @@ const BreedsFilter = ({ closeOverlay, selected }: Props) => {
   return (
     <>
       <span>Breeds</span>
-      {breeds && (
-        <Autocomplete
-          options={["Any", ...breeds]}
-          field="breed"
-          closeOverlay={closeOverlay}
-        />
-      )}
+      {breeds && <Autocomplete options={["Any", ...breeds]} field="breed" />}
     </>
   );
 };
