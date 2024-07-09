@@ -9,7 +9,12 @@ import {
 import { userUserUpdate } from "../../../../context/UserContext/updateContext";
 import { AxiosError } from "axios";
 import ErrorDialog from "../../ErrorDialog/ErrorDialog";
+import { useState } from "react";
+import { Alert, Backdrop, CircularProgress, Snackbar } from "@mui/material";
+import { createPortal } from "react-dom";
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const { showLogIn, closeDialog, showDialog } = useDialogUpdate();
   const { signup } = userUserUpdate();
   const {
@@ -22,7 +27,9 @@ const SignUp = () => {
   });
   const onSubmit = async (data: TSignUpSchema) => {
     try {
+      setLoading(true);
       await signup(data);
+      setOpen(true);
       closeDialog();
     } catch (err) {
       if (err instanceof AxiosError && err.response?.status === 400) {
@@ -31,10 +38,13 @@ const SignUp = () => {
         return;
       }
       showDialog("", <ErrorDialog message="Unsuccessful Sign Up" />);
+    } finally {
+      setLoading(false);
     }
   };
   return (
     <>
+      <div onClick={() => setOpen(true)}>Open Snackbar</div>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <label>Username</label>
         <input {...register("name")} />
@@ -56,6 +66,23 @@ const SignUp = () => {
           Log in
         </span>
       </p>
+      <Backdrop open={loading}>
+        <div className={s.loading}>
+          <CircularProgress color="inherit" />
+        </div>
+      </Backdrop>
+      {createPortal(
+        <Snackbar
+          open={open}
+          autoHideDuration={6000}
+          onClose={() => setOpen(false)}
+        >
+          <Alert severity="success" variant="filled" sx={{ width: "100%" }}>
+            Sign Up Successful!
+          </Alert>
+        </Snackbar>,
+        document.body
+      )}
     </>
   );
 };

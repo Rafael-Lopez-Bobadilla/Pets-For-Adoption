@@ -9,9 +9,12 @@ import { userUserUpdate } from "../../../../context/UserContext/updateContext";
 import { getError } from "./getError";
 import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import ErrorDialog from "../../ErrorDialog/ErrorDialog";
+import { Backdrop, CircularProgress } from "@mui/material";
+import { useState } from "react";
 
 const LogIn = () => {
   const { showSignUp, closeDialog, showDialog } = useDialogUpdate();
+  const [Loading, setLoading] = useState(false);
   const { login } = userUserUpdate();
   const {
     register,
@@ -23,6 +26,7 @@ const LogIn = () => {
   });
   const onSubmit = async (formData: TLogInSchema) => {
     try {
+      setLoading(true);
       await login(formData);
       closeDialog();
     } catch (err) {
@@ -30,6 +34,8 @@ const LogIn = () => {
       if (!authError)
         showDialog("", <ErrorDialog message="Unsuccessful Login" />);
       if (authError) setError(authError.key, { message: authError.message });
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -49,6 +55,9 @@ const LogIn = () => {
           Create one
         </span>
       </p>
+      <Backdrop open={Loading}>
+        <CircularProgress />
+      </Backdrop>
     </>
   );
 };

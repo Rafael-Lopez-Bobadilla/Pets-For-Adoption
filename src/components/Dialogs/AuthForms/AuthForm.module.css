@@ -43,3 +43,7 @@
 .alt {
   text-align: center;
 }
+
+.loading {
+  color: var(--green);
+}

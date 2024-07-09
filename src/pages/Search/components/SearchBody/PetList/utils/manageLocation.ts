@@ -11,5 +11,6 @@ export const manageLocation = (
   }
   params.set("distance", "500");
   params.set("sort", "distance");
+  params.set("limit", "12");
   return params;
 };
