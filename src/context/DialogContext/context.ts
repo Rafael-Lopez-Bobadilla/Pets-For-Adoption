@@ -4,6 +4,7 @@ type TUpdateDialogContext = {
   closeDialog: () => void;
   showSignUp: () => void;
   showLogIn: () => void;
+  showError: (message: string) => void;
 };
 type TDialogContext = {
   open: boolean;

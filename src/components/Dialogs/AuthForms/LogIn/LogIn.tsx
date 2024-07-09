@@ -8,13 +8,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userUserUpdate } from "../../../../context/UserContext/updateContext";
 import { getError } from "./getError";
 import { useDialogUpdate } from "../../../../context/DialogContext/context";
-import ErrorDialog from "../../ErrorDialog/ErrorDialog";
 import { Backdrop, CircularProgress } from "@mui/material";
-import { useState } from "react";
-
+import { useSnackbar } from "../../../../context/SnackbarContext/context";
+import { useAsync } from "../../../../hooks/useAsync";
 const LogIn = () => {
-  const { showSignUp, closeDialog, showDialog } = useDialogUpdate();
-  const [Loading, setLoading] = useState(false);
+  const { showSignUp, closeDialog, showError } = useDialogUpdate();
+  const { showSnackbar } = useSnackbar();
   const { login } = userUserUpdate();
   const {
     register,
@@ -24,23 +23,23 @@ const LogIn = () => {
   } = useForm<TLogInSchema>({
     resolver: zodResolver(logInSchema),
   });
-  const onSubmit = async (formData: TLogInSchema) => {
-    try {
-      setLoading(true);
-      await login(formData);
-      closeDialog();
-    } catch (err) {
-      const authError = getError(err);
-      if (!authError)
-        showDialog("", <ErrorDialog message="Unsuccessful Login" />);
-      if (authError) setError(authError.key, { message: authError.message });
-    } finally {
-      setLoading(false);
-    }
+  const onError = (err: unknown) => {
+    const authError = getError(err);
+    if (!authError) showError("Unsuccessful Login");
+    if (authError) setError(authError.key, { message: authError.message });
   };
+  const onSuccess = () => {
+    closeDialog();
+    showSnackbar("Log In Successful");
+  };
+  const { loading, asyncCall } = useAsync({
+    asyncFunc: login,
+    onError,
+    onSuccess,
+  });
   return (
     <>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmit(asyncCall)}>
         <label>Email</label>
         <input {...register("email")} />
         {errors.email && <p>{`${errors.email.message}`}</p>}
@@ -55,7 +54,7 @@ const LogIn = () => {
           Create one
         </span>
       </p>
-      <Backdrop open={Loading}>
+      <Backdrop open={loading}>
         <CircularProgress />
       </Backdrop>
     </>

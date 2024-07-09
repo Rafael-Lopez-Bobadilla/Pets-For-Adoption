@@ -4,20 +4,24 @@ import s from "./Username.module.css";
 import bs from "../../button.module.css";
 import arrow from "../../../../../assets/svgs/triangleDown.svg";
 import { useDialogUpdate } from "../../../../../context/DialogContext/context";
-import ErrorDialog from "../../../../Dialogs/ErrorDialog/ErrorDialog";
 import UserIcon from "../../../../Icons/UserIcon";
+import { useAsync } from "../../../../../hooks/useAsync";
+import { useSnackbar } from "../../../../../context/SnackbarContext/context";
 const Username = ({ name }: { name: string | null }) => {
   const [open, setOpen] = useState(false);
   const { logout } = userUserUpdate();
-  const { showDialog } = useDialogUpdate();
-  const onLogout = async () => {
-    try {
-      await logout();
-      setOpen(false);
-    } catch (err) {
-      showDialog("", <ErrorDialog message="Unsuccessful Log out" />);
-    }
+  const { showError } = useDialogUpdate();
+  const { showSnackbar } = useSnackbar();
+  const onError = () => showError("Unsuccessful Log out");
+  const onSuccess = () => {
+    setOpen(false);
+    showSnackbar("Logout Successful");
   };
+  const { asyncCall } = useAsync({
+    asyncFunc: logout,
+    onError,
+    onSuccess,
+  });
   return (
     <div className={s.user}>
       <button
@@ -31,7 +35,7 @@ const Username = ({ name }: { name: string | null }) => {
       </button>
       {open && (
         <button
-          onClick={onLogout}
+          onClick={asyncCall}
           onMouseDown={(e) => e.preventDefault()}
           className={`${s.logout} ${bs.button}`}
         >

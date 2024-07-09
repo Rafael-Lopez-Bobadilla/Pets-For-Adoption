@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetch } from "../../../../../useFetch";
+import { useFetch } from "../../../../../hooks/useFetch";
 import { loadAutocompleteService } from "../../../../../services/placesService/placesService";
 import { getPredictions } from "../../../../../services/placesService/placesService";
 type service = google.maps.places.AutocompleteService;

@@ -8,14 +8,12 @@ import {
 } from "../../../../services/userService/schemas";
 import { userUserUpdate } from "../../../../context/UserContext/updateContext";
 import { AxiosError } from "axios";
-import ErrorDialog from "../../ErrorDialog/ErrorDialog";
-import { useState } from "react";
-import { Alert, Backdrop, CircularProgress, Snackbar } from "@mui/material";
-import { createPortal } from "react-dom";
+import { Backdrop, CircularProgress } from "@mui/material";
+import { useSnackbar } from "../../../../context/SnackbarContext/context";
+import { useAsync } from "../../../../hooks/useAsync";
 const SignUp = () => {
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const { showLogIn, closeDialog, showDialog } = useDialogUpdate();
+  const { showSnackbar } = useSnackbar();
+  const { showLogIn, closeDialog, showError } = useDialogUpdate();
   const { signup } = userUserUpdate();
   const {
     register,
@@ -25,27 +23,26 @@ const SignUp = () => {
   } = useForm<TSignUpSchema>({
     resolver: zodResolver(signUpSchema),
   });
-  const onSubmit = async (data: TSignUpSchema) => {
-    try {
-      setLoading(true);
-      await signup(data);
-      setOpen(true);
-      closeDialog();
-    } catch (err) {
-      if (err instanceof AxiosError && err.response?.status === 400) {
-        const message = "An account with this email already exists";
-        setError("email", { message });
-        return;
-      }
-      showDialog("", <ErrorDialog message="Unsuccessful Sign Up" />);
-    } finally {
-      setLoading(false);
-    }
+  const onSuccess = () => {
+    showSnackbar("Sign Up Successful!");
+    closeDialog();
   };
+  const onError = (err: unknown) => {
+    if (err instanceof AxiosError && err.response?.status === 400) {
+      const message = "An account with this email already exists";
+      setError("email", { message });
+      return;
+    }
+    showError("Unsuccessful Sign Up");
+  };
+  const { loading, asyncCall } = useAsync({
+    asyncFunc: signup,
+    onSuccess,
+    onError,
+  });
   return (
     <>
-      <div onClick={() => setOpen(true)}>Open Snackbar</div>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmit(asyncCall)}>
         <label>Username</label>
         <input {...register("name")} />
         {errors.name && <p>{`${errors.name.message}`}</p>}
@@ -67,22 +64,8 @@ const SignUp = () => {
         </span>
       </p>
       <Backdrop open={loading}>
-        <div className={s.loading}>
-          <CircularProgress color="inherit" />
-        </div>
+        <CircularProgress />
       </Backdrop>
-      {createPortal(
-        <Snackbar
-          open={open}
-          autoHideDuration={6000}
-          onClose={() => setOpen(false)}
-        >
-          <Alert severity="success" variant="filled" sx={{ width: "100%" }}>
-            Sign Up Successful!
-          </Alert>
-        </Snackbar>,
-        document.body
-      )}
     </>
   );
 };

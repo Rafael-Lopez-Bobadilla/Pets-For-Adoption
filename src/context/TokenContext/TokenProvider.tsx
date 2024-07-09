@@ -1,4 +1,4 @@
-import { useFetch } from "../../useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { getToken } from "../../services/petfinderService/petfinderService";
 import { TokenContext } from "./context";
 import { TokenSchema } from "../../services/petfinderService/schemas/TokenSchema";

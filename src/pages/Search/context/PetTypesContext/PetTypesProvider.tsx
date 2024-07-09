@@ -1,6 +1,6 @@
 import { usePetfinderToken } from "../../../../context/TokenContext/context";
 import { getPetTypes } from "../../../../services/petfinderService/petfinderService";
-import { useFetch } from "../../../../useFetch";
+import { useFetch } from "../../../../hooks/useFetch";
 import { PetTypesContext } from "./context";
 import { TPetTypesResponse } from "../../../../services/petfinderService/schemas/TypesSchema";
 

@@ -1,6 +1,6 @@
 import { userService } from "../../services/userService/userService";
 import { TUserSchema } from "../../services/userService/schemas";
-import { useFetch } from "../../useFetch";
+import { useFetch } from "../../hooks/useFetch";
 import { UserContext } from "./context";
 import { useCallback } from "react";
 import UserUpdateProvider from "./UserUpdateProvider";

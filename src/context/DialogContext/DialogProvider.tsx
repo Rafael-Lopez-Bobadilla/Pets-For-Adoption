@@ -2,6 +2,7 @@ import { ReactNode, useCallback, useMemo, useState } from "react";
 import LogIn from "../../components/Dialogs/AuthForms/LogIn/LogIn";
 import SignUp from "../../components/Dialogs/AuthForms/SignUp/SignUp";
 import { DialogContext, UpdateDialogContext } from "./context";
+import ErrorDialog from "../../components/Dialogs/ErrorDialog/ErrorDialog";
 
 const DialogProvider = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
@@ -21,8 +22,11 @@ const DialogProvider = ({ children }: { children: ReactNode }) => {
   const showLogIn = useCallback(() => {
     showDialog("Log In", <LogIn />);
   }, []);
+  const showError = useCallback((message: string) => {
+    showDialog("", <ErrorDialog message={message} />);
+  }, []);
   const updateContext = useMemo(() => {
-    return { showDialog, closeDialog, showLogIn, showSignUp };
+    return { showDialog, closeDialog, showLogIn, showSignUp, showError };
   }, []);
   return (
     <DialogContext.Provider value={{ open, title, content }}>

@@ -8,19 +8,18 @@ import UserIcon from "../../../Icons/UserIcon";
 import CloseIcon from "../../../Icons/CloseIcon";
 import menu from "../../../../assets/svgs/menu.svg";
 import { userUserUpdate } from "../../../../context/UserContext/updateContext";
-import ErrorDialog from "../../../Dialogs/ErrorDialog/ErrorDialog";
 import AuthOptions from "../AuthOptions/AuthOptions";
 const MobileOptions = () => {
   const [open, setOpen] = useState(false);
   const { user } = useUser();
   const { logout } = userUserUpdate();
-  const { showDialog } = useDialogUpdate();
+  const { showError } = useDialogUpdate();
   const onLogout = async () => {
     try {
       await logout();
       setOpen(false);
     } catch (err) {
-      showDialog("", <ErrorDialog message="Unsuccessful Log out" />);
+      showError("Unsuccessful Log out");
     }
   };
   return (
