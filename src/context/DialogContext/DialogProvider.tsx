@@ -14,6 +14,8 @@ const DialogProvider = ({ children }: { children: ReactNode }) => {
     setOpen(true);
   }, []);
   const closeDialog = useCallback(() => {
+    setContent(null);
+    setTitle("");
     setOpen(false);
   }, []);
   const showSignUp = useCallback(() => {

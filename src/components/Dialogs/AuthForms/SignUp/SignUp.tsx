@@ -59,9 +59,7 @@ const SignUp = () => {
       </form>
       <p className={s.alt}>
         {`Already have an account? `}
-        <span className={s.link} onClick={() => showLogIn()}>
-          Log in
-        </span>
+        <span onClick={() => showLogIn()}>Log in</span>
       </p>
       <Backdrop open={loading}>
         <CircularProgress />

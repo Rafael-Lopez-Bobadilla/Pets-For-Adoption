@@ -34,14 +34,14 @@
   cursor: pointer;
 }
 
-.link {
+.alt {
+  text-align: center;
+}
+
+.alt > span {
   color: var(--green);
   text-decoration: underline;
   cursor: pointer;
-}
-
-.alt {
-  text-align: center;
 }
 
 .loading {
