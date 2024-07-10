@@ -29,6 +29,6 @@ export const useLogIn = () => {
       handleError(err, setError, showError);
     }
   };
-  const onSubmit = () => handleSubmit(submit);
+  const onSubmit = handleSubmit(submit);
   return { isSubmitting, errors, register, onSubmit, showSignUp };
 };

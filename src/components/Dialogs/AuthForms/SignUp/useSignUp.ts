@@ -35,6 +35,6 @@ export const useSignUp = () => {
       showError("Unsuccessful Sign Up");
     }
   };
-  const onSubmit = () => handleSubmit(submit);
+  const onSubmit = handleSubmit(submit);
   return { isSubmitting, errors, register, onSubmit, showLogIn };
 };

@@ -44,6 +44,6 @@
   cursor: pointer;
 }
 
-.loading {
-  color: var(--green);
+.back {
+  color: white;
 }

@@ -24,8 +24,8 @@ const SignUp = () => {
         {`Already have an account? `}
         <span onClick={() => showLogIn()}>Log in</span>
       </p>
-      <Backdrop open={isSubmitting}>
-        <CircularProgress />
+      <Backdrop open={isSubmitting} className={s.back}>
+        <CircularProgress color="inherit" />
       </Backdrop>
     </>
   );
