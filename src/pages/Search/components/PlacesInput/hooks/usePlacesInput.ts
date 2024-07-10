@@ -16,9 +16,8 @@ const usePlacesInput = () => {
     if (text === "") {
       setDefaultOption();
       setSelected(0);
-    } else {
-      setPredictions(text);
     }
+    setPredictions(text);
     changeValue(text);
   };
 

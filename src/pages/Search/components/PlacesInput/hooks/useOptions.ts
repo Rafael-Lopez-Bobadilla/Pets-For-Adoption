@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useFetch } from "../../../../../hooks/useFetch";
 import { loadAutocompleteService } from "../../../../../services/placesService/placesService";
 import { getPredictions } from "../../../../../services/placesService/placesService";
@@ -9,6 +9,7 @@ type Place = {
 };
 export const useOptions = (ANY_ID: string) => {
   const [options, setOptions] = useState<Place[]>([]);
+  const timeoutID = useRef<NodeJS.Timeout | null>(null);
   const { data: service, error: loadError } = useFetch<service>(
     loadAutocompleteService
   );
@@ -20,9 +21,13 @@ export const useOptions = (ANY_ID: string) => {
     setOptions([defaultOption]);
   };
   const setPredictions = async (text: string) => {
-    if (service) {
-      const options = await getPredictions(service, text);
-      setOptions(options);
+    if (timeoutID.current) clearTimeout(timeoutID.current);
+    if (service && text !== "") {
+      timeoutID.current = setTimeout(async () => {
+        timeoutID.current = null;
+        const options = await getPredictions(service, text);
+        setOptions(options);
+      }, 250);
     }
   };
   const clearOptions = () => setOptions([]);
