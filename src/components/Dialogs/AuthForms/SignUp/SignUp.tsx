@@ -1,48 +1,11 @@
 import s from "../AuthForm.module.css";
-import { useForm } from "react-hook-form";
-import { useDialogUpdate } from "../../../../context/DialogContext/context";
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  signUpSchema,
-  TSignUpSchema,
-} from "../../../../services/userService/schemas";
-import { userUserUpdate } from "../../../../context/UserContext/updateContext";
-import { AxiosError } from "axios";
 import { Backdrop, CircularProgress } from "@mui/material";
-import { useSnackbar } from "../../../../context/SnackbarContext/context";
-import { useAsync } from "../../../../hooks/useAsync";
+import { useSignUp } from "./useSignUp";
 const SignUp = () => {
-  const { showSnackbar } = useSnackbar();
-  const { showLogIn, closeDialog, showError } = useDialogUpdate();
-  const { signup } = userUserUpdate();
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting, errors },
-    setError,
-  } = useForm<TSignUpSchema>({
-    resolver: zodResolver(signUpSchema),
-  });
-  const onSuccess = () => {
-    showSnackbar("Sign Up Successful!");
-    closeDialog();
-  };
-  const onError = (err: unknown) => {
-    if (err instanceof AxiosError && err.response?.status === 400) {
-      const message = "An account with this email already exists";
-      setError("email", { message });
-      return;
-    }
-    showError("Unsuccessful Sign Up");
-  };
-  const { loading, asyncCall } = useAsync({
-    asyncFunc: signup,
-    onSuccess,
-    onError,
-  });
+  const { onSubmit, register, isSubmitting, errors, showLogIn } = useSignUp();
   return (
     <>
-      <form className={s.form} onSubmit={handleSubmit(asyncCall)}>
+      <form className={s.form} onSubmit={onSubmit}>
         <label>Username</label>
         <input {...register("name")} />
         {errors.name && <p>{`${errors.name.message}`}</p>}
@@ -61,7 +24,7 @@ const SignUp = () => {
         {`Already have an account? `}
         <span onClick={() => showLogIn()}>Log in</span>
       </p>
-      <Backdrop open={loading}>
+      <Backdrop open={isSubmitting}>
         <CircularProgress />
       </Backdrop>
     </>

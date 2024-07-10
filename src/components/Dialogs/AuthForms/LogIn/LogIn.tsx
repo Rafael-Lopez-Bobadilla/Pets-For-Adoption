@@ -1,45 +1,11 @@
 import s from "../AuthForm.module.css";
-import { useForm } from "react-hook-form";
-import {
-  logInSchema,
-  TLogInSchema,
-} from "../../../../services/userService/schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { userUserUpdate } from "../../../../context/UserContext/updateContext";
-import { getError } from "./getError";
-import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import { Backdrop, CircularProgress } from "@mui/material";
-import { useSnackbar } from "../../../../context/SnackbarContext/context";
-import { useAsync } from "../../../../hooks/useAsync";
+import { useLogIn } from "./useLogIn";
 const LogIn = () => {
-  const { showSignUp, closeDialog, showError } = useDialogUpdate();
-  const { showSnackbar } = useSnackbar();
-  const { login } = userUserUpdate();
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting, errors },
-    setError,
-  } = useForm<TLogInSchema>({
-    resolver: zodResolver(logInSchema),
-  });
-  const onError = (err: unknown) => {
-    const authError = getError(err);
-    if (!authError) showError("Unsuccessful Login");
-    if (authError) setError(authError.key, { message: authError.message });
-  };
-  const onSuccess = () => {
-    closeDialog();
-    showSnackbar("Log In Successful");
-  };
-  const { loading, asyncCall } = useAsync({
-    asyncFunc: login,
-    onError,
-    onSuccess,
-  });
+  const { register, errors, onSubmit, isSubmitting, showSignUp } = useLogIn();
   return (
     <>
-      <form className={s.form} onSubmit={handleSubmit(asyncCall)}>
+      <form className={s.form} onSubmit={onSubmit}>
         <label>Email</label>
         <input {...register("email")} />
         {errors.email && <p>{`${errors.email.message}`}</p>}
@@ -52,7 +18,7 @@ const LogIn = () => {
         {`No account? `}
         <span onClick={() => showSignUp()}>Create one</span>
       </p>
-      <Backdrop open={loading}>
+      <Backdrop open={isSubmitting}>
         <CircularProgress />
       </Backdrop>
     </>

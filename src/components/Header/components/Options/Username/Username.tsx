@@ -5,23 +5,21 @@ import bs from "../../button.module.css";
 import arrow from "../../../../../assets/svgs/triangleDown.svg";
 import { useDialogUpdate } from "../../../../../context/DialogContext/context";
 import UserIcon from "../../../../Icons/UserIcon";
-import { useAsync } from "../../../../../hooks/useAsync";
 import { useSnackbar } from "../../../../../context/SnackbarContext/context";
 const Username = ({ name }: { name: string | null }) => {
   const [open, setOpen] = useState(false);
   const { logout } = userUserUpdate();
   const { showError } = useDialogUpdate();
   const { showSnackbar } = useSnackbar();
-  const onError = () => showError("Unsuccessful Log out");
-  const onSuccess = () => {
-    setOpen(false);
-    showSnackbar("Logout Successful");
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setOpen(false);
+      showSnackbar("Logout Successful");
+    } catch (err) {
+      showError("Unsuccessful Log out");
+    }
   };
-  const { asyncCall } = useAsync({
-    asyncFunc: logout,
-    onError,
-    onSuccess,
-  });
   return (
     <div className={s.user}>
       <button
@@ -35,7 +33,7 @@ const Username = ({ name }: { name: string | null }) => {
       </button>
       {open && (
         <button
-          onClick={asyncCall}
+          onClick={handleLogout}
           onMouseDown={(e) => e.preventDefault()}
           className={`${s.logout} ${bs.button}`}
         >
