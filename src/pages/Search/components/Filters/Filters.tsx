@@ -1,29 +1,23 @@
 import s from "./Filters.module.css";
 import Select from "../Select/Select";
 import BreedsFilter from "./BreedsFilter/BreedsFilter";
-import { usePetTypes } from "../../context/PetTypesContext/context";
+import { usePetTypes } from "../../../../context/PetTypesContext/context";
 import Autocomplete from "../Autocomplete/Autocomplete";
-import { useSearchParams } from "react-router-dom";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { CircularProgress } from "@mui/material";
 import LoadError from "../../../../components/LoadError/LoadError";
 import { filtersData } from "./filtersData";
+import { useValidParams } from "../../context/ValidParamsContext/context";
 const Filters = () => {
   const { types, loading, error, retry } = usePetTypes();
-  const [params, setParams] = useSearchParams();
+  const { params } = useValidParams();
   const selected = useMemo(
     () =>
       types?.find(
-        (type) => params.get("type")?.toLowerCase() === type.name.toLowerCase()
+        (type) => params?.type.toLowerCase() === type.name.toLowerCase()
       ),
-    [params.get("type"), types]
+    [params?.type, types]
   );
-  const onChange = useCallback((value: string, field: string) => {
-    const newParams = new URLSearchParams(params);
-    if (value === "Any") newParams.delete(field);
-    if (value !== "Any") newParams.set(field, value);
-    setParams(newParams);
-  }, []);
   if (loading)
     return (
       <div className={s.loading}>
@@ -37,11 +31,7 @@ const Filters = () => {
       {selected && (
         <>
           <div className={s.filter}>
-            <BreedsFilter
-              selected={selected}
-              paramValue={params.get("breed")}
-              onChange={onChange}
-            />
+            <BreedsFilter selected={selected} />
           </div>
           {filtersData.map((filter) => {
             if (selected[filter.selectedKey].length > 0)
@@ -51,15 +41,13 @@ const Filters = () => {
                   {selected[filter.selectedKey].length < 10 ? (
                     <Select
                       options={selected[filter.selectedKey]}
-                      paramValue={params.get(filter.paramId)}
-                      onChange={onChange}
+                      paramValue={params?.[filter.paramId]}
                       field={filter.paramId}
                     />
                   ) : (
                     <Autocomplete
                       options={selected[filter.selectedKey]}
-                      paramValue={params.get(filter.paramId)}
-                      onChange={onChange}
+                      paramValue={params?.[filter.paramId]}
                       field={filter.paramId}
                     />
                   )}

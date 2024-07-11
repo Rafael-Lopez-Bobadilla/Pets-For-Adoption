@@ -1,18 +1,13 @@
 import Select from "../../../Select/Select";
-import { usePetTypes } from "../../../../context/PetTypesContext/context";
+import { usePetTypes } from "../../../../../../context/PetTypesContext/context";
 import { CircularProgress } from "@mui/material";
 import s from "./TypesSelect.module.css";
-import { useSearchParams } from "react-router-dom";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
+import { useValidParams } from "../../../../context/ValidParamsContext/context";
 const TypesSelect = () => {
   const { types, loading } = usePetTypes();
-  const [params, setParams] = useSearchParams();
+  const { params } = useValidParams();
   const names = useMemo(() => types?.map((type) => type.name) || null, [types]);
-  const onChange = useCallback((value: string) => {
-    const newParams = new URLSearchParams(params);
-    newParams.set("type", value);
-    setParams(newParams);
-  }, []);
   if (loading)
     return (
       <div className={s.loading}>
@@ -22,8 +17,7 @@ const TypesSelect = () => {
   return (
     <Select
       options={names ? names : []}
-      paramValue={params.get("type")}
-      onChange={onChange}
+      paramValue={params?.type}
       field="type"
     />
   );

@@ -1,8 +1,9 @@
 import { TSelectedType } from "../../../../services/petfinderService/schemas/TypesSchema";
+import { TValidParams } from "../../context/ValidParamsContext/paramsSchema";
 type TFilters = {
   selectedKey: keyof Omit<TSelectedType, "_links" | "name">;
   label: string;
-  paramId: string;
+  paramId: keyof TValidParams;
 };
 export const filtersData: TFilters[] = [
   {

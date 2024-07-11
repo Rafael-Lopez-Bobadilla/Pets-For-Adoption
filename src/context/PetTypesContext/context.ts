@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { TPetTypes } from "../../../../services/petfinderService/schemas/TypesSchema";
+import { TPetTypes } from "../../services/petfinderService/schemas/TypesSchema";
 
 type TPetTypesContext = {
   types: TPetTypes | null;
