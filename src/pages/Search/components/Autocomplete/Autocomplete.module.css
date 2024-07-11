@@ -1,0 +1,18 @@
+.autocomplete {
+  background-color: white;
+  border-radius: var(--input-radius);
+}
+
+.autocomplete
+  > :global(.MuiTextField-root)
+  > :global(.MuiAutocomplete-inputRoot) {
+  padding: var(--input-padding);
+  border-radius: var(--input-radius);
+}
+
+.autocomplete
+  > :global(.MuiTextField-root)
+  > :global(.MuiAutocomplete-inputRoot)
+  > :global(.MuiAutocomplete-input) {
+  padding: 0;
+}

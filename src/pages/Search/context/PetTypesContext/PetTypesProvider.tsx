@@ -11,11 +11,14 @@ const PetTypesProvider = ({ children }: { children: React.ReactNode }) => {
     if (!token) return null;
     return getPetTypes(token);
   };
-  const { data, loading, error } = useFetch<TPetTypesResponse>(getData, enable);
+  const { data, loading, error, retry } = useFetch<TPetTypesResponse>(
+    getData,
+    enable
+  );
   const types = data?.types || null;
 
   return (
-    <PetTypesContext.Provider value={{ types, loading, error }}>
+    <PetTypesContext.Provider value={{ types, loading, error, retry }}>
       {children}
     </PetTypesContext.Provider>
   );

@@ -16,6 +16,7 @@ export const handleError = (
       const message = "Incorrect password";
       setError("password", { message });
     }
+    return;
   }
   showError("Unsuccessful Log In");
 };

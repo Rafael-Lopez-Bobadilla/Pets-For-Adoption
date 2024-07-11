@@ -1,0 +1,8 @@
+.select:global(.MuiInputBase-root) {
+  background-color: white;
+  border-radius: var(--input-radius);
+}
+
+.select > :global(.MuiSelect-select) {
+  padding: var(--input-padding);
+}

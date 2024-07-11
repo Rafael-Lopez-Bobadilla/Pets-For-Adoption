@@ -5,6 +5,7 @@ type TPetTypesContext = {
   types: TPetTypes | null;
   loading: boolean;
   error: boolean;
+  retry: () => void;
 };
 export const PetTypesContext = createContext<TPetTypesContext | null>(null);
 

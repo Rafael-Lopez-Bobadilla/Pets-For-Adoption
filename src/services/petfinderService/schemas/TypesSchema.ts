@@ -27,3 +27,4 @@ export const TypesSchema = z.object({
 
 export type TPetTypesResponse = z.infer<typeof TypesSchema>;
 export type TPetTypes = z.infer<typeof TypesSchema.shape.types>;
+export type TSelectedType = z.infer<typeof SelectedTypeSchema>;

@@ -1,54 +1,31 @@
-import { useSearchParams } from "react-router-dom";
-import {
-  Select as SelectMui,
-  MenuItem,
-  SelectChangeEvent,
-} from "@mui/material";
+import { Select as SelectMui, MenuItem } from "@mui/material";
+import s from "./Select.module.css";
+import { memo } from "react";
 type SelectProps = {
   options: string[];
+  paramValue: string | null;
   field: string;
+  onChange: (value: string, field: string) => void;
 };
-const Select = ({ options, field }: SelectProps) => {
-  const [params, setParams] = useSearchParams();
-
-  const handleChange = (e: SelectChangeEvent) => {
-    let newParams: URLSearchParams;
-    if (field === "type") {
-      newParams = new URLSearchParams();
-    } else {
-      newParams = new URLSearchParams(params);
-    }
-    if (e.target.value === "Any") newParams.delete(field);
-    if (e.target.value !== "Any") newParams.set(field, e.target.value);
-    newParams.set("page", "1");
-    setParams(newParams);
-  };
+const Select = memo(({ options, paramValue, onChange, field }: SelectProps) => {
   const value = options.find(
-    (option) => option.toLowerCase() == params.get(field)?.toLowerCase()
+    (option) => option.toLowerCase() == paramValue?.toLowerCase()
   );
+  const completeOptions = field === "type" ? options : ["Any", ...options];
   return (
-    <>
-      <SelectMui
-        onChange={handleChange}
-        name={field}
-        fullWidth
-        sx={{
-          backgroundColor: "white",
-          borderRadius: "var(--input-radius)",
-          "& .MuiSelect-select": {
-            padding: "var(--input-padding)",
-          },
-        }}
-        value={value ? value : options[0]}
-      >
-        {options.map((option) => (
-          <MenuItem value={option} key={option}>
-            {option}
-          </MenuItem>
-        ))}
-      </SelectMui>
-    </>
+    <SelectMui
+      onChange={(e) => onChange(e.target.value, field)}
+      fullWidth
+      className={s.select}
+      value={value ? value : completeOptions[0]}
+    >
+      {completeOptions.map((option) => (
+        <MenuItem value={option} key={option}>
+          {option}
+        </MenuItem>
+      ))}
+    </SelectMui>
   );
-};
+});
 
 export default Select;

@@ -37,6 +37,8 @@ const PetList = memo(
       } catch (err) {
         if (err instanceof AxiosError && err.response?.status === 400) {
           setParams(new URLSearchParams({ type: "Dog", page: "1" }));
+        } else {
+          throw new Error("Server error not 400");
         }
       }
     };

@@ -1,33 +1,31 @@
-import AutocompleteMui from "./AutocompleteMui";
-import { useSearchParams } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { Autocomplete as AutocompleteMui } from "@mui/material";
+import { TextField } from "@mui/material";
+import s from "./Autocomplete.module.css";
+import { memo } from "react";
 type AutocompleteProps = {
   options: string[];
+  paramValue: string | null;
+  onChange: (value: string, field: string) => void;
   field: string;
 };
-const Autocomplete = ({ options, field }: AutocompleteProps) => {
-  const [params, setParams] = useSearchParams();
-  const [value, setValue] = useState(options[0]);
-  const onChange = useCallback((_e: any, newValue: string | null) => {
-    let newParams = new URLSearchParams(location.search);
-    if (newValue === "Any") newParams.delete(field);
-    if (newValue !== "Any" && newValue) newParams.set(field, newValue);
-    newParams.set("page", "1");
-    setParams(newParams);
-  }, []);
-  useEffect(() => {
-    const paramsValue = params.get(field)?.toLowerCase();
-    if (!params.has(field) && value !== options[0]) setValue(options[0]);
-    if (params.has(field) && paramsValue !== value.toLowerCase()) {
-      const newValue = options.find(
-        (option) => option.toLowerCase() == params.get(field)?.toLowerCase()
-      );
-      if (newValue) setValue(newValue);
-    }
-  }, [params]);
-  return (
-    <AutocompleteMui value={value} options={options} onChange={onChange} />
-  );
-};
+const Autocomplete = memo(
+  ({ options, paramValue, onChange, field }: AutocompleteProps) => {
+    const value = options.find(
+      (option) => option.toLowerCase() == paramValue?.toLowerCase()
+    );
+    const completeOptions = ["Any", ...options];
+    return (
+      <AutocompleteMui
+        options={completeOptions}
+        blurOnSelect={true}
+        value={value ? value : completeOptions[0]}
+        onChange={(_e, value) => onChange(value, field)}
+        renderInput={(params) => <TextField {...params} />}
+        disableClearable
+        className={s.autocomplete}
+      />
+    );
+  }
+);
 
 export default Autocomplete;

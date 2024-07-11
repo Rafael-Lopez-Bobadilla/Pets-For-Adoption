@@ -23,7 +23,6 @@
 .filters {
   display: none;
   padding-top: 40px;
-  font-weight: bold;
   margin-right: var(--select-margin);
 
   @media (min-width: 1000px) {
