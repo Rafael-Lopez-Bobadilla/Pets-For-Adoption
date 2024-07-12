@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useOptions } from "./useOptions";
-import { useSearchParams } from "react-router-dom";
 import { useValue } from "./useValue";
+import { useParamsUpdate } from "../../../hooks/useParamsUpdate";
 const ANY_ID = "Any";
 const usePlacesInput = () => {
   const { loadError, setDefaultOption, setPredictions, clearOptions, options } =
@@ -9,7 +9,7 @@ const usePlacesInput = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selected, setSelected] = useState(0);
   const { value, changeValue } = useValue();
-  const [params, setParams] = useSearchParams();
+  const { changeParam, removeParam } = useParamsUpdate();
 
   const handleInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
@@ -33,17 +33,13 @@ const usePlacesInput = () => {
   const handleChange = (value: string, id: string) => {
     clearOptions();
     inputRef.current?.blur();
-    let newParams = new URLSearchParams(params);
-    newParams.set("page", "1");
     if (id === ANY_ID) {
       changeValue("");
-      newParams.delete("location");
-      setParams(newParams);
+      removeParam("location");
       return;
     }
     changeValue(value);
-    newParams.set("location", id);
-    setParams(newParams);
+    changeParam("location", id);
   };
   return {
     value,

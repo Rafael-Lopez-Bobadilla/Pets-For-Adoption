@@ -1,34 +1,36 @@
-import {
-  Select as SelectMui,
-  MenuItem,
-  SelectChangeEvent,
-} from "@mui/material";
+import { Select as SelectMui, MenuItem } from "@mui/material";
 import s from "./Select.module.css";
-import { memo } from "react";
-import { useParamsUpdate } from "../../context/ValidParamsContext/updateContext";
-import { TValidParams } from "../../context/ValidParamsContext/paramsSchema";
+import { memo, useMemo } from "react";
+import { TParamKey } from "../../utils/paramsSchema";
+import { SelectChangeEvent } from "@mui/material";
+import { useSearchParams } from "react-router-dom";
+import { useParamsUpdate } from "../../hooks/useParamsUpdate";
 type SelectProps = {
   options: string[];
-  paramValue: string | undefined;
-  field: keyof TValidParams;
+  paramKey: TParamKey;
 };
-const Select = memo(({ options, paramValue, field }: SelectProps) => {
+const Select = memo(({ options, paramKey }: SelectProps) => {
+  const [params] = useSearchParams();
   const { changeParam, changeType, removeParam } = useParamsUpdate();
-  const value = options.find(
-    (option) => option.toLowerCase() == paramValue?.toLowerCase()
+  const value = useMemo(
+    () =>
+      options.find(
+        (option) => option.toLowerCase() == params.get(paramKey)?.toLowerCase()
+      ),
+    [params.get(paramKey)]
   );
-  const onChange = (e: SelectChangeEvent<string>) => {
+  const handleChange = (e: SelectChangeEvent<string>) => {
     const value = e.target.value;
-    if (field === "type") changeType(value);
-    if (field !== "type") {
-      if (value !== "Any") changeParam(value, field);
-      if (value === "Any") removeParam(field);
+    if (paramKey === "type") changeType(value);
+    if (paramKey !== "type") {
+      if (value !== "Any") changeParam(paramKey, value);
+      if (value === "Any") removeParam(paramKey);
     }
   };
-  const completeOptions = field === "type" ? options : ["Any", ...options];
+  const completeOptions = paramKey === "type" ? options : ["Any", ...options];
   return (
     <SelectMui
-      onChange={onChange}
+      onChange={handleChange}
       fullWidth
       className={s.select}
       value={value ? value : completeOptions[0]}

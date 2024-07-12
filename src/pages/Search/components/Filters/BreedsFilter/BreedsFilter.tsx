@@ -5,12 +5,10 @@ import { z } from "zod";
 import { getBreeds } from "../../../../../services/petfinderService/petfinderService";
 import { usePetfinderToken } from "../../../../../context/TokenContext/context";
 import { memo } from "react";
-import { useValidParams } from "../../../context/ValidParamsContext/context";
 type TSelected = z.infer<typeof SelectedTypeSchema>;
 
 const BreedsFilter = memo(({ selected }: { selected: TSelected | null }) => {
   const { token } = usePetfinderToken();
-  const { params } = useValidParams();
   const getData = () => {
     if (!selected || !token) throw new Error("token or selected not ready");
     return getBreeds(token, selected._links.breeds.href);
@@ -23,13 +21,7 @@ const BreedsFilter = memo(({ selected }: { selected: TSelected | null }) => {
   return (
     <>
       <span>Breeds</span>
-      {breeds && (
-        <Autocomplete
-          options={breeds}
-          paramValue={params?.breed}
-          field="breed"
-        />
-      )}
+      {breeds && <Autocomplete options={breeds} paramKey="breed" />}
     </>
   );
 });
