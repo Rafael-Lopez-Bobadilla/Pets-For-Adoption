@@ -1,4 +1,4 @@
-import { TLocation } from "../../../../context/LocationContext/context";
+import { TLocation } from "../../../../../context/LocationContext/context";
 
 export const isLocationSync = (
   params: URLSearchParams,

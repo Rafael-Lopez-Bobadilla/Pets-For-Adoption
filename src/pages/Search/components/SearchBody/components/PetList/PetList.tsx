@@ -1,8 +1,8 @@
-import { usePetfinderToken } from "../../../../../context/TokenContext/context";
+import { usePetfinderToken } from "../../../../../../context/TokenContext/context";
 import { useSearchParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import s from "./PetList.module.css";
-import { useLocation } from "../../../context/LocationContext/context";
+import { useLocation } from "../../../../context/LocationContext/context";
 import PetCard from "./components/PetCard/PetCard";
 import { memo } from "react";
 import NoResults from "./components/NoResults/NoResults";
@@ -11,7 +11,7 @@ import { isLocationSync } from "./utils/syncLocation";
 import { validateParams } from "./utils/validateParams";
 import { manageLocation } from "./utils/manageLocation";
 import { handleColorParam } from "./handleColorParam";
-import { getAnimals } from "../../../../../services/petfinderService/petfinderService";
+import { getAnimals } from "../../../../../../services/petfinderService/petfinderService";
 import { AxiosError } from "axios";
 const PetList = memo(
   ({

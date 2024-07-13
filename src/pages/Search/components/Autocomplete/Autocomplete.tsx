@@ -1,7 +1,7 @@
 import { Autocomplete as AutocompleteMui } from "@mui/material";
 import { TextField } from "@mui/material";
 import s from "./Autocomplete.module.css";
-import { memo, useMemo } from "react";
+import { useMemo } from "react";
 import { TParamKey } from "../../utils/paramsSchema";
 import { useSearchParams } from "react-router-dom";
 import { useParamsUpdate } from "../../hooks/useParamsUpdate";
@@ -9,7 +9,7 @@ type AutocompleteProps = {
   options: string[];
   paramKey: TParamKey;
 };
-const Autocomplete = memo(({ options, paramKey }: AutocompleteProps) => {
+const Autocomplete = ({ options, paramKey }: AutocompleteProps) => {
   const [params] = useSearchParams();
   const { changeParam, removeParam } = useParamsUpdate();
   const handleChange = (
@@ -38,6 +38,6 @@ const Autocomplete = memo(({ options, paramKey }: AutocompleteProps) => {
       className={s.autocomplete}
     />
   );
-});
+};
 
 export default Autocomplete;

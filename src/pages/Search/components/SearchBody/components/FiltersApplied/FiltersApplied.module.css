@@ -21,8 +21,9 @@
   background-color: var(--green);
 }
 
-.filter>img {
-  width: 15px;
+.filter > .close {
+  display: flex;
+  align-items: center;
   margin-left: 10px;
   cursor: pointer;
 }
@@ -31,9 +32,5 @@
   color: var(--green);
   font-weight: bold;
   text-decoration: underline;
-  padding: 5px 10px;
-}
-
-.clear>span {
   cursor: pointer;
 }

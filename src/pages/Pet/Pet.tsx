@@ -1,7 +1,7 @@
 import s from "./Pet.module.css";
 import { useParams } from "react-router-dom";
 import { usePetfinderToken } from "../../context/TokenContext/context";
-import { Pet as IPet } from "../Search/components/SearchBody/PetList/utils/IPets";
+import { Pet as IPet } from "../Search/components/SearchBody/components/PetList/utils/IPets";
 import Photos from "./components/Photos/Photos";
 import FavButton from "../../components/FavButton/FavButton";
 import { CircularProgress } from "@mui/material";

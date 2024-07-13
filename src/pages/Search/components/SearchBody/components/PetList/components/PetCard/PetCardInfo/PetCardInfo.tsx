@@ -1,13 +1,13 @@
 import s from "./PetCardInfo.module.css";
-import { Breeds } from "../../../utils/IPets";
 import { useSearchParams } from "react-router-dom";
 import { memo } from "react";
+import { TBreeds } from "../../../../../../../../../services/petfinderService/schemas/PetsSchema";
 type InfoProps = {
   name: string;
   age: string;
   gender: string;
   distance: any;
-  breeds: Breeds;
+  breeds: TBreeds;
 };
 const PetCardInfo = memo(
   ({ name, age, gender, distance, breeds }: InfoProps) => {

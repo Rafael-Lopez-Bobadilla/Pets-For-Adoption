@@ -3,57 +3,11 @@
   font-weight: 500;
   color: black;
   margin: 20px 0 40px 0;
-  font-size: 22px;
+  font-size: 25px;
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
   text-align: center;
 
   @media (min-width: 1000px) {
     display: block;
-    font-size: 25px;
   }
-}
-
-.overlay {
-  width: 100%;
-  min-height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 3;
-  background-color: #f1f1f1;
-}
-
-.filters {
-  width: var(--select-width);
-  margin: 70px auto;
-}
-
-.overlay > img {
-  width: 25px;
-  position: fixed;
-  z-index: 3;
-  top: 15px;
-  right: 15px;
-}
-
-.button {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  padding: 5px 10px;
-  margin: 0 auto 20px auto;
-  border-radius: 5px;
-  border: 1px solid gray;
-  font-family: "Inter";
-  font-size: 18px;
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
-
-  @media (min-width: 1000px) {
-    display: none;
-  }
-}
-
-.button > img {
-  width: 20px;
-  margin-left: 10px;
 }

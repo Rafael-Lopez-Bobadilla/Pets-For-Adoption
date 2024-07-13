@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+@media (min-width: 768px) {
+  .pagination > :global(.MuiPagination-ul) > li > :global(.MuiButtonBase-root) {
+    font-size: 18px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+  .pagination
+    > :global(.MuiPagination-ul)
+    > li
+    > :global(.MuiButtonBase-root)
+    > :global(.MuiPaginationItem-icon) {
+    font-size: 1.5em;
+  }
+}

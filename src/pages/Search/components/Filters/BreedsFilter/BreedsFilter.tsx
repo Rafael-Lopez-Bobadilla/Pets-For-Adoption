@@ -1,13 +1,10 @@
 import Autocomplete from "../../Autocomplete/Autocomplete";
 import { useQuery } from "@tanstack/react-query";
-import { SelectedTypeSchema } from "../../../../../services/petfinderService/schemas/TypesSchema";
-import { z } from "zod";
+import { TSelectedType } from "../../../../../services/petfinderService/schemas/TypesSchema";
 import { getBreeds } from "../../../../../services/petfinderService/petfinderService";
 import { usePetfinderToken } from "../../../../../context/TokenContext/context";
-import { memo } from "react";
-type TSelected = z.infer<typeof SelectedTypeSchema>;
 
-const BreedsFilter = memo(({ selected }: { selected: TSelected | null }) => {
+const BreedsFilter = ({ selected }: { selected: TSelectedType | null }) => {
   const { token } = usePetfinderToken();
   const getData = () => {
     if (!selected || !token) throw new Error("token or selected not ready");
@@ -24,6 +21,6 @@ const BreedsFilter = memo(({ selected }: { selected: TSelected | null }) => {
       {breeds && <Autocomplete options={breeds} paramKey="breed" />}
     </>
   );
-});
+};
 
 export default BreedsFilter;

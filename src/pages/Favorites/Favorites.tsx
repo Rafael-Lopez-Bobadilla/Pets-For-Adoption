@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useUser } from "../../context/UserContext/context";
 import { usePetfinderToken } from "../../context/TokenContext/context";
 import { getPet } from "./getPet";
-import { Pet } from "../Search/components/SearchBody/PetList/utils/IPets";
-import PetCard from "../Search/components/SearchBody/PetList/components/PetCard/PetCard";
+import { Pet } from "../Search/components/SearchBody/components/PetList/utils/IPets";
+import PetCard from "../Search/components/SearchBody/components/PetList/components/PetCard/PetCard";
 import { CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 const Favorites = () => {

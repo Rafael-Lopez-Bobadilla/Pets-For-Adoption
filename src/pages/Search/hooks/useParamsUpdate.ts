@@ -20,5 +20,21 @@ export const useParamsUpdate = () => {
     newParams.delete(key);
     setParams(newParams);
   };
-  return { changeType, changeParam, removeParam };
+  const changePage = (page: string) => {
+    setParams((params) => {
+      params.set("page", page);
+      return params;
+    });
+  };
+  const clearFilters = () => {
+    const newParams = getNewParams();
+    const location = params.get("location");
+    newParams.delete("coat");
+    newParams.delete("color");
+    newParams.delete("gender");
+    newParams.delete("breed");
+    location && newParams.set("location", location);
+    setParams(newParams);
+  };
+  return { changeType, changeParam, removeParam, changePage, clearFilters };
 };

@@ -127,3 +127,8 @@ export const PetsSchema = z.object({
   animals: z.array(petSchema),
   pagination: paginationSchema,
 });
+
+export type TPet = z.infer<typeof petSchema>;
+export type TPrimaryPhoto = z.infer<typeof primaryPhotoCroppedSchema> | null;
+export type TPhotos = z.infer<typeof photoSchema>[];
+export type TBreeds = z.infer<typeof breedsSchema>;

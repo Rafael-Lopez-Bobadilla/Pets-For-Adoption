@@ -1,14 +1,17 @@
 import s from "./PetCardImg.module.css";
-import noImage from "../../../../../../../../assets/svgs/noImage.svg";
-import { Photo, PrimaryPhotoCropped } from "../../../utils/IPets";
+import noImage from "../../../../../../../../../assets/svgs/noImage.svg";
+import {
+  TPrimaryPhoto,
+  TPhotos,
+} from "../../../../../../../../../services/petfinderService/schemas/PetsSchema";
 import { memo } from "react";
 const PetCardImg = memo(
   ({
     primary_photo,
     photos,
   }: {
-    primary_photo: PrimaryPhotoCropped | undefined;
-    photos: Photo[];
+    primary_photo: TPrimaryPhoto | undefined;
+    photos: TPhotos;
   }) => {
     return (
       <div className={s.container}>

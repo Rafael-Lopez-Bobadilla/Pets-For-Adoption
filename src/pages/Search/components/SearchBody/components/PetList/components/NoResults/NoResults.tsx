@@ -1,6 +1,6 @@
 import s from "./NoResults.module.css";
 import { useSearchParams } from "react-router-dom";
-import { useLocation } from "../../../../../context/LocationContext/context";
+import { useLocation } from "../../../../../../context/LocationContext/context";
 const NoResults = () => {
   const [params, setParams] = useSearchParams();
   const { location } = useLocation();
