@@ -4,8 +4,10 @@ import { useSearchParams } from "react-router-dom";
 import { extractLocation } from "./extractLocation";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { useParamsUpdate } from "../../hooks/useParamsUpdate";
 const LocationProvider = ({ children }: { children: React.ReactNode }) => {
-  const [params, setParams] = useSearchParams();
+  const [params, _setParams] = useSearchParams();
+  const { removeParam } = useParamsUpdate();
   const idParam = params.get("location");
   const getLocationInfo = () => {
     if (!idParam) return null;
@@ -20,11 +22,7 @@ const LocationProvider = ({ children }: { children: React.ReactNode }) => {
     queryFn: () => getLocationInfo(),
   });
   useEffect(() => {
-    if (error) {
-      const newParams = new URLSearchParams(params);
-      newParams.delete("location");
-      setParams(newParams);
-    }
+    if (error) removeParam("location");
   }, [error]);
   const location = extractLocation(data);
   return (
