@@ -4,14 +4,14 @@ import {
   TLogInSchema,
 } from "../../../../services/userService/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userUserUpdate } from "../../../../context/UserContext/updateContext";
+import { useUser } from "../../../../context/UserContext/context";
 import { handleError } from "./handleError";
 import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import { useSnackbar } from "../../../../context/SnackbarContext/context";
 export const useLogIn = () => {
   const { showSignUp, closeDialog, showError } = useDialogUpdate();
   const { showSnackbar } = useSnackbar();
-  const { login } = userUserUpdate();
+  const { login } = useUser();
   const {
     register,
     handleSubmit,

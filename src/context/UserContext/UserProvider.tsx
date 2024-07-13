@@ -2,8 +2,10 @@ import { userService } from "../../services/userService/userService";
 import { TUserSchema } from "../../services/userService/schemas";
 import { useFetch } from "../../hooks/useFetch";
 import { UserContext } from "./context";
-import { useCallback } from "react";
-import UserUpdateProvider from "./UserUpdateProvider";
+import {
+  TSignUpSchema,
+  TLogInSchema,
+} from "../../services/userService/schemas";
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const {
     data: user,
@@ -11,14 +13,40 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     error,
     setData,
   } = useFetch<TUserSchema>(userService.authenticate);
-  const updateUser = useCallback((user: TUserSchema | null) => {
+  const signup = async (formData: TSignUpSchema) => {
+    const user = await userService.signUp(formData);
     setData(user);
-  }, []);
+  };
+  const login = async (formData: TLogInSchema) => {
+    const user = await userService.logIn(formData);
+    setData(user);
+  };
+  const authWithGoogle = async (googleToken: string) => {
+    const user = await userService.authWithGoogle(googleToken);
+    setData(user);
+  };
+  const logout = async () => {
+    await userService.logout();
+    setData(null);
+  };
+  const updateFavorites = async (id: number, action: string) => {
+    const user = await userService.updateFavorites(id, action);
+    setData(user);
+  };
   return (
-    <UserContext.Provider value={{ user, loading, error }}>
-      <UserUpdateProvider updateUser={updateUser}>
-        {children}
-      </UserUpdateProvider>
+    <UserContext.Provider
+      value={{
+        user,
+        loading,
+        error,
+        login,
+        signup,
+        logout,
+        updateFavorites,
+        authWithGoogle,
+      }}
+    >
+      {children}
     </UserContext.Provider>
   );
 };

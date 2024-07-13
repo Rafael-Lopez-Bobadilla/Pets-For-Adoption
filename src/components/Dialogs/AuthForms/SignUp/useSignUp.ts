@@ -5,14 +5,14 @@ import {
   signUpSchema,
   TSignUpSchema,
 } from "../../../../services/userService/schemas";
-import { userUserUpdate } from "../../../../context/UserContext/updateContext";
+import { useUser } from "../../../../context/UserContext/context";
 import { AxiosError } from "axios";
 import { useSnackbar } from "../../../../context/SnackbarContext/context";
 
 export const useSignUp = () => {
   const { showSnackbar } = useSnackbar();
   const { showLogIn, closeDialog, showError } = useDialogUpdate();
-  const { signup } = userUserUpdate();
+  const { signup } = useUser();
   const {
     register,
     handleSubmit,

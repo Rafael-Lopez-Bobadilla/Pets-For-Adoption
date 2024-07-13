@@ -1,7 +1,6 @@
 import favorite from "../../assets/svgs/favorite.svg";
 import favoriteFilled from "../../assets/svgs/favoriteFilled.svg";
 import { useUser } from "../../context/UserContext/context";
-import { userUserUpdate } from "../../context/UserContext/updateContext";
 import s from "./FavButton.module.css";
 import { Tooltip } from "@mui/material";
 import NoUserDialog from "../Dialogs/NoUserDialog/NoUserDialog";
@@ -12,7 +11,7 @@ type Props = {
 };
 const FavButton = ({ id, background }: Props) => {
   const { user } = useUser();
-  const { updateFavorites } = userUserUpdate();
+  const { updateFavorites } = useUser();
   const { showDialog } = useDialogUpdate();
   const onHeartClick = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,

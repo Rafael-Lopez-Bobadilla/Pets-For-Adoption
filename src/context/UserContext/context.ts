@@ -1,9 +1,18 @@
 import { createContext, useContext } from "react";
 import { TUserSchema } from "../../services/userService/schemas";
+import {
+  TSignUpSchema,
+  TLogInSchema,
+} from "../../services/userService/schemas";
 type TUserContext = {
   user: TUserSchema | null;
   loading: boolean;
   error: boolean;
+  signup: (data: TSignUpSchema) => void;
+  login: (data: TLogInSchema) => void;
+  logout: () => void;
+  authWithGoogle: (token: string) => void;
+  updateFavorites: (id: number, action: string) => void;
 };
 export const UserContext = createContext<TUserContext | null>(null);
 export const useUser = () => {

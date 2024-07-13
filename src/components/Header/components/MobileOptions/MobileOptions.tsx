@@ -7,12 +7,11 @@ import { useState } from "react";
 import UserIcon from "../../../Icons/UserIcon";
 import CloseIcon from "../../../Icons/CloseIcon";
 import menu from "../../../../assets/svgs/menu.svg";
-import { userUserUpdate } from "../../../../context/UserContext/updateContext";
 import AuthOptions from "../AuthOptions/AuthOptions";
 const MobileOptions = () => {
   const [open, setOpen] = useState(false);
   const { user } = useUser();
-  const { logout } = userUserUpdate();
+  const { logout } = useUser();
   const { showError } = useDialogUpdate();
   const onLogout = async () => {
     try {

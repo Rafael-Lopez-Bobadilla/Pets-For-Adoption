@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { userUserUpdate } from "../../../../../context/UserContext/updateContext";
+import { useUser } from "../../../../../context/UserContext/context";
 import s from "./Username.module.css";
 import bs from "../../button.module.css";
 import arrow from "../../../../../assets/svgs/triangleDown.svg";
@@ -8,7 +8,7 @@ import UserIcon from "../../../../Icons/UserIcon";
 import { useSnackbar } from "../../../../../context/SnackbarContext/context";
 const Username = ({ name }: { name: string | null }) => {
   const [open, setOpen] = useState(false);
-  const { logout } = userUserUpdate();
+  const { logout } = useUser();
   const { showError } = useDialogUpdate();
   const { showSnackbar } = useSnackbar();
   const handleLogout = async () => {
