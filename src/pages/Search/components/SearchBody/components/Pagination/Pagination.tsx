@@ -1,11 +1,9 @@
-import { useSearchParams } from "react-router-dom";
 import { Pagination as PaginationMui } from "@mui/material";
 import s from "./Pagination.module.css";
-import { useParamsUpdate } from "../../../../hooks/useParamsUpdate";
+import { useValidParams } from "../../../../context/ValidParamsContext/context";
 const Pagination = ({ pageCount }: { pageCount: number }) => {
-  const [params, _setParams] = useSearchParams();
-  const { changePage } = useParamsUpdate();
-  let page = Number(params.get("page"));
+  const { changePage, params } = useValidParams();
+  const page = params ? Number(params?.page) : 1;
   const handleChange = (_e: any, value: number) => {
     changePage(value.toString());
   };

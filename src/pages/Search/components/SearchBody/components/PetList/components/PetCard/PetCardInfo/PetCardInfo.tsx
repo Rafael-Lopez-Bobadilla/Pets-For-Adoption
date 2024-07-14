@@ -1,7 +1,7 @@
 import s from "./PetCardInfo.module.css";
-import { useSearchParams } from "react-router-dom";
 import { memo } from "react";
 import { TBreeds } from "../../../../../../../../../services/petfinderService/schemas/PetsSchema";
+import { useValidParams } from "../../../../../../../context/ValidParamsContext/context";
 type InfoProps = {
   name: string;
   age: string;
@@ -11,7 +11,7 @@ type InfoProps = {
 };
 const PetCardInfo = memo(
   ({ name, age, gender, distance, breeds }: InfoProps) => {
-    const [params] = useSearchParams();
+    const { params } = useValidParams();
     return (
       <div className={s.info}>
         <h3>{`${name.charAt(0).toUpperCase()}${name
@@ -21,7 +21,7 @@ const PetCardInfo = memo(
           <span>{age}</span>|<span>{gender}</span>
         </p>
         <p>{breeds.primary}</p>
-        {params.has("location") && <p>{Math.round(distance)} miles away</p>}
+        {params?.location && <p>{Math.round(distance)} miles away</p>}
       </div>
     );
   }

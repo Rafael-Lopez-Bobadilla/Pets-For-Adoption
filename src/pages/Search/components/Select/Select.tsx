@@ -3,21 +3,19 @@ import s from "./Select.module.css";
 import { useMemo } from "react";
 import { TParamKey } from "../../utils/paramsSchema";
 import { SelectChangeEvent } from "@mui/material";
-import { useSearchParams } from "react-router-dom";
-import { useParamsUpdate } from "../../hooks/useParamsUpdate";
+import { useValidParams } from "../../context/ValidParamsContext/context";
 type SelectProps = {
   options: string[];
   paramKey: TParamKey;
 };
 const Select = ({ options, paramKey }: SelectProps) => {
-  const [params] = useSearchParams();
-  const { changeParam, changeType, removeParam } = useParamsUpdate();
+  const { changeParam, changeType, removeParam, params } = useValidParams();
   const value = useMemo(
     () =>
       options.find(
-        (option) => option.toLowerCase() == params.get(paramKey)?.toLowerCase()
+        (option) => option.toLowerCase() == params?.[paramKey]?.toLowerCase()
       ),
-    [params.get(paramKey)]
+    [params?.[paramKey]]
   );
   const handleChange = (e: SelectChangeEvent<string>) => {
     const value = e.target.value;

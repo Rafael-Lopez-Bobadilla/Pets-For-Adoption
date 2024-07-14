@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import Filters from "../../../Filters/Filters";
 import s from "./MobileFilters.module.css";
 import filtersIcon from "../../../../../../assets/svgs/filters.svg";
 import CloseIcon from "../../../../../../components/Icons/CloseIcon";
+import { useValidParams } from "../../../../context/ValidParamsContext/context";
 const MobileFilters = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [params] = useSearchParams();
+  const { params } = useValidParams();
   useEffect(() => {
     if (isOpen) setIsOpen(false);
   }, [params]);

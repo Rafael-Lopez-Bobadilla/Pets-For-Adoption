@@ -1,22 +1,20 @@
 import { usePetfinderToken } from "../../../../../../context/TokenContext/context";
-import { useSearchParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import s from "./PetList.module.css";
 import { useLocation } from "../../../../context/LocationContext/context";
 import PetCard from "./components/PetCard/PetCard";
 import NoResults from "./components/NoResults/NoResults";
 import { useQuery } from "@tanstack/react-query";
-import { validateParams } from "./utils/validateParams";
-import { manageLocation } from "./utils/manageLocation";
-import { handleColorParam } from "./handleColorParam";
+import { getCompleteParams } from "./utils/getCompleteParams";
 import { getAnimals } from "../../../../../../services/petfinderService/petfinderService";
 import { AxiosError } from "axios";
+import { useValidParams } from "../../../../context/ValidParamsContext/context";
 const PetList = ({
   updatePageCount,
 }: {
   updatePageCount: (count: number) => void;
 }) => {
-  const [params, setParams] = useSearchParams();
+  const { params, clearFilters } = useValidParams();
   const { token } = usePetfinderToken();
   const {
     location,
@@ -25,25 +23,23 @@ const PetList = ({
   } = useLocation();
   const getData = async () => {
     if (!token) throw new Error("Token not ready");
-    const validParams = validateParams(setParams, params);
-    if (!validParams) throw new Error("Invalid params");
+    if (!params) throw new Error("Invalid params");
     if (locationError || locationLoading) throw new Error("Location error");
-    const readyParams = handleColorParam(validParams);
-    const requestParams = manageLocation(location, readyParams);
+    const completeParams = getCompleteParams(location, params);
     try {
-      const data = await getAnimals(token, requestParams);
+      const data = await getAnimals(token, completeParams);
       updatePageCount(data.pagination.total_pages);
       return data;
     } catch (err) {
       if (err instanceof AxiosError && err.response?.status === 400) {
-        setParams(new URLSearchParams({ type: "Dog", page: "1" }));
+        clearFilters();
       } else {
         throw new Error("Server error not 400");
       }
     }
   };
   const { data, isPending } = useQuery({
-    queryKey: ["pets", Object.fromEntries(params)],
+    queryKey: ["pets", params],
     queryFn: () => getData(),
   });
   return (

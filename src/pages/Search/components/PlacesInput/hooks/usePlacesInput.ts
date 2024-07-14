@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useOptions } from "./useOptions";
 import { useValue } from "./useValue";
-import { useParamsUpdate } from "../../../hooks/useParamsUpdate";
+import { useValidParams } from "../../../context/ValidParamsContext/context";
 const ANY_ID = "Any";
 const usePlacesInput = () => {
   const { loadError, setDefaultOption, setPredictions, clearOptions, options } =
@@ -9,7 +9,7 @@ const usePlacesInput = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selected, setSelected] = useState(0);
   const { value, changeValue } = useValue();
-  const { changeParam, removeParam } = useParamsUpdate();
+  const { changeParam, removeParam } = useValidParams();
 
   const handleInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;

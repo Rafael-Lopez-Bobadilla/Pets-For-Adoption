@@ -1,14 +1,12 @@
 import { LocationContext } from "./context";
 import { getLocationById } from "../../../../services/placesService/placesService";
-import { useSearchParams } from "react-router-dom";
 import { extractLocation } from "./extractLocation";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useParamsUpdate } from "../../hooks/useParamsUpdate";
+import { useValidParams } from "../ValidParamsContext/context";
 const LocationProvider = ({ children }: { children: React.ReactNode }) => {
-  const [params, _setParams] = useSearchParams();
-  const { removeParam } = useParamsUpdate();
-  const idParam = params.get("location");
+  const { params, removeParam } = useValidParams();
+  const idParam = params?.location;
   const getLocationInfo = () => {
     if (!idParam) return null;
     try {

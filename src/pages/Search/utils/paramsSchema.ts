@@ -17,5 +17,5 @@ export const paramsSchema = z
   })
   .strip();
 
-type TValidParams = z.infer<typeof paramsSchema>;
+export type TValidParams = z.infer<typeof paramsSchema>;
 export type TParamKey = keyof TValidParams;

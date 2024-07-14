@@ -7,15 +7,15 @@ import { useMemo } from "react";
 import { CircularProgress } from "@mui/material";
 import LoadError from "../../../../components/LoadError/LoadError";
 import { filtersData } from "./filtersData";
-import { useSearchParams } from "react-router-dom";
+import { useValidParams } from "../../context/ValidParamsContext/context";
 const Filters = () => {
   const { types, loading, error, retry } = usePetTypes();
-  const [params] = useSearchParams();
+  const { params } = useValidParams();
   const selected = useMemo(() => {
     return types?.find(
-      (type) => params.get("type")?.toLowerCase() === type.name.toLowerCase()
+      (type) => params?.type?.toLowerCase() === type.name.toLowerCase()
     );
-  }, [params.get("type"), types]);
+  }, [params?.type, types]);
   if (loading)
     return (
       <div className={s.loading}>

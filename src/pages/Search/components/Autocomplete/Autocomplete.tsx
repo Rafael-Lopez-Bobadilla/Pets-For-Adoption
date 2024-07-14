@@ -3,15 +3,13 @@ import { TextField } from "@mui/material";
 import s from "./Autocomplete.module.css";
 import { useMemo } from "react";
 import { TParamKey } from "../../utils/paramsSchema";
-import { useSearchParams } from "react-router-dom";
-import { useParamsUpdate } from "../../hooks/useParamsUpdate";
+import { useValidParams } from "../../context/ValidParamsContext/context";
 type AutocompleteProps = {
   options: string[];
   paramKey: TParamKey;
 };
 const Autocomplete = ({ options, paramKey }: AutocompleteProps) => {
-  const [params] = useSearchParams();
-  const { changeParam, removeParam } = useParamsUpdate();
+  const { changeParam, removeParam, params } = useValidParams();
   const handleChange = (
     _e: React.SyntheticEvent<Element, Event>,
     value: string
@@ -22,9 +20,9 @@ const Autocomplete = ({ options, paramKey }: AutocompleteProps) => {
   const value = useMemo(
     () =>
       options.find(
-        (option) => option.toLowerCase() == params.get(paramKey)?.toLowerCase()
+        (option) => option.toLowerCase() == params?.[paramKey]?.toLowerCase()
       ),
-    [params.get(paramKey)]
+    [params?.[paramKey]]
   );
   const completeOptions = ["Any", ...options];
   return (

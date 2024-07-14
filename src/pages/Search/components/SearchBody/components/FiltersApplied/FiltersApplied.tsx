@@ -1,13 +1,11 @@
 import s from "./FiltersApplied.module.css";
-import { useSearchParams } from "react-router-dom";
 import { TParamKey } from "../../../../utils/paramsSchema";
-import { useParamsUpdate } from "../../../../hooks/useParamsUpdate";
 import CloseIcon from "../../../../../../components/Icons/CloseIcon";
+import { useValidParams } from "../../../../context/ValidParamsContext/context";
 const options: TParamKey[] = ["breed", "coat", "color", "gender"];
 const FiltersApplied = () => {
-  const [params, _setParams] = useSearchParams();
-  const { removeParam, clearFilters } = useParamsUpdate();
-  const filters = options.filter((option) => params.has(option));
+  const { removeParam, clearFilters, params } = useValidParams();
+  const filters = options.filter((option) => params?.[option]);
   if (filters.length > 0)
     return (
       <>
@@ -15,7 +13,7 @@ const FiltersApplied = () => {
         <div className={s.filters}>
           {filters.map((filter) => (
             <div className={s.filter} key={filter}>
-              {params.get(filter)}
+              {params?.[filter]}
               <div className={s.close} onClick={() => removeParam(filter)}>
                 <CloseIcon color="white" width="15px" />
               </div>
