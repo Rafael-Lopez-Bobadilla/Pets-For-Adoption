@@ -1,7 +1,7 @@
 import { Select as SelectMui, MenuItem } from "@mui/material";
 import s from "./Select.module.css";
 import { useMemo } from "react";
-import { TParamKey } from "../../utils/paramsSchema";
+import { TParamKey } from "../../context/ValidParamsContext/paramsSchema";
 import { SelectChangeEvent } from "@mui/material";
 import { useValidParams } from "../../context/ValidParamsContext/context";
 type SelectProps = {

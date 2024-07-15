@@ -120,7 +120,7 @@ export const paginationSchema = z.object({
   total_count: z.number(),
   current_page: z.number(),
   total_pages: z.number(),
-  _links: links2Schema,
+  _links: links2Schema.optional(),
 });
 
 export const PetsSchema = z.object({
@@ -129,6 +129,8 @@ export const PetsSchema = z.object({
 });
 
 export type TPet = z.infer<typeof petSchema>;
-export type TPrimaryPhoto = z.infer<typeof primaryPhotoCroppedSchema> | null;
-export type TPhotos = z.infer<typeof photoSchema>[];
+export type TPrimaryPhoto = z.infer<
+  typeof petSchema.shape.primary_photo_cropped
+>;
+export type TPhotos = z.infer<typeof petSchema.shape.photos>;
 export type TBreeds = z.infer<typeof breedsSchema>;

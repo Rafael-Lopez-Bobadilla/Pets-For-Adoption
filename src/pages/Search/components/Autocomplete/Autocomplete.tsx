@@ -2,7 +2,7 @@ import { Autocomplete as AutocompleteMui } from "@mui/material";
 import { TextField } from "@mui/material";
 import s from "./Autocomplete.module.css";
 import { useMemo } from "react";
-import { TParamKey } from "../../utils/paramsSchema";
+import { TParamKey } from "../../context/ValidParamsContext/paramsSchema";
 import { useValidParams } from "../../context/ValidParamsContext/context";
 type AutocompleteProps = {
   options: string[];

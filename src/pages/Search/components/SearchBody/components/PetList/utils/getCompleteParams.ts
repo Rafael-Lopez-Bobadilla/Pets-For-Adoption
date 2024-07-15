@@ -1,5 +1,5 @@
 import { TLocation } from "../../../../../context/LocationContext/context";
-import { TValidParams } from "../../../../../utils/paramsSchema";
+import { TValidParams } from "../../../../../context/ValidParamsContext/paramsSchema";
 export const getCompleteParams = (
   location: TLocation | null,
   params: TValidParams

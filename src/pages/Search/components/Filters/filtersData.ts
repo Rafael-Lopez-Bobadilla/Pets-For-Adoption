@@ -1,5 +1,5 @@
 import { TSelectedType } from "../../../../services/petfinderService/schemas/TypesSchema";
-import { TParamKey } from "../../utils/paramsSchema";
+import { TParamKey } from "../../context/ValidParamsContext/paramsSchema";
 type TFilters = {
   selectedKey: keyof Omit<TSelectedType, "_links" | "name">;
   label: string;

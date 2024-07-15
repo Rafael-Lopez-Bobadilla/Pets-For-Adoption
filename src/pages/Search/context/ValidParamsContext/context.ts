@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { TParamKey, TValidParams } from "../../utils/paramsSchema";
+import { TParamKey, TValidParams } from "./paramsSchema";
 type TValidParamsContext = {
   params: TValidParams | null;
   changeParam: (key: TParamKey, value: string) => void;
@@ -7,6 +7,7 @@ type TValidParamsContext = {
   changeType: (value: string) => void;
   clearFilters: () => void;
   changePage: (page: string) => void;
+  setDefaultParams: () => void;
 };
 export const ValidParamsContext = createContext<TValidParamsContext | null>(
   null

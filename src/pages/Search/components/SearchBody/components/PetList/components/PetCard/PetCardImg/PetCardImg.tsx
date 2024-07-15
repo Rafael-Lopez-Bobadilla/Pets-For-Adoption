@@ -10,7 +10,7 @@ const PetCardImg = memo(
     primary_photo,
     photos,
   }: {
-    primary_photo: TPrimaryPhoto | undefined;
+    primary_photo: TPrimaryPhoto;
     photos: TPhotos;
   }) => {
     return (

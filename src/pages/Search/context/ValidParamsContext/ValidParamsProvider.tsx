@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import {
-  paramsSchema,
-  TParamKey,
-  TValidParams,
-} from "../../utils/paramsSchema";
+import { paramsSchema, TParamKey, TValidParams } from "./paramsSchema";
 import { ValidParamsContext } from "./context";
 const ValidParamsProvider = ({ children }: { children: React.ReactNode }) => {
   const [params, setParams] = useSearchParams();
   const [validParams, setValidParams] = useState<TValidParams | null>(null);
+  const setDefaultParams = () => {
+    setParams({ type: "Dog", page: "1" });
+  };
   useEffect(() => {
     const parseResult = paramsSchema.safeParse(Object.fromEntries(params));
     if (parseResult.success) {
@@ -16,7 +15,7 @@ const ValidParamsProvider = ({ children }: { children: React.ReactNode }) => {
       if (Object.keys(parseResult.data).length !== params.size)
         setParams(parseResult.data);
     } else {
-      setParams({ type: "Dog", page: "1" });
+      setDefaultParams();
     }
   }, [params]);
   const getNewParams = () => {
@@ -65,6 +64,7 @@ const ValidParamsProvider = ({ children }: { children: React.ReactNode }) => {
         removeParam,
         clearFilters,
         changePage,
+        setDefaultParams,
       }}
     >
       {children}

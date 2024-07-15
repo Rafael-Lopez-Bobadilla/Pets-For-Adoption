@@ -1,5 +1,5 @@
 import s from "./FiltersApplied.module.css";
-import { TParamKey } from "../../../../utils/paramsSchema";
+import { TParamKey } from "../../../../context/ValidParamsContext/paramsSchema";
 import CloseIcon from "../../../../../../components/Icons/CloseIcon";
 import { useValidParams } from "../../../../context/ValidParamsContext/context";
 const options: TParamKey[] = ["breed", "coat", "color", "gender"];

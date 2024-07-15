@@ -7,6 +7,7 @@ const Pagination = ({ pageCount }: { pageCount: number }) => {
   const handleChange = (_e: any, value: number) => {
     changePage(value.toString());
   };
+  if (pageCount === 0) return <></>;
   return (
     <div className={s.container}>
       <PaginationMui
