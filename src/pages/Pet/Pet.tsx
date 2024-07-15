@@ -40,7 +40,7 @@ const Pet = () => {
           <div className={s.info}>
             <div className={s.name}>
               <h2>{data.name}</h2>
-              <FavButton id={data.id} background="#e6dede" />
+              <FavButton id={data.id} background="gray" />
             </div>
             <h3>Contact</h3>
             <p>

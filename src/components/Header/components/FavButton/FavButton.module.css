@@ -12,6 +12,7 @@
 
 .icon {
   display: none;
+  width: 30px;
 }
 
 @media (min-width: 768px) {

@@ -1,6 +1,6 @@
 .heart {
-  width: 35px;
-  height: 35px;
+  padding: 7px;
+  width: 40px;
   border-radius: 50px;
   display: flex;
   justify-content: center;
@@ -9,21 +9,13 @@
   opacity: 0.8;
   cursor: pointer;
 
-  @media (min-width: 768px) {
-    width: 45px;
-    height: 45px;
-  }
-
   &:hover {
     opacity: 1;
   }
 }
 
-.heart>img {
-  width: 25px;
-
-  @media (min-width: 768px) {
-    width: 30px;
-    height: 30px;
+@media (min-width: 768px) {
+  .heart {
+    width: 45px;
   }
 }

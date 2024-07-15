@@ -1,0 +1,17 @@
+.filledGreen {
+  fill: var(--green);
+  stroke: transparent;
+  width: 100%;
+}
+
+.filledWhite {
+  fill: white;
+  stroke: transparent;
+  width: 100%;
+}
+
+.bordered {
+  fill: transparent;
+  stroke: var(--green);
+  width: 100%;
+}

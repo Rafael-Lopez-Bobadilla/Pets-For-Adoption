@@ -5,6 +5,8 @@ const userClient = axios.create({
   withCredentials: true,
 });
 
+export type TUpdateAction = "add" | "remove";
+
 export const userService = {
   authenticate: async () => {
     const res = await userClient.get("/api/v1/authenticate");
@@ -40,7 +42,7 @@ export const userService = {
     return userSchema.parse(res.data);
   },
 
-  updateFavorites: async (id: number, action: string) => {
+  updateFavorites: async (id: number, action: TUpdateAction) => {
     const res = await userClient.patch(`/api/v1/updateFavorites/${action}`, {
       favorite: id.toString(),
     });

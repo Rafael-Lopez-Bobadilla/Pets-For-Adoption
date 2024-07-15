@@ -4,6 +4,7 @@ import {
   TSignUpSchema,
   TLogInSchema,
 } from "../../services/userService/schemas";
+import { TUpdateAction } from "../../services/userService/userService";
 type TUserContext = {
   user: TUserSchema | null;
   loading: boolean;
@@ -12,7 +13,7 @@ type TUserContext = {
   login: (data: TLogInSchema) => void;
   logout: () => void;
   authWithGoogle: (token: string) => void;
-  updateFavorites: (id: number, action: string) => void;
+  updateFavorites: (id: number, action: TUpdateAction) => void;
 };
 export const UserContext = createContext<TUserContext | null>(null);
 export const useUser = () => {

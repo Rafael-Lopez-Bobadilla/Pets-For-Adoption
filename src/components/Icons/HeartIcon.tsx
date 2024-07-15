@@ -1,15 +1,10 @@
-type Props = {
-  width: string;
-  color: string;
-  border: string;
-};
-const HeartIcon = ({ width, color, border }: Props) => {
+import s from "./HeartIcon.module.css";
+type style = "bordered" | "filledWhite" | "filledGreen";
+const HeartIcon = ({ style }: { style: style }) => {
   return (
     <svg
-      width={width}
-      height={width}
+      className={s[style]}
       viewBox="0 0 24 24"
-      fill={color}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0" />
@@ -23,7 +18,6 @@ const HeartIcon = ({ width, color, border }: Props) => {
       <g id="SVGRepo_iconCarrier">
         <path
           strokeWidth="2"
-          stroke={border}
           d="M12.39 20.87a.696.696 0 0 1-.78 0C9.764 19.637 2 14.15 2 8.973c0-6.68 7.85-7.75 10-3.25 2.15-4.5 10-3.43 10 3.25 0 5.178-7.764 10.664-9.61 11.895z"
         />
       </g>

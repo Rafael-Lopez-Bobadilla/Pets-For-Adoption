@@ -21,7 +21,7 @@ const PetCard = ({ pet }: { pet: TPet }) => {
             breeds={pet.breeds}
           />
           <div className={s.heart}>
-            <FavButton id={pet.id} background="white" />
+            <FavButton id={pet.id} background={"white"} />
           </div>
         </div>
       </Link>

@@ -1,16 +1,24 @@
-import { useRef, useEffect, memo } from "react";
+import { useRef, useEffect, memo, useState } from "react";
 import { useUser } from "../../../../context/UserContext/context";
 import { useDialogUpdate } from "../../../../context/DialogContext/context";
+import { Backdrop, CircularProgress } from "@mui/material";
+import { useSnackbar } from "../../../../context/SnackbarContext/context";
 const GoogleButton = memo(() => {
   const googleRef = useRef<HTMLDivElement>(null);
   const { authWithGoogle } = useUser();
-  const { closeDialog } = useDialogUpdate();
+  const { closeDialog, showError } = useDialogUpdate();
+  const { showSnackbar } = useSnackbar();
+  const [open, setOpen] = useState(false);
   const onSignIn = async (response: google.accounts.id.CredentialResponse) => {
     try {
+      setOpen(true);
       await authWithGoogle(response.credential);
       closeDialog();
+      showSnackbar("Successful Sign In");
     } catch (err) {
-      console.log(err);
+      showError("Unsuccessful Sign In");
+    } finally {
+      setOpen(false);
     }
   };
   useEffect(() => {
@@ -29,7 +37,14 @@ const GoogleButton = memo(() => {
       width: 150,
     });
   }, []);
-  return <div ref={googleRef}></div>;
+  return (
+    <>
+      <div ref={googleRef}></div>
+      <Backdrop open={open} sx={{ color: "white" }}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </>
+  );
 });
 
 export default GoogleButton;

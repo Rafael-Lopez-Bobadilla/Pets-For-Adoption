@@ -18,7 +18,7 @@ const FavButton = () => {
     <Link to="/favorites">
       <div className={s.button} onClick={handleClick}>
         <div className={s.icon}>
-          <HeartIcon width="28px" color="white" border="transparent" />
+          <HeartIcon style={"filledWhite"} />
         </div>
         <span>Favorites</span>
       </div>

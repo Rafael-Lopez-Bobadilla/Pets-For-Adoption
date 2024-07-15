@@ -1,4 +1,7 @@
-import { userService } from "../../services/userService/userService";
+import {
+  TUpdateAction,
+  userService,
+} from "../../services/userService/userService";
 import { TUserSchema } from "../../services/userService/schemas";
 import { useFetch } from "../../hooks/useFetch";
 import { UserContext } from "./context";
@@ -29,7 +32,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     await userService.logout();
     setData(null);
   };
-  const updateFavorites = async (id: number, action: string) => {
+  const updateFavorites = async (id: number, action: TUpdateAction) => {
     const user = await userService.updateFavorites(id, action);
     setData(user);
   };
