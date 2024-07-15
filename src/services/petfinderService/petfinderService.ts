@@ -2,7 +2,7 @@ import axios from "axios";
 import { TypesSchema } from "./schemas/TypesSchema";
 import { BreedsSchema } from "./schemas/BreedsSchema";
 import { TokenSchema } from "./schemas/TokenSchema";
-import { PetsSchema } from "./schemas/PetsSchema";
+import { petResponseSchema, PetsSchema } from "./schemas/PetsSchema";
 const petfinderClient = axios.create({
   baseURL: "https://api.petfinder.com",
 });
@@ -49,4 +49,13 @@ export const getAnimals = async (token: string, params: URLSearchParams) => {
     },
   });
   return PetsSchema.parse(res.data);
+};
+
+export const getPet = async (token: string, id: string) => {
+  const res = await petfinderClient.get(`/v2/animals/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return petResponseSchema.parse(res.data);
 };

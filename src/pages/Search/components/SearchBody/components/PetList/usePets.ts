@@ -5,7 +5,6 @@ import { getCompleteParams } from "./utils/getCompleteParams";
 import { getAnimals } from "../../../../../../services/petfinderService/petfinderService";
 import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { ZodError } from "zod";
 export const usePets = (updatePageCount: (count: number) => void) => {
   const { params, setDefaultParams } = useValidParams();
   const { token } = usePetfinderToken();
@@ -24,9 +23,6 @@ export const usePets = (updatePageCount: (count: number) => void) => {
       updatePageCount(data.pagination.total_pages);
       return data;
     } catch (err) {
-      if (err instanceof ZodError) {
-        console.log(err.issues);
-      }
       if (err instanceof AxiosError && err.response?.status === 400) {
         setDefaultParams();
         throw new Error("Bad request, invalid params");

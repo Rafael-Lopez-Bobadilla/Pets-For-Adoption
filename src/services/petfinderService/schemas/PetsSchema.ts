@@ -88,7 +88,7 @@ export const links2Schema = z.object({
 
 export const petSchema = z.object({
   id: z.number(),
-  organization_id: z.string(),
+  organization_id: z.string().optional(),
   url: z.string(),
   type: z.string(),
   species: z.string(),
@@ -126,6 +126,10 @@ export const paginationSchema = z.object({
 export const PetsSchema = z.object({
   animals: z.array(petSchema),
   pagination: paginationSchema,
+});
+
+export const petResponseSchema = z.object({
+  animal: petSchema,
 });
 
 export type TPet = z.infer<typeof petSchema>;

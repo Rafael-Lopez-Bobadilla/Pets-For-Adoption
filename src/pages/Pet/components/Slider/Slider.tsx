@@ -1,8 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Zoom, Navigation, Pagination } from "swiper/modules";
 import s from "./Slider.module.css";
-import { Pet } from "../../../Search/components/SearchBody/components/PetList/utils/IPets";
-const Slider = ({ pet, open }: { pet: Pet; open?: boolean }) => {
+import { TPet } from "../../../../services/petfinderService/schemas/PetsSchema";
+const Slider = ({ pet, open }: { pet: TPet; open?: boolean }) => {
   return (
     <Swiper
       zoom={true}

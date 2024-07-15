@@ -1,4 +1,3 @@
-import { Pet } from "../../../Search/components/SearchBody/components/PetList/utils/IPets";
 import Slider from "../Slider/Slider";
 import s from "./Photos.module.css";
 import expand from "../../../../assets/svgs/expand.svg";
@@ -10,7 +9,8 @@ import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./swiper.css";
-const Photos = ({ pet }: { pet: Pet }) => {
+import { TPet } from "../../../../services/petfinderService/schemas/PetsSchema";
+const Photos = ({ pet }: { pet: TPet }) => {
   const [open, setOpen] = useState(false);
   return (
     <div className={s.container}>

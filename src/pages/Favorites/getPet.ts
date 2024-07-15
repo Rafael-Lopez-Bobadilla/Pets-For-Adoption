@@ -1,8 +1,8 @@
-import { Pet } from "../Search/components/SearchBody/components/PetList/utils/IPets";
+import { TPet } from "../../services/petfinderService/schemas/PetsSchema";
 export const getPet = async (
   id: string,
   token: string,
-  setFavorites: React.Dispatch<React.SetStateAction<Pet[]>>
+  setFavorites: React.Dispatch<React.SetStateAction<TPet[]>>
 ) => {
   const res = await fetch(`https://api.petfinder.com/v2/animals/${id}`, {
     headers: {
