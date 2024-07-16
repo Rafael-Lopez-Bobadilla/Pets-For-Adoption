@@ -4,7 +4,7 @@ import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import NoFavoritesDialog from "../../../Dialogs/NoFavoritesDialog/NoFavoritesDialog";
 import { Link } from "react-router-dom";
 import NoUserDialog from "../../../Dialogs/NoUserDialog/NoUserDialog";
-import HeartIcon from "../../../Icons/HeartIcon";
+import HeartIcon from "../../../Icons/HeartIcon/HeartIcon";
 const FavButton = () => {
   const { user } = useUser();
   const { showDialog } = useDialogUpdate();

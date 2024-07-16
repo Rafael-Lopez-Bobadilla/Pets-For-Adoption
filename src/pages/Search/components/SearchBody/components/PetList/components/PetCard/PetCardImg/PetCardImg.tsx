@@ -4,7 +4,7 @@ import {
   TPhotos,
 } from "../../../../../../../../../services/petfinderService/schemas/PetsSchema";
 import { memo } from "react";
-import PetIcon from "../../../../../../../../../components/Icons/PetIcon";
+import PetIcon from "../../../../../../../../../components/Icons/PetIcon/PetIcon";
 const PetCardImg = memo(
   ({
     primary_photo,

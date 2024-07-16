@@ -1,6 +1,6 @@
 import s from "./NoFavoritesDialog.module.css";
 import { useDialogUpdate } from "../../../context/DialogContext/context";
-import HeartIcon from "../../Icons/HeartIcon";
+import HeartIcon from "../../Icons/HeartIcon/HeartIcon";
 const NoFavoritesDialog = () => {
   const { closeDialog } = useDialogUpdate();
   return (

@@ -1,5 +1,5 @@
 type Props = {
-  color: string;
+  color: "white" | "gray";
   width: string;
 };
 const UserIcon = ({ color, width }: Props) => {
@@ -22,7 +22,7 @@ const UserIcon = ({ color, width }: Props) => {
         <circle cx="12" cy="6" r="4" fill={color} />{" "}
         <path
           d="M20 17.5C20 19.9853 20 22 12 22C4 22 4 19.9853 4 17.5C4 15.0147 7.58172 13 12 13C16.4183 13 20 15.0147 20 17.5Z"
-          fill={color}
+          fill={color === "gray" ? "#d3d3d3" : "white"}
         />{" "}
       </g>
     </svg>

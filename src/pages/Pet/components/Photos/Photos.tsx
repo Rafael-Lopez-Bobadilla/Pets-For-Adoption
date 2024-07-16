@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "./swiper.css";
 import { TPet } from "../../../../services/petfinderService/schemas/PetsSchema";
 import CloseIcon from "../../../../components/Icons/CloseIcon";
-import PetIcon from "../../../../components/Icons/PetIcon";
+import PetIcon from "../../../../components/Icons/PetIcon/PetIcon";
 const Photos = ({ pet }: { pet: TPet }) => {
   const [open, setOpen] = useState(false);
   const openDialog = () => setOpen(true);

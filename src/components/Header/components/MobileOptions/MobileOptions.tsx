@@ -33,7 +33,7 @@ const MobileOptions = () => {
         <div className={s.dropMenu}>
           {user && (
             <div className={s.user}>
-              <UserIcon color="#d3d3d3" width="25px" />
+              <UserIcon color="gray" width="25px" />
               <span className={s.name}>{user.name}</span>
             </div>
           )}

@@ -4,7 +4,7 @@ import { Tooltip } from "@mui/material";
 import NoUserDialog from "../Dialogs/NoUserDialog/NoUserDialog";
 import { useDialogUpdate } from "../../context/DialogContext/context";
 import { TUpdateAction } from "../../services/userService/userService";
-import HeartIcon from "../Icons/HeartIcon";
+import HeartIcon from "../Icons/HeartIcon/HeartIcon";
 type Props = {
   id: number;
   background: "white" | "gray";
