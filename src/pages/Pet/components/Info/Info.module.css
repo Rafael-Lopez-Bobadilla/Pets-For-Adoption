@@ -1,0 +1,18 @@
+.section > h3 {
+  margin: 30px 0;
+}
+
+.info > p,
+.section > p {
+  margin: 8px 0;
+}
+
+.info > p > span,
+.section > p > span {
+  font-weight: bold;
+}
+
+.info > p > li {
+  margin-left: 20px;
+  padding: 5px 0;
+}

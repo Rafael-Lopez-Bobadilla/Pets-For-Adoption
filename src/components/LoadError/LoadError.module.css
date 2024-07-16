@@ -7,6 +7,7 @@
   padding: 40px 5px;
   border: 1px solid rgb(212, 209, 209);
   border-radius: 10px;
+  font-family: "Inter";
 }
 
 .error > h2 {

@@ -2,31 +2,45 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Zoom, Navigation, Pagination } from "swiper/modules";
 import s from "./Slider.module.css";
 import { TPet } from "../../../../services/petfinderService/schemas/PetsSchema";
-const Slider = ({ pet, open }: { pet: TPet; open?: boolean }) => {
+type Props = {
+  pet: TPet;
+  open?: boolean;
+  openDialog?: () => void;
+};
+const Slider = ({ pet, open = false, openDialog = () => {} }: Props) => {
+  let photos = [...pet.photos];
+  if (pet.primary_photo_cropped && photos.length < 1)
+    photos = [pet.primary_photo_cropped];
   return (
-    <Swiper
-      zoom={true}
-      navigation={true}
-      pagination={{
-        clickable: true,
-      }}
-      modules={[Zoom, Navigation, Pagination]}
-    >
-      {pet.photos.map((photo, index) => {
-        return (
-          <SwiperSlide key={index}>
-            <div className="swiper-zoom-container">
-              <div className={s.slide}>
-                <img
-                  src={photo.full}
-                  className={open ? `${s.img} ${s.full}` : s.img}
-                />
+    <>
+      <Swiper
+        zoom={true}
+        navigation={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Zoom, Navigation, Pagination]}
+      >
+        {photos.map((photo, index) => {
+          return (
+            <SwiperSlide key={index}>
+              <div
+                className="swiper-zoom-container"
+                style={{ cursor: "pointer" }}
+                onClick={openDialog}
+              >
+                <div className={s.slide}>
+                  <img
+                    src={photo.full}
+                    className={open ? `${s.img} ${s.full}` : s.img}
+                  />
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
-        );
-      })}
-    </Swiper>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
   );
 };
 

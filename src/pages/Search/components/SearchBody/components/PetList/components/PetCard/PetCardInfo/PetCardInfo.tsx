@@ -18,7 +18,8 @@ const PetCardInfo = memo(
           .slice(1)
           .toLowerCase()}`}</h3>
         <p>
-          <span>{age}</span>|<span>{gender}</span>
+          <span>{age}</span>
+          <span>{gender}</span>
         </p>
         <p>{breeds.primary}</p>
         {params?.location && <p>{Math.round(distance)} miles away</p>}

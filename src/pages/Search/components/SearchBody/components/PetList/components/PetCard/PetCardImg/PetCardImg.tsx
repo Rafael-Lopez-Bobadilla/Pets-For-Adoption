@@ -1,10 +1,10 @@
 import s from "./PetCardImg.module.css";
-import noImage from "../../../../../../../../../assets/svgs/noImage.svg";
 import {
   TPrimaryPhoto,
   TPhotos,
 } from "../../../../../../../../../services/petfinderService/schemas/PetsSchema";
 import { memo } from "react";
+import PetIcon from "../../../../../../../../../components/Icons/PetIcon";
 const PetCardImg = memo(
   ({
     primary_photo,
@@ -22,7 +22,9 @@ const PetCardImg = memo(
         )}
         {!primary_photo && !photos[0]?.full && (
           <>
-            <img src={noImage} className={s.noImg} />
+            <div className={s.noImg}>
+              <PetIcon color={"green"} />
+            </div>
             <p>No photo available for this pet</p>
           </>
         )}
