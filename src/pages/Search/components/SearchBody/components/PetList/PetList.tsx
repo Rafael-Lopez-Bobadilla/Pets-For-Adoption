@@ -6,7 +6,7 @@ import { usePets } from "./usePets";
 import LoadError from "../../../../../../components/LoadError/LoadError";
 import Pagination from "./components/Pagination/Pagination";
 const PetList = () => {
-  const { data, isPending, error, refetch } = usePets();
+  const { data, isPending, error, refetch, params } = usePets();
   if (isPending)
     return (
       <div className={s.loading}>
@@ -21,7 +21,9 @@ const PetList = () => {
         <div className={s.list}>
           {data.animals.map((pet) => (
             <div key={pet.id} className={s.card}>
-              <PetCard pet={pet} />
+              <PetCard pet={pet}>
+                {params?.location && `${Math.round(pet.distance)} miles away`}
+              </PetCard>
             </div>
           ))}
         </div>

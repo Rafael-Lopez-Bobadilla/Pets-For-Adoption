@@ -4,7 +4,13 @@ import PetCardImg from "./PetCardImg/PetCardImg";
 import PetCardInfo from "./PetCardInfo/PetCardInfo";
 import { TPet } from "../../../../../../../../services/petfinderService/schemas/PetsSchema";
 import { Link } from "react-router-dom";
-const PetCard = ({ pet }: { pet: TPet }) => {
+const PetCard = ({
+  children = <></>,
+  pet,
+}: {
+  children?: React.ReactNode;
+  pet: TPet;
+}) => {
   return (
     <>
       <Link to={`/pet/${pet.id}`}>
@@ -17,9 +23,10 @@ const PetCard = ({ pet }: { pet: TPet }) => {
             name={pet.name}
             age={pet.age}
             gender={pet.gender}
-            distance={pet.distance}
             breeds={pet.breeds}
-          />
+          >
+            {children}
+          </PetCardInfo>
           <div className={s.heart}>
             <FavButton id={pet.id} background={"white"} />
           </div>

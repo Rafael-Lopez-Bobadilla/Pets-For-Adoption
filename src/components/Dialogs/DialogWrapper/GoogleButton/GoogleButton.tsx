@@ -22,20 +22,26 @@ const GoogleButton = memo(() => {
     }
   };
   useEffect(() => {
-    google.accounts.id.initialize({
-      client_id:
-        "215994121648-uc647b3pmh2jui4pp6te812880pd5rvk.apps.googleusercontent.com",
-      callback: onSignIn,
-      use_fedcm_for_prompt: true,
-    });
-    google.accounts.id.renderButton(googleRef.current!, {
-      theme: "filled_blue",
-      size: "medium",
-      shape: "pill",
-      type: "standard",
-      text: "continue_with",
-      width: 150,
-    });
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.onload = () => {
+      google.accounts.id.initialize({
+        client_id:
+          "215994121648-uc647b3pmh2jui4pp6te812880pd5rvk.apps.googleusercontent.com",
+        callback: onSignIn,
+        use_fedcm_for_prompt: true,
+      });
+      google.accounts.id.renderButton(googleRef.current!, {
+        theme: "filled_blue",
+        size: "medium",
+        shape: "pill",
+        type: "standard",
+        text: "continue_with",
+        width: 150,
+      });
+    };
+    document.body.appendChild(script);
   }, []);
   return (
     <>
