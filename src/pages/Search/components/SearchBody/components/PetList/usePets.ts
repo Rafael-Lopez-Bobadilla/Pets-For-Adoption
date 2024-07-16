@@ -5,7 +5,7 @@ import { getCompleteParams } from "./utils/getCompleteParams";
 import { getAnimals } from "../../../../../../services/petfinderService/petfinderService";
 import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
-export const usePets = (updatePageCount: (count: number) => void) => {
+export const usePets = () => {
   const { params, setDefaultParams } = useValidParams();
   const { token } = usePetfinderToken();
   const {
@@ -19,9 +19,7 @@ export const usePets = (updatePageCount: (count: number) => void) => {
     if (locationError || locationLoading) throw new Error("Location error");
     const completeParams = getCompleteParams(location, params);
     try {
-      const data = await getAnimals(token, completeParams);
-      updatePageCount(data.pagination.total_pages);
-      return data;
+      return await getAnimals(token, completeParams);
     } catch (err) {
       if (err instanceof AxiosError && err.response?.status === 400) {
         setDefaultParams();

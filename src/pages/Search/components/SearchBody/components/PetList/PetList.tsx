@@ -4,12 +4,9 @@ import PetCard from "./components/PetCard/PetCard";
 import NoResults from "./components/NoResults/NoResults";
 import { usePets } from "./usePets";
 import LoadError from "../../../../../../components/LoadError/LoadError";
-const PetList = ({
-  updatePageCount,
-}: {
-  updatePageCount: (count: number) => void;
-}) => {
-  const { data, isPending, error, refetch } = usePets(updatePageCount);
+import Pagination from "./components/Pagination/Pagination";
+const PetList = () => {
+  const { data, isPending, error, refetch } = usePets();
   if (isPending)
     return (
       <div className={s.loading}>
@@ -20,13 +17,16 @@ const PetList = ({
     return <LoadError message="Unable to get pets info" retry={refetch} />;
   if (data)
     return data.animals.length > 0 ? (
-      <div className={s.list}>
-        {data.animals.map((pet) => (
-          <div key={pet.id} className={s.card}>
-            <PetCard pet={pet} />
-          </div>
-        ))}
-      </div>
+      <>
+        <div className={s.list}>
+          {data.animals.map((pet) => (
+            <div key={pet.id} className={s.card}>
+              <PetCard pet={pet} />
+            </div>
+          ))}
+        </div>
+        <Pagination pageCount={data.pagination.total_pages} />
+      </>
     ) : (
       <NoResults />
     );
