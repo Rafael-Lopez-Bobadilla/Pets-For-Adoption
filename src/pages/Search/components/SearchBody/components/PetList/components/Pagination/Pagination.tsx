@@ -5,7 +5,7 @@ const Pagination = ({ pageCount }: { pageCount: number }) => {
   const { changePage, params } = useValidParams();
   const page = params ? Number(params?.page) : 1;
   const handleChange = (_e: any, value: number) => {
-    changePage(value.toString());
+    if (page !== value) changePage(value.toString());
   };
   return (
     <div className={s.container}>
