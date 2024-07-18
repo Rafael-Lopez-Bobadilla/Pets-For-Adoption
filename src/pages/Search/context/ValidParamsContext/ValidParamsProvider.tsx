@@ -27,6 +27,10 @@ const ValidParamsProvider = ({ children }: { children: React.ReactNode }) => {
     const newParams = getNewParams();
     if (!newParams) return;
     newParams.type = value;
+    delete newParams.breed;
+    delete newParams.coat;
+    delete newParams.color;
+    delete newParams.gender;
     setParams(newParams);
   };
   const changeParam = (key: TParamKey, value: string) => {
