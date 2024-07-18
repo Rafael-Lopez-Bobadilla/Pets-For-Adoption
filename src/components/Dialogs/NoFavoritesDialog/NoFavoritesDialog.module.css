@@ -16,8 +16,10 @@
 }
 
 .noFav > p > div {
-  display: inline;
+  display: inline-block;
   vertical-align: middle;
+  width: 25px;
+  height: 25px;
 }
 
 .noFav > button {

@@ -11,7 +11,7 @@ const NoFavoritesDialog = () => {
           "When you find a pet you like, add it your favorites list by tapping the "
         }
         <div>
-          <HeartIcon width="25px" color="transparent" border="#267C5B" />
+          <HeartIcon style={"bordered"} />
         </div>
       </p>
       <button onClick={closeDialog}>OK</button>
