@@ -7,12 +7,12 @@ import { CircularProgress } from "@mui/material";
 
 const BreedsFilter = ({ selected }: { selected: TSelectedType | null }) => {
   const { token } = usePetfinderToken();
-  const getData = () => {
+  const getData = async () => {
     if (!selected || !token) throw new Error("token or selected not ready");
-    return getBreeds(token, selected._links.breeds.href);
+    return await getBreeds(token, selected._links.breeds.href);
   };
   const { data, isPending } = useQuery({
-    queryKey: [selected?.name],
+    queryKey: ["breeds", selected?.name],
     queryFn: () => getData(),
   });
   const breeds = data?.breeds.map((breed) => breed.name);

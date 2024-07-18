@@ -6,7 +6,8 @@ import { usePets } from "./usePets";
 import LoadError from "../../../../../../components/LoadError/LoadError";
 import Pagination from "./components/Pagination/Pagination";
 const PetList = () => {
-  const { data, isPending, error, refetch, params } = usePets();
+  const { data, isPending, error, refetch, params, setDefaultParams } =
+    usePets();
   if (isPending)
     return (
       <div className={s.loading}>
@@ -14,7 +15,13 @@ const PetList = () => {
       </div>
     );
   if (error)
-    return <LoadError message="Unable to get pets info" retry={refetch} />;
+    return (
+      <LoadError message="Unable to get pets info" retry={refetch}>
+        <p className={s.default} onClick={setDefaultParams}>
+          Or try setting default params
+        </p>
+      </LoadError>
+    );
   if (data)
     return data.animals.length > 0 ? (
       <>

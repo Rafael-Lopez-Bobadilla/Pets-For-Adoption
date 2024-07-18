@@ -1,9 +1,11 @@
 import s from "./LoadError.module.css";
 import reload from "../../assets/svgs/reload.svg";
 const LoadError = ({
+  children = <></>,
   message,
   retry,
 }: {
+  children?: React.ReactNode;
   message: string;
   retry: () => void;
 }) => {
@@ -15,6 +17,7 @@ const LoadError = ({
         Try again
         <img src={reload} />
       </button>
+      {children}
     </div>
   );
 };

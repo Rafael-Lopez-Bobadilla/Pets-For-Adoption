@@ -33,5 +33,5 @@ export const usePets = () => {
     queryKey: ["pets", params],
     queryFn: () => getData(),
   });
-  return { data, isPending, error, refetch, params };
+  return { data, isPending, error, refetch, params, setDefaultParams };
 };
