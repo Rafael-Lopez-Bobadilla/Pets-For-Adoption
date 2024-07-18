@@ -1,6 +1,5 @@
 import s from "./MobileOptions.module.css";
 import bs from "../button.module.css";
-import { useDialogUpdate } from "../../../../context/DialogContext/context";
 import { useUser } from "../../../../context/UserContext/context";
 import FavButton from "../FavButton/FavButton";
 import { useState } from "react";
@@ -8,19 +7,10 @@ import UserIcon from "../../../Icons/UserIcon";
 import CloseIcon from "../../../Icons/CloseIcon";
 import menu from "../../../../assets/svgs/menu.svg";
 import AuthOptions from "../AuthOptions/AuthOptions";
+import Logout from "../Logout/Logout";
 const MobileOptions = () => {
   const [open, setOpen] = useState(false);
   const { user } = useUser();
-  const { logout } = useUser();
-  const { showError } = useDialogUpdate();
-  const onLogout = async () => {
-    try {
-      await logout();
-      setOpen(false);
-    } catch (err) {
-      showError("Unsuccessful Log out");
-    }
-  };
   return (
     <>
       <button
@@ -42,9 +32,9 @@ const MobileOptions = () => {
           </div>
           {!user && <AuthOptions />}
           {user && (
-            <button onClick={onLogout} className={bs.button}>
-              Log out
-            </button>
+            <div onClick={() => setOpen(false)}>
+              <Logout />
+            </div>
           )}
         </div>
       )}

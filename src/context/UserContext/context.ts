@@ -14,6 +14,7 @@ type TUserContext = {
   logout: () => void;
   authWithGoogle: (token: string) => void;
   updateFavorites: (id: number, action: TUpdateAction) => void;
+  clearUser: () => void;
 };
 export const UserContext = createContext<TUserContext | null>(null);
 export const useUser = () => {

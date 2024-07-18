@@ -36,6 +36,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const user = await userService.updateFavorites(id, action);
     setData(user);
   };
+  const clearUser = () => setData(null);
   return (
     <UserContext.Provider
       value={{
@@ -47,6 +48,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         logout,
         updateFavorites,
         authWithGoogle,
+        clearUser,
       }}
     >
       {children}

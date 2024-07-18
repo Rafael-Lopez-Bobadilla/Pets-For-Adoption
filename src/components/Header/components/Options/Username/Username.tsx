@@ -1,25 +1,11 @@
 import { useState } from "react";
-import { useUser } from "../../../../../context/UserContext/context";
 import s from "./Username.module.css";
 import bs from "../../button.module.css";
 import arrow from "../../../../../assets/svgs/triangleDown.svg";
-import { useDialogUpdate } from "../../../../../context/DialogContext/context";
 import UserIcon from "../../../../Icons/UserIcon";
-import { useSnackbar } from "../../../../../context/SnackbarContext/context";
+import Logout from "../../Logout/Logout";
 const Username = ({ name }: { name: string | null }) => {
   const [open, setOpen] = useState(false);
-  const { logout } = useUser();
-  const { showError } = useDialogUpdate();
-  const { showSnackbar } = useSnackbar();
-  const handleLogout = async () => {
-    try {
-      await logout();
-      setOpen(false);
-      showSnackbar("Logout Successful");
-    } catch (err) {
-      showError("Unsuccessful Log out");
-    }
-  };
   return (
     <div className={s.user}>
       <button
@@ -32,13 +18,13 @@ const Username = ({ name }: { name: string | null }) => {
         <img src={arrow} className={s.arrow} />
       </button>
       {open && (
-        <button
-          onClick={handleLogout}
+        <div
+          className={s.logout}
+          onClick={() => setOpen(false)}
           onMouseDown={(e) => e.preventDefault()}
-          className={`${s.logout} ${bs.button}`}
         >
-          Log out
-        </button>
+          <Logout />
+        </div>
       )}
     </div>
   );

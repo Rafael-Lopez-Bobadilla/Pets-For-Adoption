@@ -5,13 +5,13 @@ import NoUserDialog from "../Dialogs/NoUserDialog/NoUserDialog";
 import { useDialogUpdate } from "../../context/DialogContext/context";
 import { TUpdateAction } from "../../services/userService/userService";
 import HeartIcon from "../Icons/HeartIcon/HeartIcon";
+import { AxiosError } from "axios";
 type Props = {
   id: number;
   background: "white" | "gray";
 };
 const FavButton = ({ id, background }: Props) => {
-  const { user } = useUser();
-  const { updateFavorites } = useUser();
+  const { user, clearUser, updateFavorites } = useUser();
   const { showDialog, showError } = useDialogUpdate();
   const onHeartClick = async (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -25,7 +25,12 @@ const FavButton = ({ id, background }: Props) => {
       try {
         await updateFavorites(id, action);
       } catch (err) {
-        showError("Unable to update favorites");
+        if (err instanceof AxiosError && err.response?.status === 401) {
+          showError("Session Expired");
+          clearUser();
+        } else {
+          showError("Unable to update favorites");
+        }
       }
     }
   };
