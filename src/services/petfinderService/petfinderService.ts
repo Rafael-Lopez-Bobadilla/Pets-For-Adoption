@@ -7,19 +7,11 @@ const petfinderClient = axios.create({
   baseURL: "https://api.petfinder.com",
 });
 export const getToken = async () => {
-  const res = await petfinderClient.post(
-    "/v2/oauth2/token",
-    {
-      grant_type: "client_credentials",
-      client_id: "vvdSXI35WImE30w1spcTbVvIX6NGRa5ZdsDPQRM1m01hjziFPz",
-      client_secret: "0479O0ZRBUFOuHbVrRvOBfVfhSop3cLY4XPG2fsU",
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const res = await petfinderClient.post("/v2/oauth2/token", {
+    grant_type: "client_credentials",
+    client_id: "vvdSXI35WImE30w1spcTbVvIX6NGRa5ZdsDPQRM1m01hjziFPz",
+    client_secret: "0479O0ZRBUFOuHbVrRvOBfVfhSop3cLY4XPG2fsU",
+  });
   return TokenSchema.parse(res.data);
 };
 

@@ -5,6 +5,7 @@ import { getCompleteParams } from "./utils/getCompleteParams";
 import { getAnimals } from "../../../../../../services/petfinderService/petfinderService";
 import { AxiosError } from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { TPet } from "../../../../../../services/petfinderService/schemas/PetsSchema";
 export const usePets = () => {
   const { params, setDefaultParams } = useValidParams();
   const { token } = usePetfinderToken();
@@ -19,7 +20,15 @@ export const usePets = () => {
     if (locationError || locationLoading) throw new Error("Location error");
     const completeParams = getCompleteParams(location, params);
     try {
-      return await getAnimals(token, completeParams);
+      const data = await getAnimals(token, completeParams);
+      data.animals.sort((a: TPet, b: TPet) => {
+        const photoA = a.primary_photo_cropped;
+        const photoB = b.primary_photo_cropped;
+        if (photoA && !photoB) return -1;
+        if (!photoA && photoB) return 1;
+        return 0;
+      });
+      return data;
     } catch (err) {
       if (err instanceof AxiosError && err.response?.status === 400) {
         setDefaultParams();
